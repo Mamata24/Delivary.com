@@ -14,6 +14,8 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import { getCoordinatesByCity } from "../Auth/actions";
+import { useDispatch } from "react-redux";
 
 const CssTextField = withStyles({
   root: {
@@ -100,20 +102,12 @@ const useStyles = makeStyles((theme) => ({
 
 function NavBar() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const [address, setAddress] = useState("");
 
   const handleAddress = (e) => {
-    setAddress(e.target.value);
-  };
-
-  const fetchCoordinates = (e) => {
-    // 13 for enter
-    let regexPinCodeCheck = new RegExp("^[0-9]{5}(?[0-9](1)");
-    if (e.keyCode === "13") {
-      console.log(regexPinCodeCheck.test(address));
-    }
-    //Also, how can I check whether a user is entering a pincode or a city name or an address in the query, because I have to
+    dispatch(getCoordinatesByCity(e.target.value));
   };
 
   return (
@@ -132,7 +126,6 @@ function NavBar() {
             </Grid>
             <Grid item>
               <CssTextField
-                onKeyUp={fetchCoordinates}
                 onChange={handleAddress}
                 value={address}
                 className={classes.title}

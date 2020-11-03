@@ -14,7 +14,7 @@ function SignupModal() {
     <>
       <img style={{ width: 200 }} src={logo} alt="delivery" />
       <h4>Log in to your account</h4>
-      <div style={{ fontSize: 15 }}>
+      <div style={{ fontSize: 15, color: "#1f5ea9" }}>
         <div onClick={() => goToLogin("/login")}>
           Already registered? Login.
         </div>
