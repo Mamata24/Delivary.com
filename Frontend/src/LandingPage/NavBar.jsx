@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -101,16 +101,30 @@ const useStyles = makeStyles((theme) => ({
 function NavBar() {
   const classes = useStyles();
 
+  const [address, setAddress] = useState("");
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+  const fetchCoordinates = (e) => {
+    // 13 for enter
+    let regexPinCodeCheck = new RegExp("^[0-9]{5}(?[0-9](1)");
+    if (e.keyCode === "13") {
+      console.log(regexPinCodeCheck.test(address));
+    }
+    //Also, how can I check whether a user is entering a pincode or a city name or an address in the query, because I have to
+  };
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar>
-          <Typography className={classes.menuButton}>
-            <img
-              width="200px"
-              src="https://r76.cooltext.com/rendered/cooltext367358833603393.png"
-              alt="delivary.com"
-            />
+          <Typography
+            className={classes.menuButton}
+            style={{ marginRight: "10%" }}
+          >
+            <img width="200px" src="logo.png" alt="delivary.com" />
           </Typography>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
@@ -118,6 +132,9 @@ function NavBar() {
             </Grid>
             <Grid item>
               <CssTextField
+                onKeyUp={fetchCoordinates}
+                onChange={handleAddress}
+                value={address}
                 className={classes.title}
                 InputLabelProps={{
                   className: classes.placeholder,
