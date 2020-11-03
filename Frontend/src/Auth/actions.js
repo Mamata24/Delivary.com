@@ -5,6 +5,7 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
+  HANDLE_CONTENT,
   GET_COORDINATES_CITY_REQUEST,
   GET_COORDINATES_CITY_SUCCESS,
   GET_COORDINATES_CITY_FAILURE,
@@ -36,3 +37,10 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
     )
     .then((res) => console.log(res));
 };
+
+// change content
+
+export const handleContent = (payload) => ({
+  type: HANDLE_CONTENT,
+  payload,
+});

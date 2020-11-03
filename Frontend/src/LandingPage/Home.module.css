@@ -1,75 +1,83 @@
-.bgimage{
-    background-image: url('../LandingPage/Icon/https___s3.amazonaws.com_s3.delivery.com_Homepage_default-small.jpg');
-    height: 100vh;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
+.bgimage {
+  background-image: url("../LandingPage/Icon/https___s3.amazonaws.com_s3.delivery.com_Homepage_default-small.jpg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.nav{
-    position: relative;
-    left: 800px;
-    top: 10px;
-    color: #1f5ea9;
+.nav {
+  position: relative;
+  left: 800px;
+  top: 10px;
+  color: #1f5ea9;
 }
 
-.logoimg{
-    width: 200px;
-    margin-left: 180px;
+.logoimg {
+  width: 200px;
+  margin-left: 180px;
 }
 
-.searcboxicon{
-    color: #1f5ea9;
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    background-color: white;
-    position: relative;
-    left: 185px;
-    margin-right: 50px;
+.searcboxicon {
+  color: #1f5ea9;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  padding: 8px;
+  background-color: white;
+  position: relative;
+  left: 185px;
+  margin-right: 50px;
 }
 
-.info{
-    font-size: 25px;
-    color: #666666;
-    font-family: Open Arial, sans-serif;
-    margin-left: 60px;
+.info {
+  font-size: 25px;
+  color: #666666;
+  font-family: Open Arial, sans-serif;
+  margin-left: 60px;
 }
 
-.btn{
-    background-color:  #1f5ea9;
-    border: none;
-    border-radius: 0px 2px 2px 0px;
-    color: white;
-    width: 120px;
-    height: 45px;
-    position: relative;
-    bottom: 45px;
-    left: 354px;
+.btn {
+  background-color: #1f5ea9;
+  border: none;
+  border-radius: 0px 2px 2px 0px;
+  color: white;
+  width: 120px;
+  height: 45px;
+  position: relative;
+  bottom: 45px;
+  left: 354px;
 }
-.searchInput{
-    border: none;
-    width:320px;
-    height: 35px;
-    position: relative;
-    bottom: 25px;
-    outline: none;
+.searchInput {
+  border: none;
+  width: 320px;
+  height: 35px;
+  position: relative;
+  bottom: 25px;
+  outline: none;
 }
-.inpDiv{
-    width:354px;
-    height: 45px;
-    border:1px solid #ccc;
-    padding: 6px 8px 6px 30px;
-    background: white;
-    outline: black;
+.inpDiv {
+  width: 354px;
+  height: 45px;
+  border: 1px solid #ccc;
+  padding: 6px 8px 6px 30px;
+  background: white;
+  outline: black;
 }
-.searchDiv{
-    margin-left: 45px;
+.searchDiv {
+  margin-left: 45px;
 }
 
-.locationArrow{
-    position: relative;
-    right: 20px;
-    top: 5px;
-    color: #1f5ea9;
+.locationArrow {
+  position: relative;
+  right: 20px;
+  top: 5px;
+  color: #1f5ea9;
+}
+
+.inputBox {
+  border: 0;
+  outline: none;
+  height: 30px;
+  padding-top: 20px;
 }

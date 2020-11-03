@@ -7,7 +7,7 @@ import NavBar from "./LandingPage/NavBar";
 function App() {
   return (
     <div className="App">
-      <NavBar />
+      <Home />
     </div>
   );
 }
