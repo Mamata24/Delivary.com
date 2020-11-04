@@ -111,7 +111,7 @@ export const loginUserFailure = (payload) => ({
 export const loginUser = (payload) => (dispatch) => {
   dispatch(loginUserRequest());
   axios
-    .post("http://localhost:/", payload)
+    .post("http://localhost:5000/login", payload)
     .then((res) => dispatch(loginUserSuccess(res.data)))
     .catch((err) => dispatch(loginUserFailure(err)));
 };
