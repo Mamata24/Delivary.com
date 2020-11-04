@@ -2,6 +2,8 @@ import {
   GET_COORDINATES_CITY_REQUEST,
   GET_COORDINATES_CITY_SUCCESS,
   GET_COORDINATES_CITY_FAILURE,
+  CURRENT_LOCATION_SUCCESS,
+  CURRENT_LOCATION_FAILURE,
   HANDLE_CONTENT,
   REGISTER_USER_REQUEST,
   REGISTER_USER_SUCCESS,
@@ -13,13 +15,16 @@ import {
 } from "./actionTypes";
 
 export const initialState = {
-  content: "/login",
+  // content: "/login",
   suggestions: [],
   isLoading: false,
   isError: false,
   errMsg: "",
   register: false,
   login: false,
+  lat: "",
+  lon: "",
+  currMsg: "",
 };
 
 export default (state = initialState, action) => {
@@ -54,6 +59,20 @@ export default (state = initialState, action) => {
         isLoading: false,
         isError: true,
         errMsg: action.payload,
+      };
+
+    case CURRENT_LOCATION_SUCCESS:
+      console.log(action.pos.latitude, action.pos.longitude);
+      return {
+        ...state,
+        lat: action.pos.latitude,
+        lon: action.pos.longitude,
+      };
+
+    case CURRENT_LOCATION_FAILURE:
+      return {
+        ...state,
+        currMsg: action.err,
       };
 
     case REGISTER_USER_REQUEST:

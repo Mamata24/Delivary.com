@@ -10,6 +10,8 @@ import {
   GET_COORDINATES_CITY_SUCCESS,
   GET_COORDINATES_CITY_FAILURE,
   LOGOUT,
+  CURRENT_LOCATION_SUCCESS,
+  CURRENT_LOCATION_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -38,6 +40,28 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
     )
     .then((res) => dispatch(getCoordinatesCitySuccess(res.data.features)))
     .catch((err) => dispatch(getCoordinatesCityFailure(err)));
+};
+
+// get current location
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0,
+};
+
+export const success = (pos) => ({
+  type: CURRENT_LOCATION_SUCCESS,
+  pos,
+});
+
+export const error = (err) => ({
+  type: CURRENT_LOCATION_FAILURE,
+  err,
+});
+
+export const showCurrentLocation = () => (dispatch) => {
+  console.log("request");
+  navigator.geolocation.getCurrentPosition(success, error, options);
 };
 
 // change content

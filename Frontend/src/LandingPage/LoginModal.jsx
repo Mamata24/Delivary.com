@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import logo from "../LandingPage/Icon/companyLogo.png";
-import { Link } from "react-router-dom";
 import { handleContent, loginUser } from "../Auth/actions";
-import styled from "./LoginModal.module.css";
 import { useDispatch } from "react-redux";
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
+import { googleCLientId, fbAppId } from "../googleAuth";
+import classnames from "classnames";
+import styles from "./LoginModal.module.css";
 
 function LoginModal() {
+  const responseFaceBook = (response) => {
+    console.log(response);
+  };
+  const responseGoogle = (response) => {
+    console.log(response.profileObj);
+    // dispatch()
+  };
+
   const initialState = {
     email: "",
     password: "",
@@ -28,7 +39,7 @@ function LoginModal() {
   };
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
       <img style={{ width: 200 }} src={logo} alt="delivery" />
       <h4>Log in to your account</h4>
       <div style={{ fontSize: 15, color: "#1f5ea9" }}>
@@ -59,14 +70,25 @@ function LoginModal() {
       <Button varient="primary" block onClick={login}>
         Log In
       </Button>
-      <i className="fab fa-facebook"></i>
-      <Button varient="primary" block>
-        Log in With Facebook
-      </Button>
-      <Button varient="primary" block>
-        Sign in With Google
-      </Button>
-    </>
+      <GoogleLogin
+        clientId={googleCLientId}
+        buttonText="Sign with Google"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        className={classnames(
+          "border-0 bg-primary text-light font-weight-bolder py-1 px-4 my-3"
+        )}
+      />
+
+      <FacebookLogin
+        appId={fbAppId}
+        style={{ background: "#01579b" }}
+        autoLoad={false}
+        fields="name,email,picture"
+        callback={responseFaceBook}
+        icon="fa-facebook"
+      />
+    </div>
   );
 }
 

@@ -51,9 +51,7 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="col-10">
-          <Restaurants />
-        </div>
+        <div className="col-10">{/* <Restaurants /> */}</div>
       </div>
     </div>
   );

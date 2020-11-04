@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -15,7 +15,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import { getCoordinatesByCity } from "../Auth/actions";
+import { getCoordinatesByCity, showCurrentLocation } from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const CssTextField = withStyles({
@@ -112,6 +112,10 @@ function NavBar() {
     dispatch(getCoordinatesByCity(e.target.value));
   };
 
+  const getCurrentLocation = () => {
+    dispatch(showCurrentLocation());
+  };
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
@@ -146,7 +150,11 @@ function NavBar() {
                 )}
               />
             </Grid>
-            <Grid item></Grid>
+            <Grid item>
+              <Typography variant="h5" onClick={getCurrentLocation}>
+                Use my current location
+              </Typography>
+            </Grid>
           </Grid>
 
           <Button color="inherit" className={classes.loginBtn}>

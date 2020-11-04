@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import logo from "../LandingPage/Icon/companyLogo.png";
-import { Link } from "react-router-dom";
 import { handleContent, registerUser } from "../Auth/actions";
 import { useDispatch } from "react-redux";
 
