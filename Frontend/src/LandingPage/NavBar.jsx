@@ -141,11 +141,12 @@ function NavBar() {
                       type: "search",
                       className: classes.placeholder,
                     }}
-                    label="What are you hungry for?"
+                    label="Where to deliver?"
                   />
                 )}
               />
             </Grid>
+            <Grid item></Grid>
           </Grid>
 
           <Button color="inherit" className={classes.loginBtn}>

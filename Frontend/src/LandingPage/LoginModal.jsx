@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, InputGroup, FormControl } from "react-bootstrap";
 import logo from "../LandingPage/Icon/companyLogo.png";
 import { Link } from "react-router-dom";
-import { handleContent } from "../Auth/actions";
+import { handleContent, loginUser } from "../Auth/actions";
 import styled from "./LoginModal.module.css";
 import { useDispatch } from "react-redux";
 
 function LoginModal() {
+  const initialState = {
+    email: "",
+    password: "",
+  };
+  const [loginDetails, setLoginDetails] = useState(initialState);
   const dispatch = useDispatch();
 
   const gotoRegister = (content) => {
     dispatch(handleContent(content));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginDetails((state) => ({ ...state, [name]: value }));
+  };
+
+  const login = () => {
+    dispatch(loginUser(loginDetails));
   };
 
   return (
@@ -24,6 +38,9 @@ function LoginModal() {
       </div>
       <InputGroup>
         <FormControl
+          name="email"
+          onChange={handleChange}
+          value={loginDetails.email}
           placeholder="Email Address"
           aria-label="Username"
           aria-describedby="basic-addon1"
@@ -31,12 +48,15 @@ function LoginModal() {
       </InputGroup>
       <InputGroup>
         <FormControl
+          name="password"
+          onChange={handleChange}
+          value={loginDetails.password}
           placeholder="Password"
           aria-label="Username"
           aria-describedby="basic-addon1"
         />
       </InputGroup>
-      <Button varient="primary" block>
+      <Button varient="primary" block onClick={login}>
         Log In
       </Button>
       <i className="fab fa-facebook"></i>
