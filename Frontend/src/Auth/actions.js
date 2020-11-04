@@ -9,9 +9,9 @@ import {
   GET_COORDINATES_CITY_REQUEST,
   GET_COORDINATES_CITY_SUCCESS,
   GET_COORDINATES_CITY_FAILURE,
-  LOGOUT,
   CURRENT_LOCATION_SUCCESS,
   CURRENT_LOCATION_FAILURE,
+  LOGOUT,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -43,26 +43,21 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
 };
 
 // get current location
-var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0,
-};
 
-export const success = (pos) => ({
+export const showCurrentLocationSuccess = (payload) => ({
   type: CURRENT_LOCATION_SUCCESS,
-  pos,
+  payload,
 });
+// This is the idea to post the lat and long to backend//
+// export const showCurrentLocationSuccess = (payload) => (dispatch) => {
+//   dispatch(currLocationSuccess(payload));
+//   axios.post("http://localhost:5000/currLocation", payload);
+// };
 
-export const error = (err) => ({
+export const showCurrentLocationFailure = (payload) => ({
   type: CURRENT_LOCATION_FAILURE,
-  err,
+  payload,
 });
-
-export const showCurrentLocation = () => (dispatch) => {
-  console.log("request");
-  navigator.geolocation.getCurrentPosition(success, error, options);
-};
 
 // change content
 

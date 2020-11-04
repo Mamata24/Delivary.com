@@ -44,7 +44,6 @@ export default (state = initialState, action) => {
       };
 
     case GET_COORDINATES_CITY_SUCCESS:
-      console.log(action.payload);
       return {
         ...state,
         isLoading: false,
@@ -62,11 +61,11 @@ export default (state = initialState, action) => {
       };
 
     case CURRENT_LOCATION_SUCCESS:
-      console.log(action.pos.latitude, action.pos.longitude);
+      console.log(action.payload);
       return {
         ...state,
-        lat: action.pos.latitude,
-        lon: action.pos.longitude,
+        lat: action.payload.latitude,
+        lon: action.payload.longitude,
       };
 
     case CURRENT_LOCATION_FAILURE:

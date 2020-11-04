@@ -10,10 +10,10 @@ import Dashboard from "./Dashboard/Dashboard";
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
-      <Home />
+      <NavBar />
+      {/* <Home />
       <Route path="/office" component={NavBar} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/dashboard" component={Dashboard} /> */}
     </div>
   );
 }

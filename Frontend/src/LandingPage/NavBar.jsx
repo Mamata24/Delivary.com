@@ -15,7 +15,11 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import { getCoordinatesByCity, showCurrentLocation } from "../Auth/actions";
+import {
+  getCoordinatesByCity,
+  showCurrentLocationSuccess,
+  showCurrentLocationFailure,
+} from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const CssTextField = withStyles({
@@ -103,6 +107,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function NavBar() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -112,8 +121,17 @@ function NavBar() {
     dispatch(getCoordinatesByCity(e.target.value));
   };
 
+  const success = (pos) => {
+    dispatch(showCurrentLocationSuccess(pos.coords));
+  };
+
+  const error = (err) => {
+    dispatch(showCurrentLocationFailure(err));
+  };
+
   const getCurrentLocation = () => {
-    dispatch(showCurrentLocation());
+    console.log("request");
+    navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
   return (
