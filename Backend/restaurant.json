@@ -9,10 +9,8 @@
         "min": 15,
         "delivery_fee": 0.79,
         "distance": 3.3,
-        "center": [
-            85.817841,
-            20.269054
-        ],
+        "longitude": 85.817841,
+        "latitude": 20.269054,
         "reviews": 2122,
         "dollar": 1,
         "category": "vegetarian, vegan, vegetarian food, vegan food, vegetarian restaurant, vegan restaurant, restaurant"
@@ -27,10 +25,8 @@
         "min": 11,
         "delivery_fee": 6.93,
         "distance": 8.4,
-        "center": [
-            85.816246,
-            20.284064
-        ],
+        "longitude": 85.816246,
+        "latitude": 20.284064,
         "reviews": 4927,
         "dollar": 2,
         "category": "indian restaurant, indian food, restaurant"
@@ -45,10 +41,8 @@
         "min": 18,
         "delivery_fee": 0.41,
         "distance": 1.1,
-        "center": [
-            85.836023,
-            20.256769
-        ],
+        "longitude": 85.836023,
+        "latitude": 20.256769,
         "reviews": 4892,
         "dollar": 1,
         "category": "indian restaurant, indian food, restaurant"
@@ -63,10 +57,8 @@
         "min": 13,
         "delivery_fee": 4.93,
         "distance": 7.1,
-        "center": [
-            85.818862,
-            20.291967
-        ],
+        "longitude": 85.818862,
+        "latitude": 20.291967,
         "reviews": 4028,
         "dollar": 4,
         "category": "chinese restaurant, chinese food, restaurant"
@@ -81,10 +73,8 @@
         "min": 19,
         "delivery_fee": 4.35,
         "distance": 8.5,
-        "center": [
-            85.841673,
-            20.269318
-        ],
+        "longitude": 85.841673,
+        "latitude": 20.269318,
         "reviews": 2637,
         "dollar": 3,
         "category": "asian restaurant, asian food, restaurant"
@@ -99,10 +89,8 @@
         "min": 10,
         "delivery_fee": 7.17,
         "distance": 8.1,
-        "center": [
-            85.81948,
-            20.300342
-        ],
+        "longitude": 85.81948,
+        "latitude": 20.300342,
         "reviews": 2504,
         "dollar": 4,
         "category": "italian restaurant, italian food, restaurant"
@@ -117,10 +105,8 @@
         "min": 12,
         "delivery_fee": 1.21,
         "distance": 7.9,
-        "center": [
-            85.819437,
-            20.301011
-        ],
+        "longitude": 85.819437,
+        "latitude": 20.301011,
         "reviews": 4176,
         "dollar": 1,
         "category": "restaurant, food"
@@ -135,10 +121,8 @@
         "min": 5,
         "delivery_fee": 1.04,
         "distance": 8.3,
-        "center": [
-            85.819,
-            20.354
-        ],
+        "longitude": 85.819,
+        "latitude": 20.354,
         "reviews": 1416,
         "dollar": 4,
         "category": "pizza, pizza parlor, restaurant"
@@ -153,10 +137,8 @@
         "min": 20,
         "delivery_fee": 7.05,
         "distance": 7.9,
-        "center": [
-            85.822713,
-            20.353611
-        ],
+        "longitude": 85.822713,
+        "latitude": 20.353611,
         "reviews": 1181,
         "dollar": 4,
         "category": "vegetarian, vegan, vegetarian food, vegan food, vegetarian restaurant, vegan restaurant, restaurant"
@@ -171,10 +153,8 @@
         "min": 16,
         "delivery_fee": 2.5,
         "distance": 7.1,
-        "center": [
-            85.820917,
-            20.32622
-        ],
+        "longitude": 85.820917,
+        "latitude": 20.32622,
         "reviews": 4509,
         "dollar": 4,
         "category": "chinese restaurant, chinese food, restaurant"
