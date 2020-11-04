@@ -35,7 +35,8 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?access_token=${accessToken}`
     )
-    .then((res) => console.log(res));
+    .then((res) => dispatch(getCoordinatesCitySuccess(res.data.features)))
+    .catch((err) => dispatch(getCoordinatesCityFailure(err)));
 };
 
 // change content

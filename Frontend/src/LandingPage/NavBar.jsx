@@ -11,11 +11,12 @@ import {
   CardMedia,
   CardActionArea,
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { getCoordinatesByCity } from "../Auth/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CssTextField = withStyles({
   root: {
@@ -55,7 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     marginTop: "-25px",
-    width: "250px",
+    color: "white",
+    width: "350px",
   },
   placeholder: {
     color: "white",
@@ -104,7 +106,7 @@ function NavBar() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [address, setAddress] = useState("");
+  const suggestions = useSelector((state) => state.Auth.suggestions);
 
   const handleAddress = (e) => {
     dispatch(getCoordinatesByCity(e.target.value));
@@ -125,14 +127,23 @@ function NavBar() {
               <SearchIcon />
             </Grid>
             <Grid item>
-              <CssTextField
-                onChange={handleAddress}
-                value={address}
-                className={classes.title}
-                InputLabelProps={{
-                  className: classes.placeholder,
-                }}
-                label="What are you hungry for?"
+              <Autocomplete
+                freeSolo
+                disableClearable
+                options={suggestions.map((place) => place.place_name)}
+                renderInput={(params) => (
+                  <CssTextField
+                    onChange={handleAddress}
+                    className={classes.title}
+                    {...params}
+                    InputLabelProps={{
+                      ...params.InputProps,
+                      type: "search",
+                      className: classes.placeholder,
+                    }}
+                    label="What are you hungry for?"
+                  />
+                )}
               />
             </Grid>
           </Grid>

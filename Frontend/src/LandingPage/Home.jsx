@@ -16,7 +16,7 @@ import LoginModal from "./LoginModal";
 import { useSelector } from "react-redux";
 import SignupModal from "./SignupModal";
 import classnames from "classnames";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const SearchBox = styles.div`
     height:318px;
@@ -48,7 +48,8 @@ function Home() {
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/office">For Office</NavLink>
+            <Link to="/office">For Office</Link>
+            {/* <NavLink href="/office">For Office</NavLink> */}
           </NavItem>
           <NavItem>
             <NavLink>
