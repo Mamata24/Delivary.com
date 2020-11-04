@@ -11,6 +11,8 @@ import {
   GET_COORDINATES_CITY_FAILURE,
   CURRENT_LOCATION_SUCCESS,
   CURRENT_LOCATION_FAILURE,
+  FETCH_RESTAURANTS_SUCCESS,
+  FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
@@ -32,27 +34,46 @@ export const getCoordinatesCityFailure = (payload) => ({
   payload,
 });
 
+export const fetchRestaurantsSuccess = (payload) => ({
+  type: FETCH_RESTAURANTS_SUCCESS,
+  payload,
+});
+
 export const getCoordinatesByCity = (payload) => (dispatch) => {
   dispatch(getCoordinatesCityRequest());
   axios
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?country=in&access_token=${accessToken}`
     )
-    .then((res) => dispatch(getCoordinatesCitySuccess(res.data.features)))
+    .then((res) => {
+      dispatch(getCoordinatesCitySuccess(res.data.features));
+      axios
+        .post("http://localhost:5000/currLocation", payload)
+        .then((res) => dispatch(fetchRestaurantsSuccess(res.data)));
+    })
     .catch((err) => dispatch(getCoordinatesCityFailure(err)));
 };
 
 // get current location
 
-export const showCurrentLocationSuccess = (payload) => ({
+export const currLocationSuccess = (payload) => ({
   type: CURRENT_LOCATION_SUCCESS,
   payload,
 });
+
+export const fetchRestaurantsFailure = (payload) => ({
+  type: FETCH_RESTAURANTS_FAILURE,
+  payload,
+});
+
 // This is the idea to post the lat and long to backend//
-// export const showCurrentLocationSuccess = (payload) => (dispatch) => {
-//   dispatch(currLocationSuccess(payload));
-//   axios.post("http://localhost:5000/currLocation", payload);
-// };
+export const showCurrentLocationSuccess = (payload) => (dispatch) => {
+  dispatch(currLocationSuccess(payload));
+  axios
+    .post("http://localhost:5000/currLocation", payload)
+    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+};
 
 export const showCurrentLocationFailure = (payload) => ({
   type: CURRENT_LOCATION_FAILURE,
@@ -112,6 +133,36 @@ export const loginUser = (payload) => (dispatch) => {
   dispatch(loginUserRequest());
   axios
     .post("http://localhost:5000/login", payload)
+    .then((res) => dispatch(loginUserSuccess(res.data)))
+    .catch((err) => dispatch(loginUserFailure(err)));
+};
+
+// login with google success
+
+export const googleLoginSuccess = (payload) => (dispatch) => {
+  let payloadData = {
+    first_name: payload.givenName,
+    last_name: payload.familyName,
+    email: payload.email,
+    password: `${payload.givenName}1234`,
+  };
+  axios
+    .post("http://localhost:5000/signup", payloadData)
+    .then((res) => dispatch(loginUserSuccess(res.data)))
+    .catch((err) => dispatch(loginUserFailure(err)));
+};
+
+// login with fb success
+
+export const fbLoginSuccess = (payload) => (dispatch) => {
+  let payloadData = {
+    first_name: payload.name,
+    last_name: payload.name,
+    email: payload.email,
+    password: `${payload.name}1234`,
+  };
+  axios
+    .post("http://localhost:5000/signup", payloadData)
     .then((res) => dispatch(loginUserSuccess(res.data)))
     .catch((err) => dispatch(loginUserFailure(err)));
 };

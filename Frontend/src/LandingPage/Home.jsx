@@ -1,26 +1,22 @@
-import React, { useState, useEffect } from "react";
-import {
-  Container,
-  Row,
-  Nav,
-  NavLink,
-  NavItem,
-  Modal,
-  Button,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Nav, NavLink, NavItem } from "react-bootstrap";
+import { CircularProgress } from "@material-ui/core";
 import styled from "./Home.module.css";
 import styles from "styled-components";
 import logo from "../LandingPage/Icon/companyLogo.png";
 import HowItWorksPopOver from "./HowItWorksPopOver";
-import LoginModal from "./LoginModal";
-import { loginUser, registerUser } from "../Auth/actions";
+import {
+  loginUser,
+  registerUser,
+  googleLoginSuccess,
+  fbLoginSuccess,
+} from "../Auth/actions";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import { googleCLientId, fbAppId } from "../googleAuth";
 import { useSelector, useDispatch } from "react-redux";
-import SignupModal from "./SignupModal";
 import classnames from "classnames";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SearchBox = styles.div`
     height:318px;
@@ -30,13 +26,21 @@ const SearchBox = styles.div`
     margin-left:400px;
 `;
 
+const Button = styles.button`
+  background:#01579b;
+  color:white;
+`;
+
 function Home() {
   const dispatch = useDispatch();
 
   const responseFaceBook = (response) => {
     console.log(response);
+    dispatch(fbLoginSuccess(response));
   };
+
   const responseGoogle = (response) => {
+    dispatch(googleLoginSuccess(response));
     console.log(response.profileObj);
     // dispatch()
   };
@@ -73,7 +77,17 @@ function Home() {
     dispatch(registerUser(registerDetails));
   };
 
-  return (
+  const isLoading = useSelector((state) => state.Auth.isLoading);
+
+  const [component, setComponent] = useState("#panel7");
+
+  const handleComponent = (comp) => {
+    setComponent(comp);
+  };
+
+  return isLoading ? (
+    <CircularProgress />
+  ) : (
     <Container fluid>
       <Row className={styled.bgimage}>
         <Nav className={styled.nav}>
@@ -110,8 +124,15 @@ function Home() {
                           <a
                             className="nav-link active"
                             data-toggle="tab"
-                            href="#panel7"
+                            // href="#panel7"
+                            href={component}
                             role="tab"
+                            style={
+                              component === "#panel8"
+                                ? { color: "white" }
+                                : { color: "black" }
+                            }
+                            onClick={() => handleComponent("#panel7")}
                           >
                             <i className="fas fa-user mr-1"></i>
                             Login
@@ -121,7 +142,14 @@ function Home() {
                           <a
                             className="nav-link"
                             data-toggle="tab"
-                            href="#panel8"
+                            // href="#panel8"
+                            href={component}
+                            onClick={() => handleComponent("#panel8")}
+                            style={
+                              component === "#panel7"
+                                ? { color: "white" }
+                                : { color: "black" }
+                            }
                             role="tab"
                           >
                             <i className="fas fa-user-plus mr-1"></i>
@@ -140,6 +168,9 @@ function Home() {
                         >
                           {/* <!--Body--> */}
                           <div className="modal-body mb-1">
+                            <div className="md-form form-sm mb-5 text-center">
+                              <img src="./logo2.png" alt="delivary.com" />
+                            </div>
                             <div className="md-form form-sm mb-5">
                               <i className="fas fa-envelope prefix"></i>
                               <input
@@ -178,25 +209,33 @@ function Home() {
                               </label>
                             </div>
                             <div className="text-center mt-2">
-                              <button className="btn btn-info" onClick={login}>
-                                Log in <i className="fas fa-sign-in ml-1"></i>
-                              </button>
+                              <Button
+                                className="btn text-center text-white"
+                                onClick={login}
+                              >
+                                Log in <i className="fas fa-sign-in-alt"></i>
+                              </Button>
                             </div>
-                            <GoogleLogin
-                              clientId={googleCLientId}
-                              buttonText="Sign with Google"
-                              onSuccess={responseGoogle}
-                              onFailure={responseGoogle}
-                              className="border-0 bg-primary text-light font-weight-bolder py-1 px-4 my-3"
-                            />
+                            <div className="text-center">
+                              <GoogleLogin
+                                clientId={googleCLientId}
+                                buttonText="Sign with Google"
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                className="border-0 bg-primary text-light font-weight-bolder text-center py-1 px-4 my-3"
+                              />
+                            </div>
 
-                            <FacebookLogin
-                              appId={fbAppId}
-                              autoLoad={false}
-                              fields="name,email,picture"
-                              callback={responseFaceBook}
-                              icon="fa-facebook"
-                            />
+                            <div className="text-center">
+                              <FacebookLogin
+                                className="text-center"
+                                appId={fbAppId}
+                                autoLoad={false}
+                                fields="name,email,picture"
+                                callback={responseFaceBook}
+                                icon="fa-facebook"
+                              />
+                            </div>
                           </div>
                           {/* <!--Footer--> */}
                           <div className="modal-footer">
@@ -233,6 +272,9 @@ function Home() {
                         >
                           {/* <!--Body--> */}
                           <div className="modal-body">
+                            <div className="md-form form-sm mb-5 text-center">
+                              <img src="./logo2.png" alt="" />
+                            </div>
                             <div className="md-form form-sm mb-5">
                               <i className="fas fa-user prefix"></i>
                               <input
@@ -307,12 +349,10 @@ function Home() {
                             </div>
 
                             <div className="text-center form-sm mt-2">
-                              <button
-                                className="btn btn-info"
-                                onClick={register}
-                              >
-                                Sign up <i className="fas fa-sign-in ml-1"></i>
-                              </button>
+                              <Button className="btn" onClick={register}>
+                                Sign up{" "}
+                                <i className="fas fa-sign-in-alt ml-1"></i>
+                              </Button>
                             </div>
                           </div>
                           {/* <!--Footer--> */}

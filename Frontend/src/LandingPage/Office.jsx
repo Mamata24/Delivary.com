@@ -15,6 +15,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import SearchIcon from "@material-ui/icons/Search";
 import LocalOfferIcon from "@material-ui/icons/LocalOffer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import MyLocationIcon from "@material-ui/icons/MyLocation";
 import {
   getCoordinatesByCity,
   showCurrentLocationSuccess,
@@ -106,7 +107,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function NavBar() {
+function Office() {
   var options = {
     enableHighAccuracy: true,
     timeout: 5000,
@@ -146,7 +147,7 @@ function NavBar() {
           </Typography>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
-              <SearchIcon />
+              <SearchIcon />{" "}
             </Grid>
             <Grid item>
               <Autocomplete
@@ -169,8 +170,8 @@ function NavBar() {
               />
             </Grid>
             <Grid item>
-              <Typography variant="h5" onClick={getCurrentLocation}>
-                Use my current location
+              <Typography variant="h6" onClick={getCurrentLocation}>
+                <MyLocationIcon /> Use my current location
               </Typography>
             </Grid>
           </Grid>
@@ -359,4 +360,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Office;
