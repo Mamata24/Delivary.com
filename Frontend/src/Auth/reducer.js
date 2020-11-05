@@ -11,13 +11,15 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILURE,
+  FETCH_RESTAURANTS_SUCCESS,
+  FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
 } from "./actionTypes";
 
 export const initialState = {
   // content: "/login",
   suggestions: [],
-  user: "",
+  user: [],
   isLoading: false,
   isError: false,
   errMsg: "",
@@ -26,6 +28,7 @@ export const initialState = {
   lat: "",
   lon: "",
   currMsg: "",
+  restaurants: [],
 };
 
 export default (state = initialState, action) => {
@@ -122,6 +125,21 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isError: true,
+        errMsg: action.payload,
+      };
+
+    case FETCH_RESTAURANTS_SUCCESS:
+      return {
+        ...state,
+        restaurants: action.payload,
+        errMsg: "",
+        isError: false,
+      };
+
+    case FETCH_RESTAURANTS_FAILURE:
+      return {
+        ...state,
         isError: true,
         errMsg: action.payload,
       };

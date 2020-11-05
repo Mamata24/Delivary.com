@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
+import { useSelector } from "react-redux";
+// import Restaurants from "./Restaurants";
 
 function Dashboard() {
-  const toggleBtn = () => {};
+  const [star, setStar] = useState(0);
+
+  const toggleBtn = (price) => {
+    console.log(price);
+  };
+
+  const handleStar = (starRate) => {
+    // console.log(starRate);
+    setStar(starRate);
+  };
+
+  let restaurants = useSelector((state) => state.Auth.restaurants);
+
+  restaurants = restaurants.filter((item) => item.rating >= star);
 
   return (
     <div>
@@ -25,7 +40,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Free Delivery"
                 />
-                <label className="custom-control-label" for="Free Delivery">
+                <label className="custom-control-label" htmlFor="Free Delivery">
                   Free Delivery(5)
                 </label>
               </div>
@@ -40,7 +55,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Indian"
                 />
-                <label className="custom-control-label" for="Indian">
+                <label className="custom-control-label" htmlFor="Indian">
                   Indian(3)
                 </label>
               </div>
@@ -55,7 +70,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Vegetarian"
                 />
-                <label className="custom-control-label" for="Vegetarian">
+                <label className="custom-control-label" htmlFor="Vegetarian">
                   Vegetarian(2)
                 </label>
               </div>
@@ -70,7 +85,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Chinese"
                 />
-                <label className="custom-control-label" for="Chinese">
+                <label className="custom-control-label" htmlFor="Chinese">
                   Chinese(12)
                 </label>
               </div>
@@ -85,7 +100,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Italian"
                 />
-                <label className="custom-control-label" for="Italian">
+                <label className="custom-control-label" htmlFor="Italian">
                   Italian(12)
                 </label>
               </div>
@@ -100,7 +115,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="Pizza"
                 />
-                <label className="custom-control-label" for="Pizza">
+                <label className="custom-control-label" htmlFor="Pizza">
                   Pizza(12)
                 </label>
               </div>
@@ -113,66 +128,57 @@ function Dashboard() {
           </div>
 
           <div className={classnames("row mb-4")}>
-            {/* <div className={classnames("col", styles.rating)}>
-              <span name="rating" id="str5" value="5">
-                ☆
-              </span>
-              <span name="rating" id="str4" value="4">
-                ☆
-              </span>
-              <span name="rating" id="str3" value="3">
-                ☆
-              </span>
-              <span name="rating" id="str2" value="2">
-                ☆
-              </span>
-              <span name="rating" id="str1" value="1">
-                ☆
-              </span>
-            </div> */}
-
-            <div className={styles.rating}>
-              <input
-                id="star5"
-                name="star"
-                type="radio"
-                value="5"
-                className={classnames(styles.radioBtn, styles.hide)}
-              />
-              <label for="star5">☆</label>
-              <input
-                id="star4"
-                name="star"
-                type="radio"
-                value="4"
-                className={classnames(styles.radioBtn, styles.hide)}
-              />
-              <label for="star4">☆</label>
-              <input
-                id="star3"
-                name="star"
-                type="radio"
-                value="3"
-                className={classnames(styles.radioBtn, styles.hide)}
-              />
-              <label for="star3">☆</label>
-              <input
-                id="star2"
-                name="star"
-                type="radio"
-                value="2"
-                className={classnames(styles.radioBtn, styles.hide)}
-              />
-              <label for="star2">☆</label>
-              <input
-                id="star1"
-                name="star"
-                type="radio"
-                value="1"
-                className={classnames(styles.radioBtn, styles.hide)}
-              />
-              <label for="star1">☆</label>
-              <div className={styles.clear}></div>
+            <div className="col">
+              <form>
+                <div className={styles.rating}>
+                  <input
+                    id="star5"
+                    name="star"
+                    type="radio"
+                    value={star}
+                    onClick={() => handleStar(5)}
+                    className={classnames(styles.radioBtn, styles.hide)}
+                  />
+                  <label htmlFor="star5">☆</label>
+                  <input
+                    id="star4"
+                    name="star"
+                    type="radio"
+                    value={star}
+                    onClick={() => handleStar(4)}
+                    className={classnames(styles.radioBtn, styles.hide)}
+                  />
+                  <label htmlFor="star4">☆</label>
+                  <input
+                    id="star3"
+                    name="star"
+                    type="radio"
+                    value={star}
+                    onClick={() => handleStar(3)}
+                    className={classnames(styles.radioBtn, styles.hide)}
+                  />
+                  <label htmlFor="star3">☆</label>
+                  <input
+                    id="star2"
+                    name="star"
+                    type="radio"
+                    value={star}
+                    onClick={() => handleStar(2)}
+                    className={classnames(styles.radioBtn, styles.hide)}
+                  />
+                  <label htmlFor="star2">☆</label>
+                  <input
+                    id="star1"
+                    name="star"
+                    type="radio"
+                    value={star}
+                    onClick={() => handleStar(1)}
+                    className={classnames(styles.radioBtn, styles.hide)}
+                  />
+                  <label htmlFor="star1">☆</label>
+                  <div className={styles.clear}></div>
+                </div>
+              </form>
             </div>
           </div>
           <hr />
@@ -183,10 +189,10 @@ function Dashboard() {
 
           <div className="row mb-4">
             <div className="col">
-              <button onClick={toggleBtn}>$</button>
-              <button onClick={toggleBtn}>$$</button>
-              <button onClick={toggleBtn}>$$$</button>
-              <button onClick={toggleBtn}>$$$</button>
+              <button onClick={() => toggleBtn(1)}>$</button>
+              <button onClick={() => toggleBtn(2)}>$$</button>
+              <button onClick={() => toggleBtn(3)}>$$$</button>
+              <button onClick={() => toggleBtn(4)}>$$$</button>
             </div>
           </div>
           <hr />
@@ -204,7 +210,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="dollar5"
                 />
-                <label className="custom-control-label" for="dollar5">
+                <label className="custom-control-label" htmlFor="dollar5">
                   $5
                 </label>
               </div>
@@ -220,7 +226,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="dollar10"
                 />
-                <label className="custom-control-label" for="dollar10">
+                <label className="custom-control-label" htmlFor="dollar10">
                   $10
                 </label>
               </div>
@@ -236,7 +242,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="dollar15"
                 />
-                <label className="custom-control-label" for="dollar15">
+                <label className="custom-control-label" htmlFor="dollar15">
                   $15
                 </label>
               </div>
@@ -252,7 +258,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="dollar20"
                 />
-                <label className="custom-control-label" for="dollar20">
+                <label className="custom-control-label" htmlFor="dollar20">
                   $20
                 </label>
               </div>
@@ -268,7 +274,7 @@ function Dashboard() {
                   className="custom-control-input"
                   id="dollarAll"
                 />
-                <label className="custom-control-label" for="dollarAll">
+                <label className="custom-control-label" htmlFor="dollarAll">
                   All
                 </label>
               </div>
@@ -337,6 +343,14 @@ function Dashboard() {
                 alt="Vegetarian"
               />
             </div>
+            {/* Address and Sort */}
+            <div className="row">
+              <div className="col"></div>
+              <div className="col"></div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">{/* <Restaurants/> */}</div>
           </div>
         </div>
       </div>

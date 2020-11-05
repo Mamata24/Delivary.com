@@ -11,6 +11,7 @@ import {
   GET_COORDINATES_CITY_FAILURE,
   CURRENT_LOCATION_SUCCESS,
   CURRENT_LOCATION_FAILURE,
+  FETCH_RESTAURANTS_REQUEST,
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
@@ -34,11 +35,6 @@ export const getCoordinatesCityFailure = (payload) => ({
   payload,
 });
 
-export const fetchRestaurantsSuccess = (payload) => ({
-  type: FETCH_RESTAURANTS_SUCCESS,
-  payload,
-});
-
 export const getCoordinatesByCity = (payload) => (dispatch) => {
   dispatch(getCoordinatesCityRequest());
   axios
@@ -47,9 +43,6 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
     )
     .then((res) => {
       dispatch(getCoordinatesCitySuccess(res.data.features));
-      axios
-        .post("http://localhost:5000/currLocation", payload)
-        .then((res) => dispatch(fetchRestaurantsSuccess(res.data)));
     })
     .catch((err) => dispatch(getCoordinatesCityFailure(err)));
 };
@@ -61,16 +54,44 @@ export const currLocationSuccess = (payload) => ({
   payload,
 });
 
+// fetch restaurants api
+
+export const fetchRestaurantsRequest = () => ({
+  type: FETCH_RESTAURANTS_REQUEST,
+});
+
+export const fetchRestaurantsSuccess = (payload) => ({
+  type: FETCH_RESTAURANTS_SUCCESS,
+  payload,
+});
+
 export const fetchRestaurantsFailure = (payload) => ({
   type: FETCH_RESTAURANTS_FAILURE,
   payload,
 });
 
+export const fetchRestaurants = (payload) => (dispatch) => {
+  dispatch(fetchRestaurantsRequest());
+  axios
+    .get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?country=in&access_token=${accessToken}`
+    )
+    .then((res) =>
+      axios
+        .post(
+          "http://localhost:5000/Restaurants?page=1&limit=5",
+          res.data.features[0].center
+        )
+        .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    )
+    .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+};
+
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationSuccess(payload));
   axios
-    .post("http://localhost:5000/currLocation", payload)
+    .post("http://localhost:5000/Restaurants?page=1&limit=5", payload)
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
