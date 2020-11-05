@@ -17,6 +17,7 @@ import {
 export const initialState = {
   // content: "/login",
   suggestions: [],
+  user: "",
   isLoading: false,
   isError: false,
   errMsg: "",
@@ -114,6 +115,7 @@ export default (state = initialState, action) => {
         isError: false,
         errMsg: "",
         login: true,
+        user: action.payload,
       };
 
     case LOGIN_USER_FAILURE:
