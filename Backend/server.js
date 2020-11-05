@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 
 const userRouter = require('./Routes/userRouter')
+const restaurantRouter = require('./Routes/restaurantRouter')
 
 dotenv.config()
 const app = express()
@@ -17,7 +18,7 @@ app.use(express.json())
 app.use(cors())
 
 app.use(userRouter)
-
+app.use(restaurantRouter)
 
 app.listen(PORT, () => {
     console.log(`Server is up and running on port ${PORT}`)
