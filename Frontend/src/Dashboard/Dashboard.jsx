@@ -73,7 +73,6 @@ function Dashboard() {
       if (delivery.includes("all") || delivery.length === 0) return item;
       else {
         let maxDelivery = Math.max.apply(null, delivery);
-        // console.log(maxDelivery);
         return item.min <= maxDelivery;
       }
     });
