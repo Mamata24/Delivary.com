@@ -80,8 +80,8 @@ export const fetchRestaurants = (payload) => (dispatch) => {
     .then(
       (res) =>
         (payloadLatLon = {
-          latitude: res.data.features[0].center[1],
-          longitude: res.data.features[0].center[0],
+          latitude: Number(res.data.features[0].center[1]).toFixed(6),
+          longitude: Number(res.data.features[0].center[0]).toFixed(6),
         }),
       axios
         .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
@@ -94,8 +94,8 @@ export const fetchRestaurants = (payload) => (dispatch) => {
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationSuccess(payload));
   let payloadLatLon = {
-    latitude: payload.latitude,
-    longitude: payload.longitude,
+    latitude: Number(payload.latitude).toFixed(6),
+    longitude: Number(payload.longitude).toFixed(6),
   };
   axios
     .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
