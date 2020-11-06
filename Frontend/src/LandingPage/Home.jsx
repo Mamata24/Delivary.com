@@ -12,7 +12,7 @@ import {
   fbLoginSuccess,
 } from "../Auth/actions";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { googleCLientId, fbAppId } from "../googleAuth";
 import { useSelector, useDispatch } from "react-redux";
 import classnames from "classnames";
@@ -216,13 +216,20 @@ function Home() {
                                 Log in <i className="fas fa-sign-in-alt"></i>
                               </Button>
                             </div>
-                            <div className="text-center">
+                            <div className="text-center mb-2">
                               <GoogleLogin
                                 clientId={googleCLientId}
-                                buttonText="Sign with Google"
                                 onSuccess={responseGoogle}
                                 onFailure={responseGoogle}
-                                className="border-0 bg-primary text-light font-weight-bolder text-center py-1 px-4 my-3"
+                                render={(renderProps) => (
+                                  <button
+                                    className={styled.fbBtn}
+                                    onClick={renderProps.onClick}
+                                  >
+                                    <i className="fab fa-google mr-2"></i>
+                                    Login with Google
+                                  </button>
+                                )}
                               />
                             </div>
 
@@ -232,8 +239,16 @@ function Home() {
                                 appId={fbAppId}
                                 autoLoad={false}
                                 fields="name,email,picture"
+                                render={(renderProps) => (
+                                  <button
+                                    className={styled.fbBtn}
+                                    onClick={renderProps.onClick}
+                                  >
+                                    <i className="fab fa-facebook mr-2"></i>
+                                    Login with Facebook
+                                  </button>
+                                )}
                                 callback={responseFaceBook}
-                                icon="fa-facebook"
                               />
                             </div>
                           </div>
@@ -353,6 +368,40 @@ function Home() {
                                 Sign up{" "}
                                 <i className="fas fa-sign-in-alt ml-1"></i>
                               </Button>
+                            </div>
+                            <div className="text-center mb-2">
+                              <GoogleLogin
+                                clientId={googleCLientId}
+                                onSuccess={responseGoogle}
+                                onFailure={responseGoogle}
+                                render={(renderProps) => (
+                                  <button
+                                    className={styled.fbBtn}
+                                    onClick={renderProps.onClick}
+                                  >
+                                    <i className="fab fa-google mr-2"></i>
+                                    Login with Google
+                                  </button>
+                                )}
+                              />
+                            </div>
+                            <div className="text-center">
+                              <FacebookLogin
+                                className="text-center"
+                                appId={fbAppId}
+                                autoLoad={false}
+                                fields="name,email,picture"
+                                render={(renderProps) => (
+                                  <button
+                                    className={styled.fbBtn}
+                                    onClick={renderProps.onClick}
+                                  >
+                                    <i className="fab fa-facebook mr-2"></i>
+                                    Login with Facebook
+                                  </button>
+                                )}
+                                callback={responseFaceBook}
+                              />
                             </div>
                           </div>
                           {/* <!--Footer--> */}
