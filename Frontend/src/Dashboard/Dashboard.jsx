@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 function Dashboard() {
   const [star, setStar] = useState(0);
 
+  const [category, setCategory] = useState("");
+
   const toggleBtn = (price) => {
     console.log(price);
   };
@@ -15,6 +17,11 @@ function Dashboard() {
   const handleStar = (starRate) => {
     // console.log(starRate);
     setStar(starRate);
+  };
+
+  const filterCategory = (category) => {
+    setCategory((prev) => [...prev, category]);
+    console.log(category);
   };
 
   let restaurants = useSelector((state) => state.Auth.restaurants);
@@ -37,6 +44,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Free")}
+                  value={category}
                   className="custom-control-input"
                   id="Free Delivery"
                 />
@@ -52,6 +62,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Indian")}
+                  value={category}
                   className="custom-control-input"
                   id="Indian"
                 />
@@ -67,6 +80,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Vegetarian")}
+                  value={category}
                   className="custom-control-input"
                   id="Vegetarian"
                 />
@@ -82,6 +98,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Chinese")}
+                  value={category}
                   className="custom-control-input"
                   id="Chinese"
                 />
@@ -97,6 +116,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Italian")}
+                  value={category}
                   className="custom-control-input"
                   id="Italian"
                 />
@@ -112,6 +134,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="category"
+                  onChange={() => filterCategory("Pizza")}
+                  value={category}
                   className="custom-control-input"
                   id="Pizza"
                 />
