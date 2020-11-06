@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const restaurants = require('./restaurants')
 const Restaurant = require('./Models/restaurant')
-const menu = require('./menu')
-const Menu = require('./Models/menu')
+// const menu = require('./menu')
+// const Menu = require('./Models/menu')
 const { db } = require('./Models/restaurant')
 //Mongoose setup to create connection with DB
 mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false, useUnifiedTopology: true }, (err) => {
