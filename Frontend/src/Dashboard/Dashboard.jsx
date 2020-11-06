@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
+import { Restaurant } from "@material-ui/icons";
+import Restaurants from "./Restaurants";
 
 function Dashboard() {
   const toggleBtn = () => {};
@@ -338,6 +340,7 @@ function Dashboard() {
               />
             </div>
           </div>
+          <Restaurants />
         </div>
       </div>
     </div>
