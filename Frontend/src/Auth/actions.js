@@ -93,14 +93,14 @@ export const fetchRestaurants = (payload) => (dispatch) => {
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationSuccess(payload));
-  (payloadLatLon = {
+  let payloadLatLon = {
     latitude: payload.latitude,
     longitude: payload.longitude,
-  }),
-    axios
-      .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
-      .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
-      .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+  };
+  axios
+    .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
+    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
 
 export const showCurrentLocationFailure = (payload) => ({

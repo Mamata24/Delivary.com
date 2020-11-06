@@ -4,29 +4,65 @@ import classnames from "classnames";
 import styles from "./dashboard.module.css";
 import { useSelector } from "react-redux";
 // import Restaurants from "./Restaurants";
+import restaurantsData from "./restaurants.json";
 
 function Dashboard() {
-  const [star, setStar] = useState(0);
-
-  const [category, setCategory] = useState("");
-
   const toggleBtn = (price) => {
     console.log(price);
   };
 
+  // Star Filter
+  const [star, setStar] = useState(0);
+
   const handleStar = (starRate) => {
-    // console.log(starRate);
     setStar(starRate);
   };
 
-  const filterCategory = (category) => {
-    setCategory((prev) => [...prev, category]);
-    console.log(category);
+  // Category Filter
+  const [category, setCategory] = useState([]);
+
+  const filterCategory = (e, currCategory) => {
+    // console.log(e.target);
+    if (e.target.checked) setCategory(() => [...category, currCategory]);
   };
 
-  let restaurants = useSelector((state) => state.Auth.restaurants);
+  // Delivery Fee Filter
+  const [delivery, setDelivery] = useState(["All"]);
 
-  restaurants = restaurants.filter((item) => item.rating >= star);
+  const handleDeliveryFilter = (e, fee) => {
+    if (e.target.checked) setDelivery(() => [...delivery, fee]);
+  };
+
+  // Delivery Time Filter
+  const [time, setTime] = useState("All");
+
+  const deliveryTimeFilter = (e, time) => {
+    setTime(time);
+  };
+
+  // console.log(time);
+
+  // Price Filter
+  const [price, setPrice] = useState([1]);
+
+  const priceFilter = (currPrice) => {
+    setPrice(() => [...price, currPrice]);
+  };
+
+  // let restaurants = useSelector((state) => state.Auth.restaurants);
+
+  let restaurants = restaurantsData;
+
+  // restaurants = restaurants.filter(item => console.log(item.));
+
+  restaurants = restaurants
+    .filter((item) => {
+      if (time === "All") return item;
+      if (time !== "All") return Number(item.estimated_time) <= time;
+    })
+    .filter((item) => item.rating >= star);
+
+  console.log(restaurants);
 
   return (
     <div>
@@ -45,7 +81,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Free")}
+                  onChange={(e) => filterCategory(e, "Free")}
                   value={category}
                   className="custom-control-input"
                   id="Free Delivery"
@@ -63,7 +99,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Indian")}
+                  onChange={(e) => filterCategory(e, "Indian")}
                   value={category}
                   className="custom-control-input"
                   id="Indian"
@@ -81,7 +117,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Vegetarian")}
+                  onChange={(e) => filterCategory(e, "Vegetarian")}
                   value={category}
                   className="custom-control-input"
                   id="Vegetarian"
@@ -99,7 +135,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Chinese")}
+                  onChange={(e) => filterCategory("Chineese")}
                   value={category}
                   className="custom-control-input"
                   id="Chinese"
@@ -117,7 +153,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Italian")}
+                  onChange={(e) => filterCategory("Italie,an")}
                   value={category}
                   className="custom-control-input"
                   id="Italian"
@@ -135,7 +171,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={() => filterCategory("Pizza")}
+                  onChange={(e) => filterCategory("Pizzae,")}
                   value={category}
                   className="custom-control-input"
                   id="Pizza"
@@ -214,10 +250,10 @@ function Dashboard() {
 
           <div className="row mb-4">
             <div className="col">
-              <button onClick={() => toggleBtn(1)}>$</button>
-              <button onClick={() => toggleBtn(2)}>$$</button>
-              <button onClick={() => toggleBtn(3)}>$$$</button>
-              <button onClick={() => toggleBtn(4)}>$$$</button>
+              <button onClick={(e) => toggleBtn(1)}>$</button>
+              <button onClick={(e) => toggleBtn(2)}>$$</button>
+              <button onClick={(e) => toggleBtn(3)}>$$$</button>
+              <button onClick={(e) => toggleBtn(4)}>$$$</button>
             </div>
           </div>
           <hr />
@@ -232,11 +268,14 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="deliveryFilter"
+                  value={delivery}
+                  onChange={(e) => handleDeliveryFilter(e, 5)}
                   className="custom-control-input"
                   id="dollar5"
                 />
                 <label className="custom-control-label" htmlFor="dollar5">
-                  $5
+                  {"<"} $5
                 </label>
               </div>
             </div>
@@ -248,11 +287,14 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="deliveryFilter"
+                  value={delivery}
+                  onChange={(e) => handleDeliveryFilter(e, 10)}
                   className="custom-control-input"
                   id="dollar10"
                 />
                 <label className="custom-control-label" htmlFor="dollar10">
-                  $10
+                  {"<"} $10
                 </label>
               </div>
             </div>
@@ -264,11 +306,14 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="deliveryFilter"
+                  value={delivery}
+                  onChange={(e) => handleDeliveryFilter(e, 15)}
                   className="custom-control-input"
                   id="dollar15"
                 />
                 <label className="custom-control-label" htmlFor="dollar15">
-                  $15
+                  {"<"} $15
                 </label>
               </div>
             </div>
@@ -280,11 +325,14 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="deliveryFilter"
+                  value={delivery}
+                  onChange={(e) => handleDeliveryFilter(e, 20)}
                   className="custom-control-input"
                   id="dollar20"
                 />
                 <label className="custom-control-label" htmlFor="dollar20">
-                  $20
+                  {"<"} $20
                 </label>
               </div>
             </div>
@@ -296,6 +344,9 @@ function Dashboard() {
               <div className="custom-control custom-checkbox">
                 <input
                   type="checkbox"
+                  name="deliveryFilter"
+                  value={delivery}
+                  onChange={(e) => handleDeliveryFilter(e, "all")}
                   className="custom-control-input"
                   id="dollarAll"
                 />
@@ -312,16 +363,40 @@ function Dashboard() {
             <div className="col">Delivery Estimate</div>
           </div>
           <div className="row">
-            <div className="col">10 min(no.)</div>
+            <div
+              className="col"
+              value={time}
+              onClick={(e) => deliveryTimeFilter(e, 10)}
+            >
+              10 min(no.)
+            </div>
           </div>
           <div className="row">
-            <div className="col">20 min(no.)</div>
+            <div
+              className="col"
+              value={time}
+              onClick={(e) => deliveryTimeFilter(e, 20)}
+            >
+              20 min(no.)
+            </div>
           </div>
           <div className="row">
-            <div className="col">30 min(no.)</div>
+            <div
+              className="col"
+              value={time}
+              onClick={(e) => deliveryTimeFilter(e, 30)}
+            >
+              30 min(no.)
+            </div>
           </div>
           <div className="row mb-4">
-            <div className="col">All</div>
+            <div
+              className="col"
+              value={time}
+              onClick={(e) => deliveryTimeFilter(e, "All")}
+            >
+              All
+            </div>
           </div>
         </div>
         {/* Restaurants display */}
