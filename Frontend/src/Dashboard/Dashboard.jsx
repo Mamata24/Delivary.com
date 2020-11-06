@@ -27,10 +27,20 @@ function Dashboard() {
   };
 
   // Delivery Fee Filter
-  const [delivery, setDelivery] = useState(["All"]);
+  const [delivery, setDelivery] = useState([]);
+  console.log(delivery);
 
   const handleDeliveryFilter = (e, fee) => {
-    if (e.target.checked) setDelivery(() => [...delivery, fee]);
+    if (e.target.checked) {
+      let allDelivery = [...delivery, fee];
+      // console.log(allDelivery);
+      setDelivery(allDelivery);
+    } else {
+      if (delivery.includes(fee)) {
+        let allDelivery = delivery.filter((item) => item != fee);
+        setDelivery(allDelivery);
+      }
+    }
   };
 
   // Delivery Time Filter
@@ -39,8 +49,6 @@ function Dashboard() {
   const deliveryTimeFilter = (e, time) => {
     setTime(time);
   };
-
-  // console.log(time);
 
   // Price Filter
   const [price, setPrice] = useState([1]);
@@ -52,15 +60,23 @@ function Dashboard() {
   // let restaurants = useSelector((state) => state.Auth.restaurants);
 
   let restaurants = restaurantsData;
-
-  // restaurants = restaurants.filter(item => console.log(item.));
+  // console.log(delivery);
+  // restaurants = restaurants;
 
   restaurants = restaurants
     .filter((item) => {
       if (time === "All") return item;
       if (time !== "All") return Number(item.estimated_time) <= time;
     })
-    .filter((item) => item.rating >= star);
+    .filter((item) => item.rating >= star)
+    .filter((item) => {
+      if (delivery.includes("all") || delivery.length === 0) return item;
+      else {
+        let maxDelivery = Math.max.apply(null, delivery);
+        // console.log(maxDelivery);
+        return item.min <= maxDelivery;
+      }
+    });
 
   console.log(restaurants);
 
