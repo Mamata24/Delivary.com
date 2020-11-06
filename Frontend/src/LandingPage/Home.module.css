@@ -81,3 +81,15 @@
   height: 30px;
   padding-top: 20px;
 }
+
+.fbBtn {
+  background: #1f5ea9;
+  color: white;
+  padding: 2%;
+  border-radius: 5px;
+  border: 1px solid #1f5ea9;
+}
+
+.fbBtn:hover {
+  filter: brightness(1.3);
+}
