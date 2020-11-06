@@ -23,7 +23,13 @@ exports.getRestaurant = async (req, res) => {
         };
     }
     try {
-        results.current = await Restaurant.find().limit(limit).skip(startIndex).exec()
+        // results.current = await Restaurant.find().limit(limit).skip(startIndex).exec()
+        const restaurant = await Restaurant.find({})
+        console.log(restaurant.length)
+        const requiredRestaurant = restaurant.filter(item => item.longitude > (req.body.longitude - 0.22523) && item.longitude < (req.body.longitude + 0.22523) && item.latitude > (req.body.latitude - 0.22523) && item.latitude < (req.body.latitude + 0.22523))
+        console.log(requiredRestaurant.length)
+        const w = requiredRestaurant.limit(limit).skip(startIndex).exec()
+        console.log(w.length)
         res.send(results)
     } catch (e) {
         res.status(500).send(e)
