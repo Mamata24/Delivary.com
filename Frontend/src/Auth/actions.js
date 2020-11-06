@@ -71,17 +71,20 @@ export const fetchRestaurantsFailure = (payload) => ({
 });
 
 export const fetchRestaurants = (payload) => (dispatch) => {
+  let payloadLatLon;
   dispatch(fetchRestaurantsRequest());
   axios
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload}.json?country=in&access_token=${accessToken}`
     )
-    .then((res) =>
+    .then(
+      (res) =>
+        (payloadLatLon = {
+          latitude: res.data.features[0].center[1],
+          longitude: res.data.features[0].center[0],
+        }),
       axios
-        .post(
-          "http://localhost:5000/Restaurants?page=1&limit=5",
-          res.data.features[0].center
-        )
+        .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
         .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
     )
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
@@ -90,10 +93,14 @@ export const fetchRestaurants = (payload) => (dispatch) => {
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationSuccess(payload));
-  axios
-    .post("http://localhost:5000/Restaurants?page=1&limit=5", payload)
-    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
-    .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+  (payloadLatLon = {
+    latitude: payload.latitude,
+    longitude: payload.longitude,
+  }),
+    axios
+      .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
+      .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+      .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
 
 export const showCurrentLocationFailure = (payload) => ({

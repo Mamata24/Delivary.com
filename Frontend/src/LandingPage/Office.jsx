@@ -131,7 +131,7 @@ function Office() {
   };
 
   const getCurrentLocation = () => {
-    console.log("request");
+    // console.log("request");
     navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
