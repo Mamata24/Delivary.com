@@ -7,11 +7,7 @@ import { useSelector } from "react-redux";
 import restaurantsData from "./restaurants.json";
 
 function Dashboard() {
-  const toggleBtn = (price) => {
-    console.log(price);
-  };
-
-  // Star Filter
+  // Star Filter -- done
   const [star, setStar] = useState(0);
 
   const handleStar = (starRate) => {
@@ -23,10 +19,20 @@ function Dashboard() {
 
   const filterCategory = (e, currCategory) => {
     // console.log(e.target);
-    if (e.target.checked) setCategory(() => [...category, currCategory]);
+    if (e.target.checked)
+      setCategory(() => [...category, currCategory.toLowerCase()]);
+    else {
+      if (category.includes(currCategory)) {
+        let allDelivery = category.filter(
+          (item) => item != currCategory.toLowerCase()
+        );
+        setCategory(allDelivery);
+      }
+    }
   };
+  console.log(category);
 
-  // Delivery Fee Filter
+  // Delivery Fee Filter -- done
   const [delivery, setDelivery] = useState([]);
   console.log(delivery);
 
@@ -43,7 +49,7 @@ function Dashboard() {
     }
   };
 
-  // Delivery Time Filter
+  // Delivery Time Filter -- done
   const [time, setTime] = useState("All");
 
   const deliveryTimeFilter = (e, time) => {
@@ -51,17 +57,32 @@ function Dashboard() {
   };
 
   // Price Filter
-  const [price, setPrice] = useState([1]);
+  const [price, setPrice] = useState([0]);
 
-  const priceFilter = (currPrice) => {
-    setPrice(() => [...price, currPrice]);
+  const priceFilter1 = (currPrice) => {
+    setPrice((prev) => prev + 1);
   };
+
+  // Sort Functionality
+
+  const [sortCriterion, setSortCriterion] = useState("");
+
+  const handleSort = (e) => {
+    setSortCriterion(e.target.value);
+  };
+
+  console.log(sortCriterion);
 
   // let restaurants = useSelector((state) => state.Auth.restaurants);
 
   let restaurants = restaurantsData;
   // console.log(delivery);
-  // restaurants = restaurants;
+  // restaurants = restaurants.filter((item) => {
+  //   if (category.length === 0) return item;
+  //   else {
+  //     return (item) => item.category.includes(category);
+  //   }
+  // });
 
   restaurants = restaurants
     .filter((item) => {
@@ -75,6 +96,16 @@ function Dashboard() {
         let maxDelivery = Math.max.apply(null, delivery);
         return item.min <= maxDelivery;
       }
+    })
+    .sort((a, b) => {
+      if (sortCriterion === "all") return 0;
+      if (sortCriterion === "rating")
+        return Number(b.rating) - Number(a.rating);
+      if (sortCriterion === "distance")
+        return Number(a.distance) - Number(b.distance);
+      if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
+      if (sortCriterion === "estTime")
+        return Number(a.estimated_time) - Number(b.estimated_time);
     });
 
   console.log(restaurants);
@@ -265,10 +296,10 @@ function Dashboard() {
 
           <div className="row mb-4">
             <div className="col">
-              <button onClick={(e) => toggleBtn(1)}>$</button>
-              <button onClick={(e) => toggleBtn(2)}>$$</button>
-              <button onClick={(e) => toggleBtn(3)}>$$$</button>
-              <button onClick={(e) => toggleBtn(4)}>$$$</button>
+              <button onClick={(e) => priceFilter1(e, 1)}>$</button>
+              {/* <button onClick={(e) => priceFilter2(e, 2)}>$$</button>
+              <button onClick={(e) => priceFilter3(e, 3)}>$$$</button>
+              <button onClick={(e) => priceFilter4(e, 4)}>$$$</button> */}
             </div>
           </div>
           <hr />
@@ -460,8 +491,19 @@ function Dashboard() {
             </div>
             {/* Address and Sort */}
             <div className="row">
-              <div className="col"></div>
-              <div className="col"></div>
+              <div className="col">
+                <select
+                  name="sortFunction"
+                  name="sortCriterion"
+                  onChange={handleSort}
+                >
+                  <option value="all">Sort By</option>
+                  <option value="distance">Distance</option>
+                  <option value="rating">Rating</option>
+                  <option value="minimum">Minimum</option>
+                  <option value="estTime">Est. Time</option>
+                </select>
+              </div>
             </div>
           </div>
           <div className="row">
