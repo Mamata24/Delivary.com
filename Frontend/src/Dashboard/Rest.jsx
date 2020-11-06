@@ -5,7 +5,6 @@ import styles from "./restaurant.module.css";
 import classnames from "classnames";
 
 function Rest(props) {
-  console.log(props.restData);
   let data = props.restData;
   return (
     <div>
