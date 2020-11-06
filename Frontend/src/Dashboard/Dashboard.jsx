@@ -296,7 +296,7 @@ function Dashboard() {
           </div>
         </div>
         {/* Restaurants display */}
-        <div className="col-10">
+        <div className="col-10" style={{marginTop:30,textAlign:"center"}}>
           {/* Icons */}
           <div className="row">
             {/* Italian */}
@@ -306,6 +306,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Italian.jpg"
                 alt="Italian"
               />
+              <p>Italian</p>
             </div>
             {/* Indian */}
             <div className="col">
@@ -314,6 +315,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Indian.jpg"
                 alt="Indian"
               />
+              <p>Indian</p>
             </div>
             {/* Chinese */}
             <div className="col">
@@ -322,6 +324,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Chinese.jpg"
                 alt="Chinese"
               />
+              <p>Chinese</p>
             </div>
             {/* Pizza */}
             <div className="col">
@@ -330,6 +333,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Pizza.jpg"
                 alt="Pizza"
               />
+              <p>Pizza</p>
             </div>
             {/* Vegetarian */}
             <div className="col">
@@ -338,8 +342,10 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Vegetarian.jpg"
                 alt="Vegetarian"
               />
+              <p>Vegetarian</p>
             </div>
           </div>
+          <hr/>
           <Restaurants />
         </div>
       </div>

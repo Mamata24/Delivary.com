@@ -1,5 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {restaurant} from '../RestaurantData/Restaurant'
+import DollerRating from "./DollerRating";
+import StarRating from "./StarRating";
+import styles from '../Dashboard/restaurant.module.css'
+import classnames from 'classnames'
+import { styled } from "@material-ui/core";
 
 function Restaurants() {
   const [data,setData] = useState([])
@@ -11,25 +16,29 @@ function Restaurants() {
   console.log(data)
   return(
     <>
-    {data.map(singleData=>(
+    {data.map(singleData=>
+      
+      (
       <>
-      <div key={singleData.restaurant_id} className="row view overlay">
+      <div key={singleData.restaurant_id} onClick={()=>{console.log("working")}} className={classnames("row",styles.hoverEffect)}>
             <div className="col-lg-5">
               <div className="row">
                 <div className="col-lg-3">
                 <img src={singleData.restaurant_image} alt="a1"/>
                 </div>
-                <div className="col-lg-9">
-                <h3>{singleData.restaurant_name}</h3>
-                <p>{singleData.category}</p>
-                <p>$$$$</p>
+                <div className="col-lg-9" style={{textAlign:"left"}}>
+                <h5>{singleData.restaurant_name}</h5>
+                <p className={styles.hidingText}>{singleData.category}</p>
+                {/* Doller Rating */}
+                <DollerRating rating={singleData.dollar}/>
                 </div>
               </div>
             </div>
             <div className="col-lg-7">
               <div className="row">
                 <div className="col-lg-3">
-                  <span>*****</span>
+                  {/* star rating */}
+                  <StarRating rating={singleData.rating}/>
                   <p>{singleData.reviews} Reviews</p>
                 </div>
                 <div className="col-lg-2">

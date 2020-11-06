@@ -1,0 +1,11 @@
+.hoverEffect:hover{
+    background-color: #e1e9f5;
+    cursor: pointer;
+}
+
+.hidingText{
+  white-space: nowrap; 
+  width: 300px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
