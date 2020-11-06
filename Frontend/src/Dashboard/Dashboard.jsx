@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
-
 import { useSelector } from "react-redux";
-// import Restaurants from "./Restaurants";
-import restaurantsData from "./restaurants.json";
-
+import restaurantsData from "./Restaurants.json";
+import RestaurantsDetails from "./Restaurants";
+import Rest from "./Rest";
 
 function Dashboard() {
   // Star Filter -- done
@@ -448,7 +447,7 @@ function Dashboard() {
           </div>
         </div>
         {/* Restaurants display */}
-        <div className="col-10" style={{marginTop:30,textAlign:"center"}}>
+        <div className="col-10" style={{ marginTop: 30, textAlign: "center" }}>
           {/* Icons */}
           <div className="row">
             {/* Italian */}
@@ -514,10 +513,11 @@ function Dashboard() {
             </div>
           </div>
           <div className="row">
-            <div className="col">{/* <Restaurants/> */}</div>
+            <div className="col">
+              <Rest restData={restaurants} />
+            </div>
           </div>
-          <hr/>
-          <Restaurants />
+          <hr />
         </div>
       </div>
     </div>

@@ -1,36 +1,35 @@
-import React, {useEffect, useState} from "react";
-import {restaurant} from '../RestaurantData/Restaurant'
+import React from "react";
 import DollerRating from "./DollerRating";
 import StarRating from "./StarRating";
-import styles from '../Dashboard/restaurant.module.css'
-import classnames from 'classnames'
-import { styled } from "@material-ui/core";
+import styles from "./restaurant.module.css";
+import classnames from "classnames";
 
-function Restaurants() {
-  const [data,setData] = useState([])
-
-  useEffect(()=>{
-    setData(restaurant)
-  })
-
-  console.log(data)
-  return(
-    <>
-    {data.map(singleData=>
-      
-      (
-      <>
-      <div key={singleData.restaurant_id} onClick={()=>{console.log("working")}} className={classnames("row",styles.hoverEffect)}>
+function Rest(props) {
+  console.log(props.restData);
+  let data = props.restData;
+  return (
+    <div>
+      {data.map((singleData) => (
+        <>
+          <div
+            key={singleData.restaurant_id}
+            onClick={() => {
+              console.log("working");
+            }}
+            className={classnames("row", styles.hoverEffect)}
+          >
             <div className="col-lg-5">
               <div className="row">
                 <div className="col-lg-3">
-                <img src={singleData.restaurant_image} alt="a1"/>
+                  <img src={singleData.restaurant_image} alt="a1" />
                 </div>
-                <div className="col-lg-9" style={{textAlign:"left"}}>
-                <h5>{singleData.restaurant_name}</h5>
-                <p className={styles.hidingText}>{singleData.category}</p>
-                {/* Doller Rating */}
-                <DollerRating rating={singleData.dollar}/>
+                <div className="col-lg-9" style={{ textAlign: "left" }}>
+                  <h5>{singleData.restaurant_name}</h5>
+                  <p className={styles.hidingText}>{singleData.category}</p>
+
+                  {/* Doller Rating */}
+
+                  <DollerRating rating={singleData.dollar} />
                 </div>
               </div>
             </div>
@@ -38,7 +37,8 @@ function Restaurants() {
               <div className="row">
                 <div className="col-lg-3">
                   {/* star rating */}
-                  <StarRating rating={singleData.rating}/>
+
+                  <StarRating rating={singleData.rating} />
                   <p>{singleData.reviews} Reviews</p>
                 </div>
                 <div className="col-lg-2">
@@ -60,11 +60,11 @@ function Restaurants() {
               </div>
             </div>
           </div>
-          <hr/>
-          </>
-          ))}
-    </>
-  )
+          <hr />
+        </>
+      ))}
+    </div>
+  );
 }
 
-export default Restaurants;
+export default Rest;
