@@ -3,8 +3,8 @@ import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
 import { useSelector } from "react-redux";
-import restaurantsData from "./Restaurants.json";
-import RestaurantsDetails from "./Restaurants";
+import restaurantsData from "./restaurants.json";
+// import RestaurantsDetails from "./Restaurants";
 import Rest from "./Rest";
 
 function Dashboard() {
@@ -495,10 +495,12 @@ function Dashboard() {
               />
               <p>Vegetarian</p>
             </div>
-            {/* Address and Sort */}
-            <div className="row">
-              <div className="col">
-                <select
+          </div>
+          {/* Address and Sort */}
+          <div className="row">
+              <div className="col-lg-6" style={{float:"left"}}></div>
+              <div className="col-lg-6" style={{float:"right"}}>
+              <select
                   name="sortFunction"
                   name="sortCriterion"
                   onChange={handleSort}
@@ -510,8 +512,8 @@ function Dashboard() {
                   <option value="estTime">Est. Time</option>
                 </select>
               </div>
-            </div>
           </div>
+          <br/>
           <div className="row">
             <div className="col">
               <Rest restData={restaurants} />
