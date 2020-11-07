@@ -1,504 +1,269 @@
-import React, { useState } from "react";
-import { Container, Row, Nav, NavLink, NavItem } from "react-bootstrap";
-import { CircularProgress } from "@material-ui/core";
-import styled from "./Home.module.css";
-import styles from "styled-components";
-import logo from "../LandingPage/Icon/companyLogo.png";
-import HowItWorksPopOver from "./HowItWorksPopOver";
+import React from "react";
 import {
-  loginUser,
-  registerUser,
-  googleLoginSuccess,
-  fbLoginSuccess,
-} from "../Auth/actions";
-import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { googleCLientId, fbAppId } from "../googleAuth";
-import { useSelector, useDispatch } from "react-redux";
-import classnames from "classnames";
-import { Link } from "react-router-dom";
-
-const SearchBox = styles.div`
-    height:318px;
-    width:565px;
-    background:#f4f5f5;
-    margin-top:-70px;
-    margin-left:400px;
-`;
-
-const Button = styles.button`
-  background:#01579b;
-  color:white;
-`;
+  Container,
+  Row,
+  Col,
+  Card,
+  Button,
+  FormControl,
+  InputGroup,
+  Image,
+} from "react-bootstrap";
+import styled from "./Home.module.css";
+import logo from "../LandingPage/Icon/companyLogo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function Home() {
-  const dispatch = useDispatch();
-
-  const responseFaceBook = (response) => {
-    console.log(response);
-    dispatch(fbLoginSuccess(response));
-  };
-
-  const responseGoogle = (response) => {
-    dispatch(googleLoginSuccess(response));
-    console.log(response.profileObj);
-    // dispatch()
-  };
-
-  const initialState = {
-    email: "",
-    password: "",
-  };
-  const [loginDetails, setLoginDetails] = useState(initialState);
-
-  const initialRegState = {
-    first_name: "",
-    last_name: "",
-    email: "",
-    password: "",
-  };
-  const [registerDetails, setRegisterDetails] = useState(initialRegState);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setLoginDetails((state) => ({ ...state, [name]: value }));
-  };
-
-  const login = () => {
-    dispatch(loginUser(loginDetails));
-  };
-
-  const handleRegChange = (e) => {
-    const { name, value } = e.target;
-    setRegisterDetails((state) => ({ ...state, [name]: value }));
-  };
-
-  const register = () => {
-    dispatch(registerUser(registerDetails));
-  };
-
-  const isLoading = useSelector((state) => state.Auth.isLoading);
-
-  const [component, setComponent] = useState("#panel7");
-
-  const handleComponent = (comp) => {
-    setComponent(comp);
-  };
-
-  return isLoading ? (
-    <CircularProgress />
-  ) : (
-    <Container fluid>
-      <Row className={styled.bgimage}>
-        <Nav className={styled.nav}>
-          <NavItem>
-            <NavLink href="">
-              <HowItWorksPopOver />
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <Link to="/office">For Office</Link>
-          </NavItem>
-          <NavItem>
-            <NavLink href="">
-              {/* <!--Modal: Login / Register Form--> */}
-              <div
-                className="modal fade"
-                id="modalLRForm"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="myModalLabel"
-                aria-hidden="true"
+  return (
+    <>
+      <NavBar />
+      <Container fluid>
+        <Row className={styled.bgimage}>
+          <Row style={{ textAlign: "center" }} lg={3} md={3} sm={1} xs={1}>
+            <Col></Col>
+            <Col>
+              <Card
+                style={{
+                  width: "36rem",
+                  marginTop: "7rem",
+                  marginLeft: "6rem",
+                  backgroundColor: "#f2f3f4",
+                  border: "none",
+                }}
               >
-                <div className="modal-dialog cascading-modal" role="document">
-                  {/* <!--Content--> */}
-                  <div className="modal-content">
-                    {/* <!--Modal cascading tabs--> */}
-                    <div className="modal-c-tabs">
-                      {/* <!-- Nav tabs --> */}
-                      <ul
-                        className="nav nav-tabs md-tabs tabs-2 light-blue darken-3"
-                        role="tablist"
-                      >
-                        <li className="nav-item">
-                          <a
-                            className="nav-link active"
-                            data-toggle="tab"
-                            // href="#panel7"
-                            href={component}
-                            role="tab"
-                            style={
-                              component === "#panel8"
-                                ? { color: "white" }
-                                : { color: "black" }
-                            }
-                            onClick={() => handleComponent("#panel7")}
-                          >
-                            <i className="fas fa-user mr-1"></i>
-                            Login
-                          </a>
-                        </li>
-                        <li className="nav-item">
-                          <a
-                            className="nav-link"
-                            data-toggle="tab"
-                            // href="#panel8"
-                            href={component}
-                            onClick={() => handleComponent("#panel8")}
-                            style={
-                              component === "#panel7"
-                                ? { color: "white" }
-                                : { color: "black" }
-                            }
-                            role="tab"
-                          >
-                            <i className="fas fa-user-plus mr-1"></i>
-                            Register
-                          </a>
-                        </li>
-                      </ul>
-
-                      {/* <!-- Tab panels --> */}
-                      <div className="tab-content">
-                        {/* <!--Panel 7--> */}
-                        <div
-                          className="tab-pane fade in show active"
-                          id="panel7"
-                          role="tabpanel"
-                        >
-                          {/* <!--Body--> */}
-                          <div className="modal-body mb-1">
-                            <div className="md-form form-sm mb-5 text-center">
-                              <img src="./logo2.png" alt="delivary.com" />
-                            </div>
-                            <div className="md-form form-sm mb-5">
-                              <i className="fas fa-envelope prefix"></i>
-                              <input
-                                type="email"
-                                name="email"
-                                onChange={handleChange}
-                                value={loginDetails.email}
-                                id="modalLRInput10"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput10"
-                              >
-                                Your email
-                              </label>
-                            </div>
-
-                            <div className="md-form form-sm mb-4">
-                              <i className="fas fa-lock prefix"></i>
-                              <input
-                                name="password"
-                                onChange={handleChange}
-                                value={loginDetails.password}
-                                type="password"
-                                id="modalLRInput11"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput11"
-                              >
-                                Your password
-                              </label>
-                            </div>
-                            <div className="text-center mt-2">
-                              <Button
-                                className="btn text-center text-white"
-                                onClick={login}
-                              >
-                                Log in <i className="fas fa-sign-in-alt"></i>
-                              </Button>
-                            </div>
-                            <div className="text-center mb-2">
-                              <GoogleLogin
-                                clientId={googleCLientId}
-                                onSuccess={responseGoogle}
-                                onFailure={responseGoogle}
-                                render={(renderProps) => (
-                                  <button
-                                    className={styled.fbBtn}
-                                    onClick={renderProps.onClick}
-                                  >
-                                    <i className="fab fa-google mr-2"></i>
-                                    Login with Google
-                                  </button>
-                                )}
-                              />
-                            </div>
-
-                            <div className="text-center">
-                              <FacebookLogin
-                                className="text-center"
-                                appId={fbAppId}
-                                autoLoad={false}
-                                fields="name,email,picture"
-                                render={(renderProps) => (
-                                  <button
-                                    className={styled.fbBtn}
-                                    onClick={renderProps.onClick}
-                                  >
-                                    <i className="fab fa-facebook mr-2"></i>
-                                    Login with Facebook
-                                  </button>
-                                )}
-                                callback={responseFaceBook}
-                              />
-                            </div>
-                          </div>
-                          {/* <!--Footer--> */}
-                          <div className="modal-footer">
-                            <div className="options text-center text-md-right mt-1">
-                              <p>
-                                Not a member?{" "}
-                                <a href="#" className="blue-text">
-                                  Sign Up
-                                </a>
-                              </p>
-                              <p>
-                                Forgot{" "}
-                                <a href="#" className="blue-text">
-                                  Password?
-                                </a>
-                              </p>
-                            </div>
-                            <button
-                              type="button"
-                              className="btn btn-outline-info waves-effect ml-auto"
-                              data-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
-                        </div>
-                        {/* <!--/.Panel 7--> */}
-
-                        {/* <!--Panel 8--> */}
-                        <div
-                          className="tab-pane fade"
-                          id="panel8"
-                          role="tabpanel"
-                        >
-                          {/* <!--Body--> */}
-                          <div className="modal-body">
-                            <div className="md-form form-sm mb-5 text-center">
-                              <img src="./logo2.png" alt="" />
-                            </div>
-                            <div className="md-form form-sm mb-5">
-                              <i className="fas fa-user prefix"></i>
-                              <input
-                                name="first_name"
-                                onChange={handleRegChange}
-                                value={registerDetails.first_name}
-                                type="text"
-                                id="modalLRInput12"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput12"
-                              >
-                                First Name
-                              </label>
-                            </div>
-
-                            <div className="md-form form-sm mb-5">
-                              <i className="fas fa-user prefix"></i>
-                              <input
-                                name="last_name"
-                                onChange={handleRegChange}
-                                value={registerDetails.last_name}
-                                type="text"
-                                id="modalLRInput12"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput12"
-                              >
-                                Last Name
-                              </label>
-                            </div>
-
-                            <div className="md-form form-sm mb-5">
-                              <i className="fas fa-envelope prefix"></i>
-                              <input
-                                name="email"
-                                onChange={handleRegChange}
-                                value={registerDetails.email}
-                                type="email"
-                                id="modalLRInput12"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput12"
-                              >
-                                Email
-                              </label>
-                            </div>
-
-                            <div className="md-form form-sm mb-5">
-                              <i className="fas fa-lock prefix"></i>
-                              <input
-                                type="password"
-                                id="modalLRInput13"
-                                className="form-control form-control-sm validate"
-                              />
-                              <label
-                                data-error="wrong"
-                                data-success="right"
-                                for="modalLRInput13"
-                              >
-                                Your password
-                              </label>
-                            </div>
-
-                            <div className="text-center form-sm mt-2">
-                              <Button className="btn" onClick={register}>
-                                Sign up{" "}
-                                <i className="fas fa-sign-in-alt ml-1"></i>
-                              </Button>
-                            </div>
-                            <div className="text-center mb-2">
-                              <GoogleLogin
-                                clientId={googleCLientId}
-                                onSuccess={responseGoogle}
-                                onFailure={responseGoogle}
-                                render={(renderProps) => (
-                                  <button
-                                    className={styled.fbBtn}
-                                    onClick={renderProps.onClick}
-                                  >
-                                    <i className="fab fa-google mr-2"></i>
-                                    Login with Google
-                                  </button>
-                                )}
-                              />
-                            </div>
-                            <div className="text-center">
-                              <FacebookLogin
-                                className="text-center"
-                                appId={fbAppId}
-                                autoLoad={false}
-                                fields="name,email,picture"
-                                render={(renderProps) => (
-                                  <button
-                                    className={styled.fbBtn}
-                                    onClick={renderProps.onClick}
-                                  >
-                                    <i className="fab fa-facebook mr-2"></i>
-                                    Login with Facebook
-                                  </button>
-                                )}
-                                callback={responseFaceBook}
-                              />
-                            </div>
-                          </div>
-                          {/* <!--Footer--> */}
-                          <div className="modal-footer">
-                            <div className="options text-right">
-                              <p className="pt-1">
-                                Already have an account?{" "}
-                                <a href="#" className="blue-text">
-                                  Log In
-                                </a>
-                              </p>
-                            </div>
-                            <button
-                              type="button"
-                              className="btn btn-outline-info waves-effect ml-auto"
-                              data-dismiss="modal"
-                            >
-                              Close
-                            </button>
-                          </div>
-                        </div>
-                        {/* <!--/.Panel 8--> */}
-                      </div>
-                    </div>
+                <Card.Body>
+                  <Image
+                    className={styled.logoimg}
+                    src="./logo2.png"
+                    alt="delivery"
+                  />
+                  <div>
+                    <i className="fa fa-utensils fa-2x"></i>
+                    <FontAwesomeIcon
+                      icon="utensils"
+                      size="2x"
+                      className={styled.searcboxicon}
+                    />
+                    <FontAwesomeIcon
+                      icon="glass-martini"
+                      size="2x"
+                      className={styled.searcboxicon}
+                    />
+                    <FontAwesomeIcon
+                      icon="shopping-basket"
+                      size="2x"
+                      className={styled.searcboxicon}
+                    />
                   </div>
-                  {/* <!--/.Content--> */}
-                </div>
-              </div>
-              {/* Modal: Login / Register Form */}
+                  <div className={styled.info}>
+                    <p>See who delivers in your neighborhood</p>
+                  </div>
+                  <div className={styled.searchDiv}>
+                    <div class={styled.inpDiv}>
+                      <FontAwesomeIcon
+                        icon="location-arrow"
+                        className={styled.locationArrow}
+                      />
+                      <input class={styled.searchInput} type="text" />
+                    </div>
 
-              <div class="text-center">
-                <a
-                  href=""
-                  className="btn btn-default bg-primary text-white btn-rounded my-3"
-                  data-toggle="modal"
-                  data-target="#modalLRForm"
-                >
-                  Log in
-                </a>
-              </div>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/home">
-              <i className="fas fa-tag fa-2x"></i>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="/home">
-              <i className={classnames("fas fa-shopping-bag fa-2x")}></i>
-            </NavLink>
-          </NavItem>
-        </Nav>
-        <Row>
-          <SearchBox>
-            <img className={styled.logoimg} src={logo} alt="delivery" />
-            <div>
-              <i
-                className={classnames(
-                  "fas fa-utensils fa-2x",
-                  styled.searcboxicon
-                )}
-              ></i>
-
-              <i
-                className={classnames(
-                  "fas fa-glass-martini fa-2x",
-                  styled.searcboxicon
-                )}
-              ></i>
-
-              <i
-                className={classnames(
-                  "fas fa-shopping-basket fa-2x",
-                  styled.searcboxicon
-                )}
-              ></i>
-            </div>
-            <div className={styled.info}>
-              <p>See who delivers in your neighborhood</p>
-            </div>
-            <div className={styled.searchDiv}>
-              <div className={styled.inpDiv}>
-                <i
-                  className="fas fa-location-arrow fa-2x"
-                  style={{ color: "#1f5ea9" }}
-                ></i>
-                <span>
-                  <input className={styled.inputBox} type="text" />
-                </span>
-              </div>
-              <button className={styled.btn}>Search</button>
-            </div>
-          </SearchBox>
+                    <button className={styled.btn}>Search</button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col></Col>
+          </Row>
         </Row>
-      </Row>
-    </Container>
+      </Container>
+      <Container>
+        <Row style={{ textAlign: "center", margin: 50 }}>
+          <Col>
+            <h4>Why order with delivery.com</h4>
+          </Col>
+        </Row>
+        <Row
+          lg={3}
+          sm={2}
+          xs={1}
+          style={{ textAlign: "center" }}
+          className={styled.animation}
+        >
+          <Col>
+            <img
+              src="img1.png"
+              alt="img1"
+              style={{ height: 150, width: 150 }}
+            />
+            <div>
+              <img src="Shadow.png" alt="shadow" style={{ width: 100 }} />
+            </div>
+            <h5>Find Favorites and Discover New Ones</h5>
+            <p>
+              Browse thousands of restaurants and stores to get the best of your
+              neighborhood delivered.
+            </p>
+          </Col>
+          <Col>
+            <img
+              src="img2.png"
+              alt="img2"
+              style={{ height: 150, width: 150 }}
+            />
+            <div>
+              <img src="Shadow.png" alt="shadow" style={{ width: 100 }} />
+            </div>
+            <h5>Free, Easy, and Essential</h5>
+            <p>
+              It's free to order, so save time tackling your to-do list at home,
+              at work, or on the go.
+            </p>
+          </Col>
+          <Col>
+            <img
+              src="img3.png"
+              alt="img3"
+              style={{ height: 150, width: 150 }}
+            />
+            <div>
+              <img src="Shadow.png" alt="shadow" style={{ width: 100 }} />
+            </div>
+            <h5>Earn Points and Get Rewards</h5>
+            <p>
+              Score Delivery Points with every purchase and cash them in for
+              gift cards and other rewards.
+            </p>
+          </Col>
+        </Row>
+      </Container>
+      <Container style={{ background: "#f8f8f8" }} fluid>
+        <Row style={{ textAlign: "center", margin: 50 }}>
+          <Col style={{ marginTop: 50 }}>
+            <h4>Get to know us</h4>
+          </Col>
+        </Row>
+        <Row>
+          <Container>
+            <Row style={{ backgroundColor: "white" }}>
+              <Col>
+                <img
+                  style={{ height: 300, borderRadius: "0% 50% 50% 0%" }}
+                  src="pic1.jpg"
+                  alt="pic1"
+                />
+              </Col>
+              <Col>
+                <div style={{ margin: 50 }}>
+                  <h4>For Local Businesses</h4>
+                  <p>
+                    Find out how to start growing your business with online
+                    ordering.
+                  </p>
+                  <Button variant="outline-primary">Learn More</Button>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </Row>
+        <Row style={{ marginTop: 20 }}>
+          <Container style={{ marginBottom: 20 }}>
+            <Row>
+              <Col lg={6}>
+                <Row
+                  style={{
+                    backgroundColor: "white",
+                    marginRight: 2,
+                    height: "auto",
+                  }}
+                >
+                  <Col>
+                    <div style={{ margin: 50 }}>
+                      <h5>About Us</h5>
+                      <p>We’re a fun bunch. Drop in and get to know us!</p>
+                      <Button variant="outline-primary">Learn More</Button>
+                    </div>
+                  </Col>
+                  <Col>
+                    <img
+                      style={{ height: "10rem" }}
+                      src="pic2.jpg"
+                      alt="pic2"
+                    />
+                  </Col>
+                </Row>
+              </Col>
+              <Col lg={6}>
+                <Row
+                  style={{
+                    backgroundColor: "white",
+                    marginLeft: 2,
+                    height: "auto",
+                  }}
+                >
+                  <Col>
+                    <div style={{ margin: 50 }}>
+                      <h5>Delivery Points</h5>
+                      <p>No one else dishes out such great rewards!</p>
+                      <Button variant="outline-primary">Learn More</Button>
+                    </div>
+                  </Col>
+                  <Col>
+                    <img
+                      style={{ height: "10rem" }}
+                      src="pic3.jpg"
+                      alt="pic3"
+                    />
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Container>
+        </Row>
+      </Container>
+      <Container style={{ backgroundColor: "white" }}>
+        <Row style={{ position: "relative" }}>
+          <Col lg={6} xs={12} sm={12}>
+            <img
+              style={{ height: 200, marginTop: 100, marginBottom: -70 }}
+              src="bottomImage3.png"
+              alt="b3"
+            />
+            <img
+              style={{ height: 200, marginBottom: -70 }}
+              src="bottomImage2.png"
+              alt="b2"
+            />
+            <img style={{ height: 200 }} src="bottomImage1.png" alt="b1" />
+          </Col>
+          <Col lg={6} xs={12} sm={12}>
+            <Row style={{ marginTop: 150 }}>
+              <h3>Tap into the neighborhood.</h3>
+              <p>
+                Download the delivery.com app today <br></br> so you can order
+                anytime, anywhere.
+              </p>
+              <div>
+                <img style={{ width: 140 }} src="app.png" alt="appStore" />
+                <img style={{ width: 180 }} src="play.png" alt="playStore" />
+              </div>
+              <InputGroup>
+                <Row>
+                  <Col>
+                    <FormControl placeholder="Mobile Number" />
+                  </Col>
+                  <Col>
+                    <Button varient="primary">Send Link</Button>
+                  </Col>
+                </Row>
+              </InputGroup>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+      <Footer />
+    </>
   );
 }
 

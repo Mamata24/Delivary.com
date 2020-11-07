@@ -118,7 +118,7 @@ export default (state = initialState, action) => {
         isError: false,
         errMsg: "",
         login: true,
-        user: action.payload,
+        user: action.payload.user,
       };
 
     case LOGIN_USER_FAILURE:
@@ -149,6 +149,7 @@ export default (state = initialState, action) => {
         ...state,
         login: false,
         register: false,
+        user: [],
       };
 
     default:

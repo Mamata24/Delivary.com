@@ -21,6 +21,7 @@ const Span = styled.span`
 
 function DashboardNav() {
   const user = useSelector((state) => state.Auth.user);
+
   return (
     <Div className="container-fluid">
       <div className="row">
@@ -33,8 +34,7 @@ function DashboardNav() {
 
         <div className="offset-1 col-1 text-white">
           <i className="fas fa-user-circle fa-2x mt-3"></i>
-          {/* <span className="text-white">{user.first_name}</span> */}
-          <Span className="font-weight-bold ml-2">akki</Span>
+          <Span className="text-white">{user.first_name}</Span>
         </div>
         <div className=" offset-2 col-0.8 text-white mt-3">
           <i className="fas fa-tag fa-2x"></i>

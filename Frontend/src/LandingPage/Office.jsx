@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -20,6 +20,7 @@ import {
   getCoordinatesByCity,
   showCurrentLocationSuccess,
   showCurrentLocationFailure,
+  fetchRestaurants,
 } from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -116,9 +117,11 @@ function Office() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const [address, setAddress] = useState("");
   const suggestions = useSelector((state) => state.Auth.suggestions);
 
   const handleAddress = (e) => {
+    setAddress(e.target.value);
     dispatch(getCoordinatesByCity(e.target.value));
   };
 
@@ -135,6 +138,10 @@ function Office() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   };
 
+  const getRestaurants = () => {
+    dispatch(fetchRestaurants(address));
+  };
+
   return (
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
@@ -147,15 +154,13 @@ function Office() {
           </Typography>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>
-              <SearchIcon />{" "}
-            </Grid>
-            <Grid item>
               <Autocomplete
                 freeSolo
                 disableClearable
                 options={suggestions.map((place) => place.place_name)}
                 renderInput={(params) => (
                   <CssTextField
+                    value={address}
                     onChange={handleAddress}
                     className={classes.title}
                     {...params}
@@ -168,6 +173,9 @@ function Office() {
                   />
                 )}
               />
+            </Grid>
+            <Grid item onClick={getRestaurants}>
+              <SearchIcon />
             </Grid>
             <Grid item>
               <Typography variant="h6" onClick={getCurrentLocation}>

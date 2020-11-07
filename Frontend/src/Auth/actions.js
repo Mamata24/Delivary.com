@@ -174,6 +174,7 @@ export const googleLoginSuccess = (payload) => (dispatch) => {
     email: payload.email,
     password: `${payload.givenName}1234`,
   };
+  console.log(payloadData);
   axios
     .post("http://localhost:5000/signup", payloadData)
     .then((res) => dispatch(loginUserSuccess(res.data)))

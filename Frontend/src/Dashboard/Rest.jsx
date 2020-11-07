@@ -3,15 +3,19 @@ import DollerRating from "./DollerRating";
 import StarRating from "./StarRating";
 import styles from "./restaurant.module.css";
 import classnames from "classnames";
+import { Link } from "react-router-dom";
 
 function Rest(props) {
   let data = props.restData;
   return (
     <div>
       {data.map((singleData) => (
-        <>
+        <Link
+          to={`/dashboard/${singleData.id}`}
+          style={{ textDecoration: "none" }}
+        >
           <div
-            key={singleData.restaurant_id}
+            key={singleData.id}
             onClick={() => {
               console.log("working");
             }}
@@ -60,7 +64,7 @@ function Rest(props) {
             </div>
           </div>
           <hr />
-        </>
+        </Link>
       ))}
     </div>
   );

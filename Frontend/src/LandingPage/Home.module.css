@@ -4,6 +4,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 }
 
 .nav {
@@ -14,27 +15,25 @@
 }
 
 .logoimg {
-  width: 200px;
-  margin-left: 180px;
+  width: 180px;
 }
 
 .searcboxicon {
   color: #1f5ea9;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  padding: 8px;
-  background-color: white;
-  position: relative;
-  left: 185px;
-  margin-right: 50px;
+  /* height: 50px;
+  width: 50px; */
+  /* border-radius: 50%; */
+  /* background-color: white; */
+  /* position: relative; */
+  /* left: 185px; */
+  margin: 10px;
 }
 
 .info {
   font-size: 25px;
   color: #666666;
   font-family: Open Arial, sans-serif;
-  margin-left: 60px;
+  /* margin-left: 60px; */
 }
 
 .btn {
@@ -46,7 +45,7 @@
   height: 45px;
   position: relative;
   bottom: 45px;
-  left: 354px;
+  left: 150px;
 }
 .searchInput {
   border: none;
@@ -70,26 +69,7 @@
 
 .locationArrow {
   position: relative;
-  right: 20px;
+  right: 170px;
   top: 5px;
   color: #1f5ea9;
-}
-
-.inputBox {
-  border: 0;
-  outline: none;
-  height: 30px;
-  padding-top: 20px;
-}
-
-.fbBtn {
-  background: #1f5ea9;
-  color: white;
-  padding: 2%;
-  border-radius: 5px;
-  border: 1px solid #1f5ea9;
-}
-
-.fbBtn:hover {
-  filter: brightness(1.3);
 }
