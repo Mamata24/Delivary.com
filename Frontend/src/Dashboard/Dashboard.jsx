@@ -23,7 +23,7 @@ function Dashboard() {
     if (e.target.checked)
       setCategory(() => [...category, currCategory.toLowerCase()]);
     else {
-      if (category.includes(currCategory)) {
+      if (category.includes(currCategory.toLowerCase())) {
         let allDelivery = category.filter(
           (item) => item != currCategory.toLowerCase()
         );
@@ -77,37 +77,40 @@ function Dashboard() {
   // let restaurants = useSelector((state) => state.Auth.restaurants);
 
   let restaurants = restaurantsData;
-  // console.log(delivery);
-  // restaurants = restaurants.filter((item) => {
-  //   if (category.length === 0) return item;
-  //   else {
-  //     return (item) => item.category.includes(category);
-  //   }
-  // });
-
-  restaurants = restaurants
-    .filter((item) => {
-      if (time === "All") return item;
-      if (time !== "All") return Number(item.estimated_time) <= time;
-    })
-    .filter((item) => item.rating >= star)
-    .filter((item) => {
-      if (delivery.includes("all") || delivery.length === 0) return item;
-      else {
-        let maxDelivery = Math.max.apply(null, delivery);
-        return item.min <= maxDelivery;
+  console.log(category);
+  restaurants = restaurants.filter((item) => {
+    if (category.length === 0) return item;
+    else {
+      for (var i = 0; i < category.length; i++) {
+        return item.category.toLowerCase().includes(category[i]);
+        // return item.category.toLowerCase().includes("indian");
       }
-    })
-    .sort((a, b) => {
-      if (sortCriterion === "all") return 0;
-      if (sortCriterion === "rating")
-        return Number(b.rating) - Number(a.rating);
-      if (sortCriterion === "distance")
-        return Number(a.distance) - Number(b.distance);
-      if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
-      if (sortCriterion === "estTime")
-        return Number(a.estimated_time) - Number(b.estimated_time);
-    });
+    }
+  });
+
+  // restaurants = restaurants
+  //   .filter((item) => {
+  //     if (time === "All") return item;
+  //     if (time !== "All") return Number(item.estimated_time) <= time;
+  //   })
+  //   .filter((item) => item.rating >= star)
+  //   .filter((item) => {
+  //     if (delivery.includes("all") || delivery.length === 0) return item;
+  //     else {
+  //       let maxDelivery = Math.max.apply(null, delivery);
+  //       return item.min <= maxDelivery;
+  //     }
+  //   })
+  //   .sort((a, b) => {
+  //     if (sortCriterion === "all") return 0;
+  //     if (sortCriterion === "rating")
+  //       return Number(b.rating) - Number(a.rating);
+  //     if (sortCriterion === "distance")
+  //       return Number(a.distance) - Number(b.distance);
+  //     if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
+  //     if (sortCriterion === "estTime")
+  //       return Number(a.estimated_time) - Number(b.estimated_time);
+  //   });
 
   console.log(restaurants);
 
@@ -182,7 +185,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={(e) => filterCategory("Chineese")}
+                  onChange={(e) => filterCategory(e, "Chineese")}
                   value={category}
                   className="custom-control-input"
                   id="Chinese"
@@ -200,7 +203,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={(e) => filterCategory("Italie,an")}
+                  onChange={(e) => filterCategory(e, "Italian")}
                   value={category}
                   className="custom-control-input"
                   id="Italian"
@@ -218,7 +221,7 @@ function Dashboard() {
                 <input
                   type="checkbox"
                   name="category"
-                  onChange={(e) => filterCategory("Pizzae,")}
+                  onChange={(e) => filterCategory(e, "Pizza")}
                   value={category}
                   className="custom-control-input"
                   id="Pizza"
