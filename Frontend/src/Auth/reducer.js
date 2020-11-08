@@ -15,16 +15,17 @@ import {
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
 } from "./actionTypes";
+import { loadData, saveData } from "../localStorage";
 
 export const initialState = {
   // content: "/login",
   suggestions: [],
-  user: [],
+  user: loadData("delivaryUser") || [],
   isLoading: false,
   isError: false,
   errMsg: "",
   register: false,
-  login: false,
+  login: loadData("delivaryAuth") || false,
   lat: "",
   lon: "",
   currMsg: "",
@@ -112,6 +113,8 @@ export default (state = initialState, action) => {
       };
 
     case LOGIN_USER_SUCCESS:
+      saveData("delivaryAuth", true);
+      saveData("delivaryUser", action.payload.user);
       return {
         ...state,
         isLoading: false,
@@ -145,6 +148,8 @@ export default (state = initialState, action) => {
       };
 
     case LOGOUT:
+      saveData("delivaryAuth", false);
+      saveData("delivaryUser", []);
       return {
         ...state,
         login: false,

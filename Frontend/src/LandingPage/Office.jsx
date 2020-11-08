@@ -126,15 +126,17 @@ function Office() {
   };
 
   const success = (pos) => {
+    console.log(pos);
     dispatch(showCurrentLocationSuccess(pos.coords));
   };
 
   const error = (err) => {
+    console.log(err);
     dispatch(showCurrentLocationFailure(err));
   };
 
   const getCurrentLocation = () => {
-    // console.log("request");
+    console.log("request");
     navigator.geolocation.getCurrentPosition(success, error, options);
   };
 

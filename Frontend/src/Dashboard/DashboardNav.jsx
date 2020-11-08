@@ -29,7 +29,11 @@ function DashboardNav() {
           <img src="./logo.png" width="150px" alt="delivary.com" />
         </div>
         <div className="col-3">
-          <Input className="bg-white mt-3" type="text" value={user.location} />
+          <Input
+            className="bg-white mt-3"
+            type="text"
+            value={user.first_name}
+          />
         </div>
 
         <div className="offset-1 col-1 text-white">

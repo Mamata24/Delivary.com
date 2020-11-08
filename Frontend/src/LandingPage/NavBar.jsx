@@ -27,7 +27,7 @@ function NavBar() {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" fixed="top" className={styled.nav}>
+      <Navbar collapseOnSelect fixed="top" expand="lg" className={styled.nav}>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">

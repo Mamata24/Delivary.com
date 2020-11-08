@@ -6,8 +6,14 @@ import { useSelector } from "react-redux";
 import restaurantsData from "./Restaurants.json";
 import RestaurantsDetails from "./Restaurants";
 import Rest from "./Rest";
+import { useEffect } from "react";
 
 function Dashboard() {
+  const login = useSelector((state) => state.Auth.login);
+
+  useEffect(() => {
+    // if (login) window.location.reload(true);
+  }, []);
   // Star Filter -- done
   const [star, setStar] = useState(0);
 

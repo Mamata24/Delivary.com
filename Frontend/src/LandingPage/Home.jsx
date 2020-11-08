@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Container,
   Row,
@@ -14,8 +14,53 @@ import logo from "../LandingPage/Icon/companyLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCoordinatesByCity,
+  showCurrentLocationSuccess,
+  showCurrentLocationFailure,
+  fetchRestaurants,
+} from "../Auth/actions";
+import styles from "styled-components";
+
+const Input = styles.input`
+  border:0;
+`;
 
 function Home() {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+  const dispatch = useDispatch();
+
+  const [address, setAddress] = useState("");
+  const suggestions = useSelector((state) => state.Auth.suggestions);
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+    dispatch(getCoordinatesByCity(e.target.value));
+  };
+
+  const success = (pos) => {
+    console.log(pos);
+    dispatch(showCurrentLocationSuccess(pos.coords));
+  };
+
+  const error = (err) => {
+    console.log(err);
+    dispatch(showCurrentLocationFailure(err));
+  };
+
+  const getCurrentLocation = () => {
+    console.log("request");
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  };
+
+  const getRestaurants = () => {
+    dispatch(fetchRestaurants(address));
+  };
   return (
     <>
       <NavBar />
@@ -61,15 +106,24 @@ function Home() {
                     <p>See who delivers in your neighborhood</p>
                   </div>
                   <div className={styled.searchDiv}>
-                    <div class={styled.inpDiv}>
+                    <div className={styled.inpDiv}>
                       <FontAwesomeIcon
                         icon="location-arrow"
                         className={styled.locationArrow}
                       />
-                      <input class={styled.searchInput} type="text" />
+                      <Input
+                        type="text"
+                        onChange={handleAddress}
+                        value={address}
+                        placeholder="Street Address, City, State"
+                      />
+                      {suggestions &&
+                        suggestions.map((item) => <div>{item.place_name}</div>)}
                     </div>
 
-                    <button className={styled.btn}>Search</button>
+                    <button className={styled.btn} onClick={getRestaurants}>
+                      Search
+                    </button>
                   </div>
                 </Card.Body>
               </Card>

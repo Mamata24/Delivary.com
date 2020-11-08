@@ -21,6 +21,21 @@ const Button = styles.button`
 `;
 function LogReg() {
   const dispatch = useDispatch();
+  const [clickedLogin, setClickedLogin] = useState(false);
+
+  const clickLogin = () => {
+    setClickedLogin(true);
+  };
+
+  React.useEffect(() => {
+    return () => {
+      const elem = document.getElementsByClassName("modal-backdrop");
+      // console.log(elem[0]);
+      if (elem[0]) {
+        elem[0].parentElement.removeChild(elem[0]);
+      }
+    };
+  }, [clickedLogin]);
 
   const responseFaceBook = (response) => {
     console.log(response);
@@ -77,19 +92,28 @@ function LogReg() {
   if (login) {
     history.push("/dashboard");
   }
+  React.useEffect(() => {
+    return () => {
+      const elem = document.getElementsByClassName("modal-backdrop");
+      if (elem[0]) {
+        elem[0].parentElement.removeChild(elem[0]);
+      }
+    };
+  }, []);
   return (
     <>
       {/* <!--Modal: Login / Register Form--> */}
       <div
+        style={{ zIndex: "99999" }}
         className="modal fade"
         id="modalLRForm"
-        tabindex="-1"
+        // tabindex="999999"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog cascading-modal" role="document">
-          {/* <!--Content--> */}
+          {/* <!--Content-->   */}
           <div className="modal-content">
             {/* <!--Modal cascading tabs--> */}
             <div className="modal-c-tabs">
@@ -99,7 +123,7 @@ function LogReg() {
                 role="tablist"
               >
                 <li className="nav-item">
-                  <a
+                  <div
                     className="nav-link active"
                     data-toggle="tab"
                     // href="#panel7"
@@ -114,10 +138,10 @@ function LogReg() {
                   >
                     <i className="fas fa-user mr-1"></i>
                     Login
-                  </a>
+                  </div>
                 </li>
                 <li className="nav-item">
-                  <a
+                  <div
                     className="nav-link"
                     data-toggle="tab"
                     // href="#panel8"
@@ -132,7 +156,7 @@ function LogReg() {
                   >
                     <i className="fas fa-user-plus mr-1"></i>
                     Register
-                  </a>
+                  </div>
                 </li>
               </ul>
 
@@ -235,15 +259,15 @@ function LogReg() {
                     <div className="options text-center text-md-right mt-1">
                       <p>
                         Not a member?{" "}
-                        <a href="#" className="blue-text">
+                        <div href="#" className="blue-text">
                           Sign Up
-                        </a>
+                        </div>
                       </p>
                       <p>
                         Forgot{" "}
-                        <a href="#" className="blue-text">
+                        <div href="#" className="blue-text">
                           Password?
-                        </a>
+                        </div>
                       </p>
                     </div>
                     <button
@@ -369,9 +393,9 @@ function LogReg() {
                     <div className="options text-right">
                       <p className="pt-1">
                         Already have an account?{" "}
-                        <a href="#" className="blue-text">
+                        <div href="#" className="blue-text">
                           Log In
-                        </a>
+                        </div>
                       </p>
                     </div>
                     <button
@@ -392,14 +416,15 @@ function LogReg() {
       </div>
       {/* Modal: Login / Register Form */}
       <div class="text-center">
-        <a
+        <div
           href="#"
           className="text-white my-3"
           data-toggle="modal"
           data-target="#modalLRForm"
+          onClick={clickLogin}
         >
           <Button>Log in</Button>
-        </a>
+        </div>
       </div>
     </>
   );
