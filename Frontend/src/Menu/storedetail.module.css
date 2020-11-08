@@ -1,0 +1,10 @@
+.bgImage{
+  min-height:180;
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-image:url('https://res.cloudinary.com/delivery-com/image/fetch/q_70,f_auto/https%3A%2F%2Fs3.amazonaws.com%2Fs3.delivery.com%2Fimages%2Fmerchant-header-images%2F1499964554.jpg');
+}
+.overlay{
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
