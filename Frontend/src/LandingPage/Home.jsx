@@ -10,7 +10,6 @@ import {
   Image,
 } from "react-bootstrap";
 import styled from "./Home.module.css";
-import logo from "../LandingPage/Icon/companyLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
@@ -21,7 +20,7 @@ import {
   showCurrentLocationFailure,
   fetchRestaurants,
 } from "../Auth/actions";
-import styles from "styled-components";
+import styles, { createGlobalStyle } from "styled-components";
 
 const Input = styles.input`
   border:0;
@@ -39,6 +38,7 @@ function Home() {
   const suggestions = useSelector((state) => state.Auth.suggestions);
 
   const handleAddress = (e) => {
+    console.log(e.target.value);
     setAddress(e.target.value);
     dispatch(getCoordinatesByCity(e.target.value));
   };
@@ -60,6 +60,10 @@ function Home() {
 
   const getRestaurants = () => {
     dispatch(fetchRestaurants(address));
+  };
+
+  const handleClick = () => {
+    console.log("click");
   };
   return (
     <>
@@ -117,13 +121,12 @@ function Home() {
                         value={address}
                         placeholder="Street Address, City, State"
                       />
-                      {suggestions &&
-                        suggestions.map((item) => <div>{item.place_name}</div>)}
                     </div>
 
                     <button className={styled.btn} onClick={getRestaurants}>
                       Search
                     </button>
+                    {/* <button onClick={handleClick}>hi</button> */}
                   </div>
                 </Card.Body>
               </Card>

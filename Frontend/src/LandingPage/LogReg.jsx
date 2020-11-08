@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { googleCLientId, fbAppId } from "../googleAuth";
-import classnames from "classnames";
 import {
   loginUser,
   registerUser,
@@ -10,7 +9,7 @@ import {
   fbLoginSuccess,
 } from "../Auth/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "../LandingPage/Nav.module.css";
 import styles from "styled-components";
 
@@ -92,6 +91,7 @@ function LogReg() {
   if (login) {
     history.push("/dashboard");
   }
+
   React.useEffect(() => {
     return () => {
       const elem = document.getElementsByClassName("modal-backdrop");
@@ -100,6 +100,7 @@ function LogReg() {
       }
     };
   }, []);
+
   return (
     <>
       {/* <!--Modal: Login / Register Form--> */}

@@ -3,10 +3,33 @@ import DollerRating from "./DollerRating";
 import StarRating from "./StarRating";
 import styles from "./restaurant.module.css";
 import classnames from "classnames";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import Pagination from "@material-ui/lab/Pagination";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchNextPageRestaurants, changePage } from "../Auth/actions";
 
 function Rest(props) {
   let data = props.restData;
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { totalRestaurants, lat, lon, activePage } = useSelector(
+    (state) => state.Auth
+  );
+
+  let totalPages = Math.ceil(totalRestaurants / 5);
+
+  const handlePageChange = async (e, value) => {
+    await dispatch(changePage(value));
+    let payload = {
+      latitude: lat,
+      longitude: lon,
+      page: value,
+    };
+    await dispatch(fetchNextPageRestaurants(payload));
+    await history.push(`?page=${value}&limit=5`);
+  };
+
   return (
     <div>
       {data.map((singleData) => (
@@ -66,6 +89,17 @@ function Rest(props) {
           <hr />
         </Link>
       ))}
+      <Pagination
+        count={totalPages}
+        onChange={handlePageChange}
+        style={{
+          clear: "both",
+          marginLeft: "42%",
+          outline: "none",
+          marginBottom: "3%",
+        }}
+        color="secondary"
+      />
     </div>
   );
 }

@@ -1,30 +1,12 @@
-import React, { useState } from "react";
-import { Nav, Navbar, NavLink } from "react-bootstrap";
+import React from "react";
+import { Nav, Navbar } from "react-bootstrap";
 import HowItWorksPopOver from "./HowItWorksPopOver";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "../LandingPage/Nav.module.css";
-import { useDispatch } from "react-redux";
-import classnames from "classnames";
-import { Link, useHistory } from "react-router-dom";
-import styles from "styled-components";
+import { Link } from "react-router-dom";
 import LogReg from "./LogReg";
 
-// const SearchBox = styles.div`
-//     height:318px;
-//     width:565px;
-//     background:#f4f5f5;
-//     margin-top:-70px;
-//     margin-left:400px;
-// `;
-
-const Button = styles.button`
-  background:#01579b;
-  color:white;
-`;
-
 function NavBar() {
-  const dispatch = useDispatch();
-
   return (
     <>
       <Navbar collapseOnSelect fixed="top" expand="lg" className={styled.nav}>

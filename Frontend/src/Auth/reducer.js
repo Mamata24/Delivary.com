@@ -14,6 +14,7 @@ import {
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
+  CHANGE_PAGE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -30,6 +31,8 @@ export const initialState = {
   lon: "",
   currMsg: "",
   restaurants: [],
+  activePage: loadData("delivaryPage") || 1,
+  totalRestaurants: "",
 };
 
 export default (state = initialState, action) => {
@@ -66,7 +69,7 @@ export default (state = initialState, action) => {
       };
 
     case CURRENT_LOCATION_SUCCESS:
-      console.log(action.payload);
+      saveData("deliveryAuth", true);
       return {
         ...state,
         lat: action.payload.latitude,
@@ -133,10 +136,13 @@ export default (state = initialState, action) => {
       };
 
     case FETCH_RESTAURANTS_SUCCESS:
+      saveData("delivaryPage", action.payload.page);
       return {
         ...state,
-        restaurants: action.payload,
+        restaurants: action.payload.data,
         errMsg: "",
+        activePage: action.payload.page,
+        totalRestaurants: action.payload.total,
         isError: false,
       };
 
@@ -155,6 +161,13 @@ export default (state = initialState, action) => {
         login: false,
         register: false,
         user: [],
+      };
+
+    case CHANGE_PAGE:
+      saveData("delivaryPage", action.payload);
+      return {
+        ...state,
+        activePage: action.payload,
       };
 
     default:

@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -26,7 +25,7 @@ function DashboardNav() {
     <Div className="container-fluid">
       <div className="row">
         <div className="col-3">
-          <img src="logo2.png" width="150px" alt="delivary.com" />
+          <img src="logo.png" width="150px" alt="delivary.com" />
         </div>
         <div className="col-3">
           <Input

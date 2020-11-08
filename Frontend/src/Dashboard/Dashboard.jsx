@@ -2,18 +2,10 @@ import React, { useState } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
-import { useSelector } from "react-redux";
-import restaurantsData from "./restaurants.json";
-// import RestaurantsDetails from "./Restaurants";
 import Rest from "./Rest";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function Dashboard() {
-  const login = useSelector((state) => state.Auth.login);
-
-  useEffect(() => {
-    // if (login) window.location.reload(true);
-  }, []);
   // Star Filter -- done
   const [star, setStar] = useState(0);
 
@@ -31,7 +23,7 @@ function Dashboard() {
     else {
       if (category.includes(currCategory.toLowerCase())) {
         let allDelivery = category.filter(
-          (item) => item != currCategory.toLowerCase()
+          (item) => item !== currCategory.toLowerCase()
         );
         setCategory(allDelivery);
       }
@@ -41,7 +33,6 @@ function Dashboard() {
 
   // Delivery Fee Filter -- done
   const [delivery, setDelivery] = useState([]);
-  console.log(delivery);
 
   const handleDeliveryFilter = (e, fee) => {
     if (e.target.checked) {
@@ -50,7 +41,7 @@ function Dashboard() {
       setDelivery(allDelivery);
     } else {
       if (delivery.includes(fee)) {
-        let allDelivery = delivery.filter((item) => item != fee);
+        let allDelivery = delivery.filter((item) => item !== fee);
         setDelivery(allDelivery);
       }
     }
@@ -80,19 +71,18 @@ function Dashboard() {
 
   console.log(sortCriterion);
 
-  // let restaurants = useSelector((state) => state.Auth.restaurants);
+  let restaurants = useSelector((state) => state.Auth.restaurants);
 
-  let restaurants = restaurantsData;
   console.log(category);
-  restaurants = restaurants.filter((item) => {
-    if (category.length === 0) return item;
-    else {
-      for (var i = 0; i < category.length; i++) {
-        return item.category.toLowerCase().includes(category[i]);
-        // return item.category.toLowerCase().includes("indian");
-      }
-    }
-  });
+  // restaurants = restaurants.filter((item) => {
+  //   if (category.length === 0) return item;
+  //   else {
+  //     for (var i = 0; i < category.length; i++) {
+  //       return item.category.toLowerCase().includes(category[i]);
+  //       // return item.category.toLowerCase().includes("indian");
+  //     }
+  //   }
+  // });
 
   // restaurants = restaurants
   //   .filter((item) => {
@@ -507,22 +497,18 @@ function Dashboard() {
           </div>
           {/* Address and Sort */}
           <div className="row">
-              <div className="col-lg-6" style={{float:"left"}}></div>
-              <div className="col-lg-6" style={{float:"right"}}>
-              <select
-                  name="sortFunction"
-                  name="sortCriterion"
-                  onChange={handleSort}
-                >
-                  <option value="all">Sort By</option>
-                  <option value="distance">Distance</option>
-                  <option value="rating">Rating</option>
-                  <option value="minimum">Minimum</option>
-                  <option value="estTime">Est. Time</option>
-                </select>
-              </div>
+            <div className="col-lg-6" style={{ float: "left" }}></div>
+            <div className="col-lg-6" style={{ float: "right" }}>
+              <select name="sortFunction" onChange={handleSort}>
+                <option value="all">Sort By</option>
+                <option value="distance">Distance</option>
+                <option value="rating">Rating</option>
+                <option value="minimum">Minimum</option>
+                <option value="estTime">Est. Time</option>
+              </select>
+            </div>
           </div>
-          <br/>
+          <br />
           <div className="row">
             <div className="col">
               <Rest restData={restaurants} />

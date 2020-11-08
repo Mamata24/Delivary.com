@@ -15,6 +15,7 @@ import {
   FETCH_RESTAURANTS_SUCCESS,
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
+  CHANGE_PAGE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -90,13 +91,28 @@ export const fetchRestaurants = (payload) => (dispatch) => {
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
 
+export const fetchNextPageRestaurants = (payload) => (dispatch) => {
+  let payloadLatLon = {
+    latitude: payload.latitude,
+    longitude: payload.longitude,
+  };
+  axios
+    .post(
+      `http://localhost:5000/Restaurants?page=${payload.page}&limit=5`,
+      payloadLatLon
+    )
+    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+};
+
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
-  dispatch(currLocationSuccess(payload));
   let payloadLatLon = {
-    latitude: Number(payload.latitude).toFixed(6),
-    longitude: Number(payload.longitude).toFixed(6),
+    latitude: 12.935234,
+    longitude: 77.630049,
   };
+  dispatch(currLocationSuccess(payloadLatLon));
+
   axios
     .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
@@ -200,4 +216,11 @@ export const fbLoginSuccess = (payload) => (dispatch) => {
 
 export const logoutUser = () => ({
   type: LOGOUT,
+});
+
+// change page
+
+export const changePage = (payload) => ({
+  type: CHANGE_PAGE,
+  payload,
 });
