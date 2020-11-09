@@ -70,10 +70,45 @@ function MenuDisplay() {
             </p>
             <div class="collapse" id="appetiser">
               <div class="card card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life
-                accusamus terry richardson ad squid. Nihil anim keffiyeh
-                helvetica, craft beer labore wes anderson cred nesciunt sapiente
-                ea proident.
+                <div className="row">
+                  <div className="col-lg-6">
+                    {/* filter */}
+                    <div className="row">
+                      <div className="col-lg-8">
+                        <a href="#chicken">Chicken Briyani</a>
+                      </div>
+                      <div className="col-lg-4">
+                        <p>$12.00</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-8">
+                        <a href="#chicken">Chicken Briyani</a>
+                      </div>
+                      <div className="col-lg-4">
+                        <p>$12.00</p>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-8">
+                        <a href="#chicken">Chicken Briyani</a>
+                      </div>
+                      <div className="col-lg-4">
+                        <p>$12.00</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-6">
+                  <div className="row">
+                      <div className="col-lg-8">
+                        <a href="#chicken">Fish Kabab</a>
+                      </div>
+                      <div className="col-lg-4">
+                        <p>$20.00</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <p>
