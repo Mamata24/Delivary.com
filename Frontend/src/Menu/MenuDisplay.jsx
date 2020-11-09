@@ -1,52 +1,152 @@
-import React from 'react'
-import Scrollspy from 'react-scrollspy'
-import MenuData from './MenuData.json'
-import './menuDisplay.css'
+import React from "react";
+
 function MenuDisplay() {
-    return (
-        <div className="container-fluid" style={{ backgroundColor: "grey" }}>
-            <div className="row">
-                <div className="App">
-                    <Scrollspy
-                        className="scrollspy" items={['section-1', 'section-2', 'section-3', 'section-4']}
-                        currentClassName="isCurrent">
-                        <li><a href="#section-1">Appetizer</a></li>
-                        <li><a href="#section-2">Breakfast</a></li>
-                        <li><a href="#section-3">Main Course</a></li>
-                        <li><a href="#section-4">Pudding</a></li>
-                    </Scrollspy>
-                    {MenuData.map((e) => (
-                        <div
-                            key={e.id}
-                            onScroll={() => {
-                                console.log("working");
-                            }}
-                        >
-                            <section id="section-1">
-                                <div className="col-lg-5">
-                                    <div className="row">
-                                        <div className="col-lg-9" style={{ marginLeft: "200px" }}>
-                                            <div>{e.dish_name}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-lg-7">
-                                    <div className="row">
-                                        <div className="col-lg-8" style={{ marginLeft: "200px" }}>
-                                            <span>{e.dish_description}</span>
-                                        </div>
-                                        <div className="col-lg-2" style={{ marginLeft: "200px" }}>
-                                            <span>{e.dish_price}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    ))};
-        </div>
+  return (
+    <>
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-lg-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-toggle="collapse"
+                  href="#appetiser"
+                  aria-expanded="false"
+                  aria-controls="appetiser"
+                >
+                  Appetiser
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="collapse"
+                  href="#breakFast"
+                  aria-expanded="false"
+                  aria-controls="breakFast"
+                >
+                  Break Fast
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="collapse"
+                  href="#lunch"
+                  aria-expanded="false"
+                  aria-controls="lunch"
+                >
+                  Lunch
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="collapse"
+                  href="#dinner"
+                  aria-expanded="false"
+                  aria-controls="dinner"
+                >
+                  Dinner
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-9" style={{ backgroundColor: "white" }}>
+            <p className="mt-3">
+              <a
+                data-toggle="collapse"
+                href="#appetiser"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Appetiser
+                <span style={{ float: "right" }}>
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+            </p>
+            <div class="collapse" id="appetiser">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
+              </div>
             </div>
+            <p>
+              <a
+                data-toggle="collapse"
+                href="#breakFast"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Break Fast
+                <span style={{ float: "right" }}>
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+            </p>
+            <div class="collapse" id="breakFast">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
+              </div>
+            </div>
+            <p>
+              <a
+                data-toggle="collapse"
+                href="#lunch"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Lunch
+                <span style={{ float: "right" }}>
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+            </p>
+            <div class="collapse" id="lunch">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
+              </div>
+            </div>
+            <p>
+              <a
+                data-toggle="collapse"
+                href="#dinner"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Dinner
+                <span style={{ float: "right" }}>
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+            </p>
+            <div class="collapse" id="dinner">
+              <div class="card card-body">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life
+                accusamus terry richardson ad squid. Nihil anim keffiyeh
+                helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                ea proident.
+              </div>
+            </div>
+          </div>
         </div>
-    );
+      </div>
+    </>
+  );
 }
 
-export default MenuDisplay
+export default MenuDisplay;
