@@ -16,7 +16,11 @@ function Checkout() {
           className="col-12 pt-3 text-white  d-flex justify-content-between"
           style={{ ...topnav }}
         >
-          <Link style={{ color: "white", textDecoration: "none" }} to="/menu">
+          {/* {`/dashboard/${orders.restaurantId}`} ===>>>  */}
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/dashboard"
+          >
             <h5> back to menu</h5>
           </Link>
           <img width="170px" src="./logo.png" alt="Delivary.com" />

@@ -13,21 +13,19 @@ function Rest(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { totalRestaurants, lat, lon, activePage } = useSelector(
-    (state) => state.Auth
-  );
+  const { totalRestaurants, lat, lon } = useSelector((state) => state.Auth);
 
   let totalPages = Math.ceil(totalRestaurants / 5);
 
-  const handlePageChange = async (e, value) => {
-    await dispatch(changePage(value));
+  const handlePageChange = (e, value) => {
+    dispatch(changePage(value));
     let payload = {
       latitude: lat,
       longitude: lon,
       page: value,
     };
-    await dispatch(fetchNextPageRestaurants(payload));
-    await history.push(`?page=${value}&limit=5`);
+    dispatch(fetchNextPageRestaurants(payload));
+    history.push(`?page=${value}&limit=5`);
   };
 
   return (
@@ -94,7 +92,6 @@ function Rest(props) {
         onChange={handlePageChange}
         style={{
           clear: "both",
-          marginLeft: "42%",
           outline: "none",
           marginBottom: "3%",
         }}

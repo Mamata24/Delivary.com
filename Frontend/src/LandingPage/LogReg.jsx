@@ -9,7 +9,6 @@ import {
   fbLoginSuccess,
 } from "../Auth/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import styled from "../LandingPage/Nav.module.css";
 import styles from "styled-components";
 
@@ -18,6 +17,7 @@ const Button = styles.button`
   color:white;
   border: 1px solid #01579b;
 `;
+
 function LogReg() {
   const dispatch = useDispatch();
   const [clickedLogin, setClickedLogin] = useState(false);
@@ -27,13 +27,14 @@ function LogReg() {
   };
 
   React.useEffect(() => {
-    return () => {
-      const elem = document.getElementsByClassName("modal-backdrop");
-      // console.log(elem[0]);
-      if (elem[0]) {
-        elem[0].parentElement.removeChild(elem[0]);
-      }
-    };
+    if (clickedLogin)
+      return () => {
+        const elem = document.getElementsByClassName("modal-backdrop");
+        // console.log(elem[0]);
+        if (elem[0]) {
+          elem[0].parentElement.removeChild(elem[0]);
+        }
+      };
   }, [clickedLogin]);
 
   const responseFaceBook = (response) => {
@@ -86,10 +87,10 @@ function LogReg() {
   const handleComponent = (comp) => {
     setComponent(comp);
   };
-  const history = useHistory();
 
   if (login) {
-    history.push("/dashboard");
+    // history.push("/dashboard");
+    document.getElementById("close").click();
   }
 
   React.useEffect(() => {
@@ -401,6 +402,7 @@ function LogReg() {
                     </div>
                     <button
                       type="button"
+                      id="close"
                       className="btn btn-outline-info waves-effect ml-auto"
                       data-dismiss="modal"
                     >

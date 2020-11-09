@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "../LandingPage/Nav.module.css";
 import { Link } from "react-router-dom";
 import LogReg from "./LogReg";
+import { useSelector } from "react-redux";
+import Profile from "./Profile";
 
 function NavBar() {
+  const { login } = useSelector((state) => state.Auth);
   return (
     <>
       <Navbar collapseOnSelect fixed="top" expand="lg" className={styled.nav}>
@@ -24,9 +27,7 @@ function NavBar() {
                 For Office
               </Link>
             </Nav.Link>
-            <Nav.Link>
-              <LogReg />
-            </Nav.Link>
+            <Nav.Link>{!login ? <LogReg /> : <Profile />}</Nav.Link>
             <Nav.Link style={{ color: "#1f5ea9" }}>
               <FontAwesomeIcon icon="tag" size="lg" rotation={90} />
             </Nav.Link>

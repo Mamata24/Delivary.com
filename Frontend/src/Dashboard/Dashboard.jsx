@@ -74,39 +74,36 @@ function Dashboard() {
   let restaurants = useSelector((state) => state.Auth.restaurants);
 
   console.log(category);
-  // restaurants = restaurants.filter((item) => {
+  // restaurants = restaurants.some((item) => {
   //   if (category.length === 0) return item;
   //   else {
-  //     for (var i = 0; i < category.length; i++) {
-  //       return item.category.toLowerCase().includes(category[i]);
-  //       // return item.category.toLowerCase().includes("indian");
-  //     }
+  //     return item.category.toLowerCase().includes(category);
   //   }
   // });
 
-  // restaurants = restaurants
-  //   .filter((item) => {
-  //     if (time === "All") return item;
-  //     if (time !== "All") return Number(item.estimated_time) <= time;
-  //   })
-  //   .filter((item) => item.rating >= star)
-  //   .filter((item) => {
-  //     if (delivery.includes("all") || delivery.length === 0) return item;
-  //     else {
-  //       let maxDelivery = Math.max.apply(null, delivery);
-  //       return item.min <= maxDelivery;
-  //     }
-  //   })
-  //   .sort((a, b) => {
-  //     if (sortCriterion === "all") return 0;
-  //     if (sortCriterion === "rating")
-  //       return Number(b.rating) - Number(a.rating);
-  //     if (sortCriterion === "distance")
-  //       return Number(a.distance) - Number(b.distance);
-  //     if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
-  //     if (sortCriterion === "estTime")
-  //       return Number(a.estimated_time) - Number(b.estimated_time);
-  //   });
+  restaurants = restaurants
+    .filter((item) => {
+      if (time === "All") return item;
+      if (time !== "All") return Number(item.estimated_time) <= time;
+    })
+    .filter((item) => item.rating >= star)
+    .filter((item) => {
+      if (delivery.includes("all") || delivery.length === 0) return item;
+      else {
+        let maxDelivery = Math.max.apply(null, delivery);
+        return item.min <= maxDelivery;
+      }
+    })
+    .sort((a, b) => {
+      if (sortCriterion === "all") return 0;
+      if (sortCriterion === "rating")
+        return Number(b.rating) - Number(a.rating);
+      if (sortCriterion === "distance")
+        return Number(a.distance) - Number(b.distance);
+      if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
+      if (sortCriterion === "estTime")
+        return Number(a.estimated_time) - Number(b.estimated_time);
+    });
 
   console.log(restaurants);
 
@@ -409,38 +406,50 @@ function Dashboard() {
             <div className="col">Delivery Estimate</div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 10)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onClick={(e) => deliveryTimeFilter(e, 10)}
+              />
               10 min(no.)
             </div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 20)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, 20)}
+              />
               20 min(no.)
             </div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 30)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, 30)}
+              />
               30 min(no.)
             </div>
           </div>
           <div className="row mb-4">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, "All")}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, "All")}
+              />
               All
             </div>
           </div>

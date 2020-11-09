@@ -25,6 +25,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LogReg from "./LogReg";
+import Profile from "./Profile";
 
 const CssTextField = withStyles({
   root: {
@@ -121,7 +122,7 @@ function Office() {
   const history = useHistory();
 
   const [address, setAddress] = useState("");
-  const suggestions = useSelector((state) => state.Auth.suggestions);
+  const { login, suggestions } = useSelector((state) => state.Auth);
 
   const handleAddress = (e) => {
     setAddress(e.target.value);
@@ -189,8 +190,8 @@ function Office() {
               </Typography>
             </Grid>
           </Grid>
+          {login ? <Profile /> : <LogReg />}
 
-          <LogReg />
           <Typography style={{ margin: "0 2%" }}>
             <LocalOfferIcon />
           </Typography>
