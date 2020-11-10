@@ -17,6 +17,7 @@ import {
   LOGOUT,
   CHANGE_PAGE,
   PUSH_ORDER,
+  GET_PLACE_NAME,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -51,10 +52,26 @@ export const getCoordinatesByCity = (payload) => (dispatch) => {
 
 // get current location
 
-export const currLocationSuccess = (payload) => ({
+export const getPlaceName = (payload) => ({
+  type: GET_PLACE_NAME,
+  payload,
+});
+
+export const currLocationReqSuccess = (payload) => ({
   type: CURRENT_LOCATION_SUCCESS,
   payload,
 });
+
+export const currLocationSuccess = (payload) => (dispatch) => {
+  dispatch(currLocationReqSuccess(payload));
+  console.log(payload);
+  axios
+    .get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload.longitude},${payload.latitude}.json?access_token=${accessToken}`
+    )
+    .then((res) => dispatch(getPlaceName(res.data.features[0].place_name)))
+    .catch((err) => dispatch(showCurrentLocationFailure(err)));
+};
 
 // fetch restaurants api
 
@@ -109,9 +126,14 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   let payloadLatLon = {
-    latitude: 12.935234,
-    longitude: 77.630049,
+    latitude: 20.269054,
+    longitude: 85.817841,
   };
+  // let payloadLatLon = {
+  //   latitude: Number(payload.latitude).toFixed(6),
+  //   longitude: Number(payload.longitude).toFixed(6),
+  // };
+  // console.log(payloadLatLon);
   dispatch(currLocationSuccess(payloadLatLon));
 
   axios
