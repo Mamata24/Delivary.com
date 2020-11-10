@@ -15,6 +15,7 @@ import {
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
   CHANGE_PAGE,
+  PUSH_ORDER
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -33,6 +34,7 @@ export const initialState = {
   restaurants: [],
   activePage: loadData("delivaryPage") || 1,
   totalRestaurants: "",
+  orders:[]
 };
 
 export default (state = initialState, action) => {
@@ -170,7 +172,14 @@ export default (state = initialState, action) => {
         activePage: action.payload,
       };
 
+      case PUSH_ORDER:
+        return{
+          ...state,
+          orders:[...state.orders,action.payload]
+        }
+
     default:
       return state;
   }
 };
+

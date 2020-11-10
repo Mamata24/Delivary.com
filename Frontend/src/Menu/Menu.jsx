@@ -3,9 +3,13 @@ import DashboardNav from "../Dashboard/DashboardNav";
 import MenuDisplay from "./MenuDisplay";
 import StoreDetailHeader from "./StoreDetailHeader";
 import SubMenu from "./SubMenu";
-import OrderBag from "./OrderBag"
+import OrderBag from "./OrderBag";
+import {useSelector} from 'react-redux'
 
 function Menu() {
+  const orders = useSelector(state=>state.Auth.orders)
+  console.log(orders)
+  
   return (
     <>
       <div className="container-fluid">

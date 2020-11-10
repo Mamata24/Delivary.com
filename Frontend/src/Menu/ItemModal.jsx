@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
+import {useDispatch} from 'react-redux'
+import {pushOrder} from '../Auth/actions'
 
 function ItemModal(props) {
-    console.log(props);
-    const {dish_name,price} = props.dishdetail
+  const dispatch = useDispatch()
+    // console.log(props);
+    const {dish_name,price,dish_id} = props.dishdetail
   const [qty, setQty] = useState(1);
+  const addToCart = ()=>{
+    let dish = {
+      dish_id:dish_id,
+      dish_name:dish_name,
+      price:price,
+      qty:qty,
+      subTotal:(Number(price)*Number(qty)).toFixed(2)
+    }
+    dispatch(pushOrder(dish))
+    props.onHide(false)
+  }
   return (
     <>
       <Modal
@@ -60,12 +74,16 @@ function ItemModal(props) {
               <Col lg={6}>
                 <Row>
                   <Col>
-                    <Button className="btn btn-block" onClick={props.onHide}>
+                    <Button className="btn btn-block" onClick={addToCart}>
                       Add to bag{" "}
                       <span style={{ backgroundColor: "blue" }}>
                         ${qty * price}
                       </span>
                     </Button>
+                    {/* oooooooooooooooooooooorders:[] -> reducer
+                    dish:{dishId::,dishTitle:,qty:,subtotal:,                  }
+                    Schema::
+                    restauramtId:,orders:[],lAT:,LON:,total:,timeStamp, userId,                address */}
                   </Col>
                 </Row>
               </Col>

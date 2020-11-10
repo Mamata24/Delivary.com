@@ -16,6 +16,7 @@ import {
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
   CHANGE_PAGE,
+  PUSH_ORDER,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -224,3 +225,9 @@ export const changePage = (payload) => ({
   type: CHANGE_PAGE,
   payload,
 });
+
+//Push dish
+export const pushOrder = (payload) => ({
+  type: PUSH_ORDER,
+  payload,
+})

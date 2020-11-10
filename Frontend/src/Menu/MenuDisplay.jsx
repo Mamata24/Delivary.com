@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import ItemModal from "./ItemModal";
 import MenuData from './MenuData.json'
 function MenuDisplay() {
-  const categorySet = ["Appetizer", "Breakfast"]
+  // const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
   const [dishDetail,setdishDetail] = useState({});
 
@@ -79,14 +79,15 @@ function MenuDisplay() {
                 <div className="row">
                   <div className="col-lg-6">
                     {/* filter */}
-                    {MenuData.filter(data => data.category == 'Appetizer' && data.restaurant_id == 1 && data.dish_id < 6).map(filteredAppetizer =>
+                    {MenuData.filter(data => data.category === 'Appetizer' && data.restaurant_id === 1 && data.dish_id < 6).map(filteredAppetizer =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredAppetizer.dish_name,
-                                price: filteredAppetizer.dish_price
+                                price: filteredAppetizer.dish_price,
+                                dish_id:filteredAppetizer.dish_id
                               }
                             ))}>
                             {filteredAppetizer.dish_name}
@@ -100,14 +101,15 @@ function MenuDisplay() {
                     )}
                   </div>
                   <div className="col-lg-6">
-                    {MenuData.filter(data => data.category == 'Appetizer' && data.restaurant_id == 1 && data.dish_id > 5).map(filteredAppetizer =>
+                    {MenuData.filter(data => data.category === 'Appetizer' && data.restaurant_id === 1 && data.dish_id > 5).map(filteredAppetizer =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredAppetizer.dish_name,
-                                price: filteredAppetizer.dish_price
+                                price: filteredAppetizer.dish_price,
+                                dish_id:filteredAppetizer.dish_id
                               }
                             ))}>
                             {filteredAppetizer.dish_name}
@@ -142,14 +144,15 @@ function MenuDisplay() {
                 <div className="row">
                   <div className="col-lg-6">
                     {/* filter */}
-                    {MenuData.filter(data => data.category == 'Breakfast' && data.restaurant_id == 2 && data.dish_id < 36).map(filteredBreakfast =>
+                    {MenuData.filter(data => data.category === 'Breakfast' && data.restaurant_id === 2 && data.dish_id < 36).map(filteredBreakfast =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredBreakfast.dish_name,
-                                price: filteredBreakfast.dish_price
+                                price: filteredBreakfast.dish_price,
+                                dish_id:filteredBreakfast.dish_id
                               }
                             ))}>
                             {filteredBreakfast.dish_name}
@@ -163,14 +166,15 @@ function MenuDisplay() {
                     )}
                   </div>
                   <div className="col-lg-6">
-                    {MenuData.filter(data => data.category == 'Breakfast' && data.restaurant_id == 2 && data.dish_id > 35).map(filteredBreakfast =>
+                    {MenuData.filter(data => data.category === 'Breakfast' && data.restaurant_id === 2 && data.dish_id > 35).map(filteredBreakfast =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredBreakfast.dish_name,
-                                price: filteredBreakfast.dish_price
+                                price: filteredBreakfast.dish_price,
+                                dish_id:filteredBreakfast.dish_id
                               }
                             ))}>
                             {filteredBreakfast.dish_name}
@@ -205,14 +209,15 @@ function MenuDisplay() {
                 <div className="row">
                   <div className="col-lg-6">
                     {/* filter */}
-                    {MenuData.filter(data => data.category == 'Main Course' && data.restaurant_id == 1 && data.dish_id < 46).map(filteredMainCourse =>
+                    {MenuData.filter(data => data.category === 'Main Course' && data.restaurant_id ===1 && data.dish_id < 46).map(filteredMainCourse =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredMainCourse.dish_name,
-                                price: filteredMainCourse.dish_price
+                                price: filteredMainCourse.dish_price,
+                                dish_id:filteredMainCourse.dish_id
                               }
                             ))}>
                             {filteredMainCourse.dish_name}
@@ -226,14 +231,15 @@ function MenuDisplay() {
                     )}
                   </div>
                   <div className="col-lg-6">
-                    {MenuData.filter(data => data.category == 'Main Course' && data.restaurant_id == 1 && data.dish_id > 45).map(filteredMainCourse =>
+                    {MenuData.filter(data => data.category === 'Main Course' && data.restaurant_id === 1 && data.dish_id > 45).map(filteredMainCourse =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredMainCourse.dish_name,
-                                price: filteredMainCourse.dish_price
+                                price: filteredMainCourse.dish_price,
+                                dish_id:filteredMainCourse.dish_id
                               }
                             ))}>
                             {filteredMainCourse.dish_name}
@@ -268,14 +274,15 @@ function MenuDisplay() {
                 <div className="row">
                   <div className="col-lg-6">
                     {/* filter */}
-                    {MenuData.filter(data => data.category == 'Pudding' && data.restaurant_id == 2 && data.dish_id < 76).map(filteredPudding =>
+                    {MenuData.filter(data => data.category === 'Pudding' && data.restaurant_id === 2 && data.dish_id < 76).map(filteredPudding =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredPudding.dish_name,
-                                price: filteredPudding.dish_price
+                                price: filteredPudding.dish_price,
+                                dish_id:filteredPudding.dish_id
                               }
                             ))}>
                             {filteredPudding.dish_name}
@@ -289,14 +296,15 @@ function MenuDisplay() {
                     )}
                   </div>
                   <div className="col-lg-6">
-                    {MenuData.filter(data => data.category == 'Pudding' && data.restaurant_id == 2 && data.dish_id > 75).map(filteredPudding =>
+                    {MenuData.filter(data => data.category === 'Pudding' && data.restaurant_id === 2 && data.dish_id > 75).map(filteredPudding =>
                       <div className="row">
                         <div className="col-lg-8">
                           <a href="#chicken" onClick={()=>(setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredPudding.dish_name,
-                                price: filteredPudding.dish_price
+                                price: filteredPudding.dish_price,
+                                dish_id:filteredPudding.dish_id
                               }
                             ))}>
                             {filteredPudding.dish_name}
