@@ -1,5 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
+import ItemModal from "./ItemModal";
+
 function MenuDisplay() {
+
+  const [modalShow, setModalShow] = useState(false);
+
     return (
         <>
             <div className="container mt-5">
@@ -74,7 +79,7 @@ function MenuDisplay() {
                     {/* filter */}
                     <div className="row">
                       <div className="col-lg-8">
-                        <a href="#chicken">Chicken Briyani</a>
+                        <a href="#abcd" onClick={()=>setModalShow(true)}>Chicken Briyani</a>
                       </div>
                       <div className="col-lg-4">
                         <p>$12.00</p>
@@ -179,6 +184,7 @@ function MenuDisplay() {
                     </div>
                 </div>
             </div>
+            <ItemModal show={modalShow} onHide={()=>setModalShow(false)}/>
         </>
     );
 }

@@ -13,11 +13,10 @@ function Menu() {
           <DashboardNav />
           <SubMenu />
           <StoreDetailHeader />
-            <div className="col-lg-9">
+            <div className="col-lg-8">
               <MenuDisplay />
-              {/* <h1>Hello</h1> */}
             </div>
-            <div className="col-lg-3">
+            <div className="col-lg-4">
               <OrderBag />
             </div>
         </div>
