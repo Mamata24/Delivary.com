@@ -15,7 +15,7 @@ function Rest(props) {
 
   const { totalRestaurants, lat, lon } = useSelector((state) => state.Auth);
 
-  let totalPages = Math.ceil(totalRestaurants / 5);
+  let totalPages = Math.ceil(totalRestaurants.length / 5);
 
   const handlePageChange = (e, value) => {
     dispatch(changePage(value));
@@ -32,7 +32,7 @@ function Rest(props) {
     <div>
       {data.map((singleData) => (
         <Link
-          to={`/dashboard/${singleData.id}`}
+          to={`/dashboard/${singleData.restaurant_id}`}
           style={{ textDecoration: "none" }}
         >
           <div

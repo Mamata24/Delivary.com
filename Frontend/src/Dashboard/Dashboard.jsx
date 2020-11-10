@@ -455,53 +455,242 @@ function Dashboard() {
           </div>
         </div>
         {/* Restaurants display */}
-        <div className="col-10" style={{ marginTop: 30, textAlign: "center" }}>
+        <div
+          className={classnames("col-10", styles.scrollContent)}
+          style={{ marginTop: 30, textAlign: "center" }}
+        >
           {/* Icons */}
           <div className="row">
             {/* Italian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Italian.jpg"
                 alt="Italian"
               />
-              <p>Italian</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Italian
+              </p>
+            </div>
+            {/* Turkish */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Turkish.jpg"
+                alt="Turkish"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Turkish
+              </p>
             </div>
             {/* Indian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Indian.jpg"
                 alt="Indian"
               />
-              <p>Indian</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Indian
+              </p>
+            </div>
+            {/* Sandwiches */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Sandwiches.jpg"
+                alt="sandwiches"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Sandwiches
+              </p>
             </div>
             {/* Chinese */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Chinese.jpg"
                 alt="Chinese"
               />
-              <p>Chinese</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Chinese
+              </p>
+            </div>
+            {/* Sushi */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Sushi.jpg"
+                alt="Sushi"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Sushi
+              </p>
             </div>
             {/* Pizza */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Pizza.jpg"
                 alt="Pizza"
               />
-              <p>Pizza</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Pizza
+              </p>
+            </div>
+            {/* Salads */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Salads.jpg"
+                alt="Salads"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Salads
+              </p>
             </div>
             {/* Vegetarian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Vegetarian.jpg"
                 alt="Vegetarian"
               />
-              <p>Vegetarian</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Vegetarian
+              </p>
+            </div>
+            {/* Asian */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Asian_icon.jpg"
+                alt="Asian"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Asian
+              </p>
+            </div>
+            {/* American */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/American.jpg"
+                alt="American"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                American
+              </p>
+            </div>
+            {/* Mediterranean */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Mediterranean.jpg"
+                alt="Mediterranean"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Mediterranean
+              </p>
+            </div>
+            {/* Healthy */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Healthy.jpg"
+                alt="Healthy"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Healthy
+              </p>
+            </div>
+            {/* Thai */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Thai.jpg"
+                alt="Thai"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Thai
+              </p>
+            </div>
+            {/* Deli */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Deli.jpg"
+                alt="Deli"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Deli
+              </p>
+            </div>
+            {/* Japanese */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Japanese.jpg"
+                alt="Japanese"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Japanese
+              </p>
+            </div>
+            {/* Wings */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Wings.jpg"
+                alt="Wings"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Wings
+              </p>
+            </div>
+            {/* Desserts */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Dessert.jpg"
+                alt="Desserts"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Desserts
+              </p>
+            </div>
+            {/* Seafood */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Seafood.jpg"
+                alt="Seafood"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Seafood
+              </p>
+            </div>
+            {/* Latin */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Generic.jpg"
+                alt="Latin"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Latin
+              </p>
+            </div>
+            {/* IceCream */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/IceCream.jpg"
+                alt="IceCream"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Ice Cream
+              </p>
             </div>
           </div>
           {/* Address and Sort */}

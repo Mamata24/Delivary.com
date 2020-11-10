@@ -19,7 +19,7 @@ const Span = styled.span`
 `;
 
 function DashboardNav() {
-  const user = useSelector((state) => state.Auth.user);
+  const { user, place } = useSelector((state) => state.Auth);
 
   return (
     <Div className="container-fluid">
@@ -28,11 +28,7 @@ function DashboardNav() {
           <img src="logo.png" width="150px" alt="delivary.com" />
         </div>
         <div className="col-3">
-          <Input
-            className="bg-white mt-3"
-            type="text"
-            value={user.first_name}
-          />
+          <Input className="bg-white mt-3" type="text" value={place} />
         </div>
 
         <div className="offset-1 col-1 text-white">
