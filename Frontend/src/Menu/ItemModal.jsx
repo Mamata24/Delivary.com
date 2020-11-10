@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
 
 function ItemModal(props) {
-  //   console.log(props);
+    console.log(props);
+    const {dish_name,price} = props.dishdetail
   const [qty, setQty] = useState(1);
   return (
     <>
@@ -20,8 +21,8 @@ function ItemModal(props) {
         <Modal.Body>
           <Container>
             <Row>
-              <Col lg={6}>Chicken Briyani</Col>
-              <Col lg={6}>$50.00</Col>
+              <Col lg={6}>{dish_name}</Col>
+              <Col lg={6}>${price}</Col>
             </Row>
           </Container>
         </Modal.Body>
@@ -62,7 +63,7 @@ function ItemModal(props) {
                     <Button className="btn btn-block" onClick={props.onHide}>
                       Add to bag{" "}
                       <span style={{ backgroundColor: "blue" }}>
-                        ${qty * 50}
+                        ${qty * price}
                       </span>
                     </Button>
                   </Col>

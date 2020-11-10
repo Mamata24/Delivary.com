@@ -4,6 +4,8 @@ import MenuData from './MenuData.json'
 function MenuDisplay() {
   const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
+  const [dishDetail,setdishDetail] = useState({});
+
   return (
     <>
       <div className="container mt-5">
@@ -80,7 +82,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Appetizer' && data.restaurant_id == 1 && data.dish_id < 6).map(filteredAppetizer =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredAppetizer.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredAppetizer.dish_name,
+                                price: filteredAppetizer.dish_price
+                              }
+                            ))}>
+                            {filteredAppetizer.dish_name}
+                          </a>
                           <div style={{ color: "grey" }}>{filteredAppetizer.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -93,7 +103,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Appetizer' && data.restaurant_id == 1 && data.dish_id > 5).map(filteredAppetizer =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredAppetizer.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredAppetizer.dish_name,
+                                price: filteredAppetizer.dish_price
+                              }
+                            ))}>
+                            {filteredAppetizer.dish_name}
+                            </a>
                           <div style={{ color: "grey" }}>{filteredAppetizer.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -127,7 +145,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Breakfast' && data.restaurant_id == 2 && data.dish_id < 36).map(filteredBreakfast =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredBreakfast.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredBreakfast.dish_name,
+                                price: filteredBreakfast.dish_price
+                              }
+                            ))}>
+                            {filteredBreakfast.dish_name}
+                            </a>
                           <div style={{ color: "grey" }}>{filteredBreakfast.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -140,7 +166,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Breakfast' && data.restaurant_id == 2 && data.dish_id > 35).map(filteredBreakfast =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredBreakfast.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredBreakfast.dish_name,
+                                price: filteredBreakfast.dish_price
+                              }
+                            ))}>
+                            {filteredBreakfast.dish_name}
+                          </a>
                           <div style={{ color: "grey" }}>{filteredBreakfast.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -174,7 +208,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Main Course' && data.restaurant_id == 1 && data.dish_id < 46).map(filteredMainCourse =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredMainCourse.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredMainCourse.dish_name,
+                                price: filteredMainCourse.dish_price
+                              }
+                            ))}>
+                            {filteredMainCourse.dish_name}
+                            </a>
                           <div style={{ color: "grey" }}>{filteredMainCourse.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -187,7 +229,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Main Course' && data.restaurant_id == 1 && data.dish_id > 45).map(filteredMainCourse =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredMainCourse.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredMainCourse.dish_name,
+                                price: filteredMainCourse.dish_price
+                              }
+                            ))}>
+                            {filteredMainCourse.dish_name}
+                            </a>
                           <div style={{ color: "grey" }}>{filteredMainCourse.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -221,7 +271,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Pudding' && data.restaurant_id == 2 && data.dish_id < 76).map(filteredPudding =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredPudding.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredPudding.dish_name,
+                                price: filteredPudding.dish_price
+                              }
+                            ))}>
+                            {filteredPudding.dish_name}
+                          </a>
                           <div style={{ color: "grey" }}>{filteredPudding.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -234,7 +292,15 @@ function MenuDisplay() {
                     {MenuData.filter(data => data.category == 'Pudding' && data.restaurant_id == 2 && data.dish_id > 75).map(filteredPudding =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>setModalShow(true)}>{filteredPudding.dish_name}</a>
+                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                            setdishDetail(
+                              {
+                                dish_name:filteredPudding.dish_name,
+                                price: filteredPudding.dish_price
+                              }
+                            ))}>
+                            {filteredPudding.dish_name}
+                          </a>
                           <div style={{ color: "grey" }}>{filteredPudding.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -249,7 +315,7 @@ function MenuDisplay() {
           </div>
         </div>
       </div>
-      <ItemModal show={modalShow} onHide={()=>setModalShow(false)}/>
+      <ItemModal show={modalShow} onHide={()=>setModalShow(false)} dishdetail={dishDetail}/>
     </>
   );
 }
