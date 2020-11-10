@@ -1,45 +1,37 @@
 import React from "react";
 import styled from "./checkout.module.css";
 import classnames from "classnames";
+import { useSelector } from "react-redux";
 
 function Bag() {
+  const orders = useSelector((state) => state.Auth.orders);
   return (
     <>
       <div className="col-sm-12 col-lg-4 mb-4">
         <div className="row">
           <div className="col-12">
-            <button className={classnames("btn btn-block", styled.theme)}>
-              Proceed to Checkout
-            </button>
-            <p className="text-muted text-center mt-2">
-              You won't be charged yet.
-            </p>
             <div class="card">
               <div class="card-body">
                 <div className="row">
                   <div className="col-12 d-flex justify-content-between">
                     <h5>Your Bag</h5>
-                    <p style={{ color: "#01579b" }}>+ Add items</p>
                   </div>
                   <div className="col-12">
                     <p style={{ color: "#01579b" }}>Ali Baba Organic Market</p>
                   </div>
                   <div className="col-12">
                     <h5>Order</h5>
-                    <div className="row">
-                      <div className="col-2">4</div>
-                      <div className="col-7">
-                        <p>Chef's Salad</p>
-                      </div>
-                      <div className="col-3">$31.96</div>
-                    </div>
-                    <div className="row">
-                      <div className="col-2"></div>
-                      <div className="col-7">
-                        <p>Lorem, ipsum dolor.</p>
-                      </div>
-                      <div className="col-3">$31</div>
-                    </div>
+                    {orders &&
+                      orders.map((item) => (
+                        <div key={item.dish_id} className="row">
+                          <div className="col-2">4</div>
+                          <div className="col-7">
+                            <p>{item.dish_name}</p>
+                          </div>
+                          <div className="col-3">₹ {item.subTotal}</div>
+                        </div>
+                      ))}
+
                     <hr />
                     <div className="row">
                       <div className="col-12">
@@ -92,15 +84,30 @@ function Bag() {
                         <div className="row">
                           <div className="col-12 d-flex justify-content-between">
                             <h5>Subtotal</h5>
-                            <h5>$ 0.00</h5>
+                            <h5>
+                              {orders.length !== 0 ? (
+                                <>
+                                  ₹
+                                  {orders
+                                    .map((item) => item.subTotal)
+                                    .reduce((a = 0, c) => a + Number(c))}
+                                </>
+                              ) : (
+                                "No item in your bag"
+                              )}
+                            </h5>
                           </div>
+
                           <div className="col-12 d-flex justify-content-between">
-                            <p>Subtotal</p>
-                            <p>$ 0.00</p>
-                          </div>
-                          <div className="col-12 d-flex justify-content-between">
-                            <h5>total</h5>
-                            <h5>$ 0.00</h5>
+                            <h5>Total</h5>
+                            <h5>
+                              ₹
+                              {orders.length !== 0
+                                ? orders
+                                    .map((item) => item.subTotal)
+                                    .reduce((a = 0, c) => a + Number(c))
+                                : 0}
+                            </h5>
                           </div>
                         </div>
                       </div>

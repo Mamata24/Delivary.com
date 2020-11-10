@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Bag from "./Bag";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import classnames from "classnames";
 import styled from "./checkout.module.css";
 import { razorPayment } from "../Auth/actions";
-import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 const topnav = {
   background: "#01579b",
@@ -14,21 +13,30 @@ const topnav = {
 function Checkout() {
   const [pay, setPay] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { user, orders, payment } = useSelector((state) => state.Auth);
 
   const handlePayment = (e) => {
     if (e.target.checked) setPay(true);
     else setPay(false);
   };
 
-  console.log(pay);
+  if (payment) {
+    let payload = {
+      orders: orders,
+    };
+    dispatch(postOrders(payload));
+    history.push("/orders");
+  }
 
   const paymentHandler = async (e) => {
     e.preventDefault();
     let payload = {
       amount: 200,
-      name: "akki",
+      name: user.first_name,
     };
-    dispatch(razorPayment(payload));
+    pay && dispatch(razorPayment(payload));
   };
 
   return (
@@ -79,7 +87,7 @@ function Checkout() {
                     <div className="row">
                       <div className="col-12 d-flex justify-content-between">
                         <h5>Order Information</h5>
-                        <p className="text-primary">cancel</p>
+                        {/* <p className="text-danger">Cancel</p> */}
                       </div>
                     </div>
                     <div className="row">
@@ -90,7 +98,7 @@ function Checkout() {
                           Delivery
                         </button>
                       </div>
-                      <div className="col-2">
+                      <div className="col-sm-4 ml-sm-4 mt-sm-1 col-md-2">
                         <select name="" id="" className="form-control">
                           <option value="">Today</option>
                           <option value="">Sat 11/7</option>
@@ -100,7 +108,7 @@ function Checkout() {
                           <option value="">Wed 11/11</option>
                         </select>
                       </div>
-                      <div className="col-2 ml-n3">
+                      <div className="col-sm-4 mt-sm-1 col-md-2 ml-1">
                         <select name="" id="" className="form-control">
                           <option value="">ASAP </option>
                           <option value="">10:00 pm</option>
@@ -131,7 +139,7 @@ function Checkout() {
                       </div>
                     </div>
                     <div className="row mt-3">
-                      <div className="col-5">
+                      <div className="col-sm-12 col-md-5">
                         <button className={classnames("btn", styled.theme)}>
                           Update Order Information
                         </button>
@@ -148,9 +156,12 @@ function Checkout() {
                     <h5>Promos</h5>
                     <div className="row">
                       <div className="col-4">
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          className="form-control mt-sm-1 mt-md-0"
+                        />
                       </div>
-                      <div className="col-4">
+                      <div className="col-sm-8 col-md-4">
                         <button
                           className={classnames("btn disabled", styled.theme)}
                         >
@@ -189,13 +200,16 @@ function Checkout() {
                     <h5>Gift Cards</h5>
                     <div className="row">
                       <div className="col-4">
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          className="form-control mt-sm-1 mt-md-0"
+                        />
                       </div>
-                      <div className="col-4">
+                      <div className="col-sm-8 col-md-4">
                         <button
                           className={classnames("btn disabled", styled.theme)}
                         >
-                          Apply Code{" "}
+                          Apply Code
                         </button>
                       </div>
                     </div>
@@ -211,6 +225,11 @@ function Checkout() {
                 >
                   Proceed to Checkout
                 </button>
+                {!pay && (
+                  <div className="text-danger text-center font-weight-bold">
+                    Select a payment method
+                  </div>
+                )}
                 <p className="text-muted text-center mt-2">
                   You won't be charged yet.
                 </p>

@@ -31,17 +31,14 @@ const instance = new Razorpay({
 
 app.get("/order", (req, res) => {
   try {
-    console.log(1);
     const options = {
       amount: 100 * 100,
       currency: "INR",
       receipt: uuidv4(),
       payment_capture: 0,
     };
-    console.log(2);
     instance.orders.create(options, (err, order) => {
       if (err) {
-        console.log(3);
         return res.status(500).json(err);
       }
       return res.status(200).json(order);
@@ -53,11 +50,10 @@ app.get("/order", (req, res) => {
 
 app.post("/capture/:paymentId", (req, res) => {
   try {
-    console.log("yes1");
     return request(
       {
         method: "POST",
-        url: `https://${process.env.RAZOR_PAY_KEY_ID}:${process.env.RAZOR_PAY_KEY_SECRET}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
+        url: `https://${process.env.RAZOR_PAY_KEY_ID}:${process.env.RAZOR_PAY_SECRET_KEY}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
         form: {
           amount: 100 * 100,
           currency: "INR",
@@ -65,11 +61,11 @@ app.post("/capture/:paymentId", (req, res) => {
       },
       async function (err, response, body) {
         if (err) {
-          console.log("yes2");
           return res.status(500).json({
             message: "Something Went Wrong1",
           });
         }
+        // console.log(body);
         return res.status(200).json(body);
       }
     );

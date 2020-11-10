@@ -18,6 +18,8 @@ import {
   CHANGE_PAGE,
   PUSH_ORDER,
   GET_PLACE_NAME,
+  PAYMENT_SUCCESS,
+  PAYMENT_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -250,6 +252,14 @@ export const changePage = (payload) => ({
 
 // payment
 
+export const paymentSuccess = () => ({
+  type: PAYMENT_SUCCESS,
+});
+
+export const paymentFailure = () => ({
+  type: PAYMENT_FAILURE,
+});
+
 export const razorPayment = (payload) => async (dispatch) => {
   const response = await axios.get("http://localhost:5000/order");
   const { data } = response;
@@ -261,12 +271,12 @@ export const razorPayment = (payload) => async (dispatch) => {
       try {
         const paymentId = response.razorpay_payment_id;
         const url = `http://localhost:5000/capture/${paymentId}`;
-        const capturedResponse = await axios.post(url, {});
+        const capturedResponse = await axios.post(url);
         const successObj = JSON.parse(capturedResponse.data);
         const captured = successObj.captured;
-        if (captured) console.log("success");
+        if (captured) dispatch(paymentSuccess());
       } catch (error) {
-        console.log(error);
+        dispatch(paymentFailure());
       }
     },
   };

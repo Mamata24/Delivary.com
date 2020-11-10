@@ -17,3 +17,5 @@ export const HANDLE_CONTENT = "HANDLE_CONTENT";
 export const CHANGE_PAGE = "CHANGE_PAGE";
 export const PUSH_ORDER = "PUSH_ORDER";
 export const GET_PLACE_NAME = "GET_PLACE_NAME";
+export const PAYMENT_SUCCESS = "PAYMENT_SUCCESS";
+export const PAYMENT_FAILURE = "PAYMENT_FAILURE";
