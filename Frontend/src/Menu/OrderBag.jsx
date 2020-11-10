@@ -1,4 +1,3 @@
-import { blue, red } from "@material-ui/core/colors";
 import React from "react";
 
 function OrderBag() {
