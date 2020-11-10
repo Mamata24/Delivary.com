@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Bag from "./Bag";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 import styled from "./checkout.module.css";
+import { razorPayment } from "../Auth/actions";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const topnav = {
   background: "#01579b",
   height: "60px",
 };
 function Checkout() {
+  const [pay, setPay] = useState(false);
+  const dispatch = useDispatch();
+
+  const handlePayment = (e) => {
+    if (e.target.checked) setPay(true);
+    else setPay(false);
+  };
+
+  console.log(pay);
+
+  const paymentHandler = async (e) => {
+    e.preventDefault();
+    let payload = {
+      amount: 200,
+      name: "akki",
+    };
+    dispatch(razorPayment(payload));
+  };
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -132,8 +154,7 @@ function Checkout() {
                         <button
                           className={classnames("btn disabled", styled.theme)}
                         >
-                          {" "}
-                          Apply Code{" "}
+                          Apply Code
                         </button>
                       </div>
                     </div>
@@ -148,7 +169,12 @@ function Checkout() {
                     <h5>Payment Methods</h5>
                     <div className="row">
                       <div className="col-12">
-                        <input type="radio" />
+                        <input
+                          type="radio"
+                          name="payment"
+                          checked={pay}
+                          onChange={handlePayment}
+                        />
                         <span className="pl-3">Razorpay</span>
                       </div>
                     </div>
@@ -179,7 +205,10 @@ function Checkout() {
             </div>
             <div className="row">
               <div className="col-12">
-                <button className={classnames("btn btn-block", styled.theme)}>
+                <button
+                  onClick={paymentHandler}
+                  className={classnames("btn btn-block", styled.theme)}
+                >
                   Proceed to Checkout
                 </button>
                 <p className="text-muted text-center mt-2">

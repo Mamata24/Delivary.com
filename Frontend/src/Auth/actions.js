@@ -246,3 +246,29 @@ export const changePage = (payload) => ({
   type: CHANGE_PAGE,
   payload,
 });
+
+// payment
+
+export const razorPayment = (payload) => async (dispatch) => {
+  const response = await axios.get("http://localhost:5000/order");
+  const { data } = response;
+  const options = {
+    name: payload.name,
+    description: "Integration of RazorPay",
+    order_id: data.id,
+    handler: async (response) => {
+      try {
+        const paymentId = response.razorpay_payment_id;
+        const url = `http://localhost:5000/capture/${paymentId}`;
+        const capturedResponse = await axios.post(url, {});
+        const successObj = JSON.parse(capturedResponse.data);
+        const captured = successObj.captured;
+        if (captured) console.log("success");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  };
+  const rzp1 = new window.Razorpay(options);
+  rzp1.open();
+};

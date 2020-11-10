@@ -456,11 +456,11 @@ function Dashboard() {
         </div>
         {/* Restaurants display */}
         <div
-          className={classnames("col-10", styles.scrollContent)}
+          className={classnames("col-10")}
           style={{ marginTop: 30, textAlign: "center" }}
         >
           {/* Icons */}
-          <div className="row">
+          <div className={classnames("row", styles.scrollContent)}>
             {/* Italian */}
             <div className="col-1 text-center">
               <img
@@ -468,9 +468,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Italian.jpg"
                 alt="Italian"
               />
-              <p className={classnames("text-center", styles.textColor)}>
-                Italian
-              </p>
+              <p className={classnames("ml-2", styles.textColor)}>Italian</p>
             </div>
             {/* Turkish */}
             <div className="col-1 text-center">
@@ -589,9 +587,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Mediterranean.jpg"
                 alt="Mediterranean"
               />
-              <p className={classnames("text-center", styles.textColor)}>
-                Mediterranean
-              </p>
+              <p className={styles.textColor}>Mediterranean</p>
             </div>
             {/* Healthy */}
             <div className="col-1 text-center">
@@ -600,9 +596,7 @@ function Dashboard() {
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Healthy.jpg"
                 alt="Healthy"
               />
-              <p className={classnames("text-center", styles.textColor)}>
-                Healthy
-              </p>
+              <p className={classnames("ml-4", styles.textColor)}>Healthy</p>
             </div>
             {/* Thai */}
             <div className="col-1 text-center">
