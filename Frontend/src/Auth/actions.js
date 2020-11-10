@@ -16,6 +16,7 @@ import {
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
   CHANGE_PAGE,
+  PUSH_ORDER,
   GET_PLACE_NAME,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
@@ -272,3 +273,9 @@ export const razorPayment = (payload) => async (dispatch) => {
   const rzp1 = new window.Razorpay(options);
   rzp1.open();
 };
+
+//Push dish
+export const pushOrder = (payload) => ({
+  type: PUSH_ORDER,
+  payload,
+});

@@ -15,6 +15,7 @@ import {
   FETCH_RESTAURANTS_FAILURE,
   LOGOUT,
   CHANGE_PAGE,
+  PUSH_ORDER,
   GET_PLACE_NAME,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
@@ -34,6 +35,7 @@ export const initialState = {
   restaurants: [],
   activePage: loadData("delivaryPage") || 1,
   totalRestaurants: "",
+  orders:[],
   place: loadData("delivaryPlace") || "",
 };
 
@@ -175,6 +177,11 @@ export default (state = initialState, action) => {
         activePage: action.payload,
       };
 
+      case PUSH_ORDER:
+        return{
+          ...state,
+          orders:[...state.orders,action.payload]
+        }
     case GET_PLACE_NAME:
       saveData("delivaryPlace", action.payload);
       return {
@@ -186,3 +193,4 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
