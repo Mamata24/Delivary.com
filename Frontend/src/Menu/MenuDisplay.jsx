@@ -1,10 +1,21 @@
 import React,{useState} from "react";
 import ItemModal from "./ItemModal";
 import MenuData from './MenuData.json'
+import mapboxgl from 'mapbox-gl'
+
 function MenuDisplay() {
   // const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
   const [dishDetail,setdishDetail] = useState({});
+
+  // mapboxgl.accessToken = 'pk.eyJ1Ijoic2lkZGhhcnRoa3VtYWFhciIsImEiOiJja2hjcm1kNmkxcXhtMnFucTB0MXZ0cThvIn0.wfTYILIpwtBd5H811pV70Q';
+  // const map = new mapboxgl.Map({
+  //   container: 'map',
+  //   style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+  //   center: [-74.5, 40], // starting position [lng, lat]
+  //   zoom: 9 // starting zoom
+  // });
+
 
   return (
     <>
@@ -54,6 +65,17 @@ function MenuDisplay() {
                   aria-controls="dinner"
                 >
                   Pudding
+                   </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-toggle="collapse"
+                  href="#map"
+                  aria-expanded="false"
+                  aria-controls="map"
+                >
+                  View Map and Hours
                    </a>
               </li>
 
@@ -316,6 +338,29 @@ function MenuDisplay() {
                         </div>
                       </div>
                     )}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a
+                data-toggle="collapse"
+                href="#map"
+                role="button"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                View Map and Hours
+                <span style={{ float: "right" }}>
+                  <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
+            </p>
+            <div class="collapse" id="map">
+              <div class="card card-body">
+                <div className="row">
+                  <div id="map">
+                    
                   </div>
                 </div>
               </div>
