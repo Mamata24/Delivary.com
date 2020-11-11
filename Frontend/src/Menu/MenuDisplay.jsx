@@ -1,21 +1,13 @@
 import React,{useState} from "react";
 import ItemModal from "./ItemModal";
+import MapBox from "./MapBox";
 import MenuData from './MenuData.json'
-import mapboxgl from 'mapbox-gl'
+import Gmap from '../Menu/Gmap'
 
 function MenuDisplay() {
   // const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
   const [dishDetail,setdishDetail] = useState({});
-
-  // mapboxgl.accessToken = 'pk.eyJ1Ijoic2lkZGhhcnRoa3VtYWFhciIsImEiOiJja2hjcm1kNmkxcXhtMnFucTB0MXZ0cThvIn0.wfTYILIpwtBd5H811pV70Q';
-  // const map = new mapboxgl.Map({
-  //   container: 'map',
-  //   style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
-  //   center: [-74.5, 40], // starting position [lng, lat]
-  //   zoom: 9 // starting zoom
-  // });
-
 
   return (
     <>
@@ -71,9 +63,9 @@ function MenuDisplay() {
                 <a
                   class="nav-link"
                   data-toggle="collapse"
-                  href="#map"
+                  href="#mapp"
                   aria-expanded="false"
-                  aria-controls="map"
+                  aria-controls="mapp"
                 >
                   View Map and Hours
                    </a>
@@ -345,7 +337,7 @@ function MenuDisplay() {
             <p>
               <a
                 data-toggle="collapse"
-                href="#map"
+                href="#mapp"
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
@@ -356,11 +348,91 @@ function MenuDisplay() {
                 </span>
               </a>
             </p>
-            <div class="collapse" id="map">
+            <div class="collapse" id="mapp">
               <div class="card card-body">
                 <div className="row">
-                  <div id="map">
-                    
+                  <div className="col-lg-12">
+                      <p>Phone: <span style={{color:"blue"}}>9876543210</span></p>
+                    <div className="row">
+                      <div className="col-lg-6">
+                        <p style={{textAlign:"center"}}>Delivery Hours</p>
+                        <div className="row">
+                          <div className="col-lg-3">Mon</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Tue</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Wed</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Thu</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Fri</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Sat</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Sun</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                      </div>
+                      <div className="col-lg-6">
+                        <p style={{textAlign:"center"}}>Pickup Hours</p>
+                        <div className="row">
+                          <div className="col-lg-3">Mon</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Tue</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Wed</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Thu</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Fri</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Sat</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                        <br/>
+                        <div className="row">
+                          <div className="col-lg-3">Sun</div>
+                          <div className="col-lg-9">12:00 pm - 12:00 am</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <MapBox lat={20.268998} lon={85.818373}/>
+                    {/* <Gmap /> */}
                   </div>
                 </div>
               </div>

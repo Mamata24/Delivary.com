@@ -5,6 +5,7 @@ import StoreDetailHeader from "./StoreDetailHeader";
 import SubMenu from "./SubMenu";
 import OrderBag from "./OrderBag";
 import {useSelector} from 'react-redux'
+import Footer from '../LandingPage/Footer'
 
 function Menu() {
   const orders = useSelector(state=>state.Auth.orders)
@@ -23,6 +24,9 @@ function Menu() {
             <div className="col-lg-4">
               <OrderBag />
             </div>
+        </div>
+        <div className="row">
+          <Footer />
         </div>
       </div>
     </>
