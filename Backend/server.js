@@ -9,6 +9,7 @@ const cors = require("cors");
 const userRouter = require("./Routes/userRouter");
 const restaurantRouter = require("./Routes/restaurantRouter");
 const paymentRouter = require("./Routes/paymentRouter");
+const orderRouter = require("./Routes/orderRouter")
 // const menuRouter = require('./Routes/menuRouter')
 
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(cors());
 
 app.use(userRouter);
 app.use(restaurantRouter);
+app.use(orderRouter)
 
 const instance = new Razorpay({
   key_id: process.env.RAZOR_PAY_KEY_ID,
