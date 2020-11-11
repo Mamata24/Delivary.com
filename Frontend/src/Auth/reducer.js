@@ -17,6 +17,8 @@ import {
   CHANGE_PAGE,
   PUSH_ORDER,
   GET_PLACE_NAME,
+  PAYMENT_SUCCESS,
+  PAYMENT_FAILURE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -35,8 +37,9 @@ export const initialState = {
   restaurants: [],
   activePage: loadData("delivaryPage") || 1,
   totalRestaurants: "",
-  orders:[],
+  orders: [],
   place: loadData("delivaryPlace") || "",
+  payment: false,
 };
 
 export default (state = initialState, action) => {
@@ -168,6 +171,7 @@ export default (state = initialState, action) => {
         register: false,
         user: [],
         place: "",
+        payment: false,
       };
 
     case CHANGE_PAGE:
@@ -177,11 +181,12 @@ export default (state = initialState, action) => {
         activePage: action.payload,
       };
 
-      case PUSH_ORDER:
-        return{
-          ...state,
-          orders:[...state.orders,action.payload]
-        }
+    case PUSH_ORDER:
+      return {
+        ...state,
+        orders: [...state.orders, action.payload],
+        payment: false,
+      };
     case GET_PLACE_NAME:
       saveData("delivaryPlace", action.payload);
       return {
@@ -189,8 +194,19 @@ export default (state = initialState, action) => {
         place: action.payload,
       };
 
+    case PAYMENT_SUCCESS:
+      return {
+        ...state,
+        payment: true,
+      };
+
+    case PAYMENT_FAILURE:
+      return {
+        ...state,
+        payment: false,
+      };
+
     default:
       return state;
   }
 };
-

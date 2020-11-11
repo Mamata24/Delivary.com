@@ -18,6 +18,8 @@ import {
   CHANGE_PAGE,
   PUSH_ORDER,
   GET_PLACE_NAME,
+  PAYMENT_SUCCESS,
+  PAYMENT_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -248,8 +250,42 @@ export const changePage = (payload) => ({
   payload,
 });
 
+// payment
+
+export const paymentSuccess = () => ({
+  type: PAYMENT_SUCCESS,
+});
+
+export const paymentFailure = () => ({
+  type: PAYMENT_FAILURE,
+});
+
+export const razorPayment = (payload) => async (dispatch) => {
+  const response = await axios.get("http://localhost:5000/order");
+  const { data } = response;
+  const options = {
+    name: payload.name,
+    description: "Integration of RazorPay",
+    order_id: data.id,
+    handler: async (response) => {
+      try {
+        const paymentId = response.razorpay_payment_id;
+        const url = `http://localhost:5000/capture/${paymentId}`;
+        const capturedResponse = await axios.post(url);
+        const successObj = JSON.parse(capturedResponse.data);
+        const captured = successObj.captured;
+        if (captured) dispatch(paymentSuccess());
+      } catch (error) {
+        dispatch(paymentFailure());
+      }
+    },
+  };
+  const rzp1 = new window.Razorpay(options);
+  rzp1.open();
+};
+
 //Push dish
 export const pushOrder = (payload) => ({
   type: PUSH_ORDER,
   payload,
-})
+});

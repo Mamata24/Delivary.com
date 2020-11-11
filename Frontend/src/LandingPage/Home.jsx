@@ -43,6 +43,10 @@ function Home() {
     dispatch(getCoordinatesByCity(e.target.value));
   };
 
+  const getAddress = (place) => {
+    setAddress(place);
+  };
+
   const success = (pos) => {
     console.log(pos);
     dispatch(showCurrentLocationSuccess(pos.coords));
@@ -62,9 +66,6 @@ function Home() {
     dispatch(fetchRestaurants(address));
   };
 
-  const handleClick = () => {
-    console.log("click");
-  };
   return (
     <>
       <NavBar />
@@ -121,12 +122,17 @@ function Home() {
                         value={address}
                         placeholder="Street Address, City, State"
                       />
+                      {suggestions &&
+                        suggestions.map((item) => (
+                          <div onClick={() => getAddress(item.place_name)}>
+                            {item.place_name}
+                          </div>
+                        ))}
                     </div>
 
                     <button className={styled.btn} onClick={getRestaurants}>
                       Search
                     </button>
-                    {/* <button onClick={handleClick}>hi</button> */}
                   </div>
                 </Card.Body>
               </Card>
