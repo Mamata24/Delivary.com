@@ -23,10 +23,14 @@ function Checkout() {
   };
 
   if (payment) {
-    let payload = {
-      orders: orders,
-    };
-    dispatch(postOrders(payload));
+    // let payload = {
+    //   orders: orders,
+    //   restId,
+    //   restName,
+    //   userId,
+    //   totalAmt,
+    // };
+    // dispatch(postOrders(payload));
     history.push("/orders");
   }
 
