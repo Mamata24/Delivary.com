@@ -32,7 +32,7 @@ const instance = new Razorpay({
 app.get("/order", (req, res) => {
   try {
     const options = {
-      amount: 100 * 100,
+      amount: Number(req.query.amount) * 100,
       currency: "INR",
       receipt: uuidv4(),
       payment_capture: 0,
@@ -55,7 +55,7 @@ app.post("/capture/:paymentId", (req, res) => {
         method: "POST",
         url: `https://${process.env.RAZOR_PAY_KEY_ID}:${process.env.RAZOR_PAY_SECRET_KEY}@api.razorpay.com/v1/payments/${req.params.paymentId}/capture`,
         form: {
-          amount: 100 * 100,
+          amount: Number(req.query.amount) * 100,
           currency: "INR",
         },
       },

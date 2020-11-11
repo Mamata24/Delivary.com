@@ -22,7 +22,8 @@ import {
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
   ORDERS_FAILURE,
-  RESTAURENT_DETAIL
+  RESTAURENT_DETAIL,
+  BILL_AMOUNT,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -132,8 +133,8 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
 // This is the idea to post the lat and long to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   let payloadLatLon = {
-    latitude: 20.269054,
-    longitude: 85.817841,
+    latitude: 17.269054,
+    longitude: 83.817841,
   };
   // let payloadLatLon = {
   //   latitude: Number(payload.latitude).toFixed(6),
@@ -143,7 +144,10 @@ export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationSuccess(payloadLatLon));
 
   axios
-    .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
+    .post(
+      "http://localhost:5000/Restaurants?star=0&deliveryFee=All&deliveryTime=All&page=1&limit=5",
+      payloadLatLon
+    )
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
@@ -265,7 +269,9 @@ export const paymentFailure = () => ({
 });
 
 export const razorPayment = (payload) => async (dispatch) => {
-  const response = await axios.get("http://localhost:5000/order");
+  const response = await axios.get(
+    `http://localhost:5000/order?amount=${payload.amount}`
+  );
   const { data } = response;
   const options = {
     name: payload.name,
@@ -274,7 +280,7 @@ export const razorPayment = (payload) => async (dispatch) => {
     handler: async (response) => {
       try {
         const paymentId = response.razorpay_payment_id;
-        const url = `http://localhost:5000/capture/${paymentId}`;
+        const url = `http://localhost:5000/capture/${paymentId}?amount=${payload.amount}`;
         const capturedResponse = await axios.post(url);
         const successObj = JSON.parse(capturedResponse.data);
         const captured = successObj.captured;
@@ -321,5 +327,12 @@ export const postOrders = (payload) => (dispatch) => {
 
 export const restaurantDetail = (payload) => ({
   type:RESTAURENT_DETAIL,
-  payload
+  payload,
+});
+
+// total Order Amount
+
+export const billAmount = (payload) => ({
+  type: BILL_AMOUNT,
+  payload,
 });
