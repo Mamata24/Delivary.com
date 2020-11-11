@@ -17,6 +17,7 @@ function ItemModal(props) {
       subTotal:(Number(price)*Number(qty)).toFixed(2)
     }
     dispatch(pushOrder(dish))
+    setQty(1)
     props.onHide(false)
   }
   return (

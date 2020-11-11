@@ -22,6 +22,7 @@ import {
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
   ORDERS_FAILURE,
+  RESTAURENT_DETAIL
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -315,3 +316,10 @@ export const postOrders = (payload) => (dispatch) => {
     )
     .catch((err) => dispatch(ordersFailure(err)));
 };
+
+// Restaurent detail
+
+export const restaurantDetail = (payload) => ({
+  type:RESTAURENT_DETAIL,
+  payload
+});

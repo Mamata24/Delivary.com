@@ -15,7 +15,8 @@ function Checkout() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user, orders, payment } = useSelector((state) => state.Auth);
+  const { user, orders, payment, restaurantDetail } = useSelector((state) => state.Auth);
+  console.log(restaurantDetail)
 
   const handlePayment = (e) => {
     if (e.target.checked) setPay(true);

@@ -21,6 +21,7 @@ import {
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
   ORDERS_FAILURE,
+  RESTAURENT_DETAIL
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -42,6 +43,7 @@ export const initialState = {
   place: loadData("delivaryPlace") || "",
   payment: false,
   userOrders: [],
+  restaurantDetail: ""
 };
 
 export default (state = initialState, action) => {
@@ -221,6 +223,13 @@ export default (state = initialState, action) => {
         isError: true,
         errMsg: action.payload,
       };
+
+    case RESTAURENT_DETAIL:
+      return{
+        ...state,
+        restaurantDetail:action.payload
+      };
+    
 
     default:
       return state;

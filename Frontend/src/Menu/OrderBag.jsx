@@ -2,12 +2,14 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Checkout from "../Checkout/Checkout";
+import {restaurantDetail} from '../Auth/actions'
 
 function OrderBag(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.Auth.orders);
-  // console.log(orders)
+  // const getRest = useSelector((state) => state.Auth.restaurants);
+  console.log(props)
 
   let sum = orders.reduce(function (tot, arr) {
     return tot + Number(arr.subTotal);
@@ -18,11 +20,11 @@ function OrderBag(props) {
   // }
 
   const movingToCheckout = () => {
-    // let payload = {
-    //   restaurantId:,
-    //   restaurant_Name:
-    // };
-    // dispatch(restaurantDetail(payload))
+    let payload = {
+      restaurantId:props.id,
+      restaurant_Name:props.rest_name
+    };
+    dispatch(restaurantDetail(payload))
     history.push("/checkout");
   };
 
