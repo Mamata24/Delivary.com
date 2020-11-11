@@ -78,14 +78,6 @@ function Dashboard() {
     (state) => state.Auth
   );
 
-  console.log(activePage);
-  // restaurants = restaurants.some((item) => {
-  //   if (category.length === 0) return item;
-  //   else {
-  //     return item.category.toLowerCase().includes(category);
-  //   }
-  // });
-
   // filter from backend
   useEffect(() => {
     let deliveryCategory;
@@ -301,10 +293,10 @@ function Dashboard() {
 
           <div className="row mb-4">
             <div className="col">
-              <button onClick={(e) => priceFilter1(e, 1)}>$</button>
-              {/* <button onClick={(e) => priceFilter2(e, 2)}>$$</button>
-              <button onClick={(e) => priceFilter3(e, 3)}>$$$</button>
-              <button onClick={(e) => priceFilter4(e, 4)}>$$$</button> */}
+              <button onClick={(e) => priceFilter1(e, 1)}>₹</button>
+              {/* <button onClick={(e) => priceFilter2(e, 2)}>₹₹</button>
+              <button onClick={(e) => priceFilter3(e, 3)}>₹₹₹</button>
+              <button onClick={(e) => priceFilter4(e, 4)}>₹₹₹₹</button> */}
             </div>
           </div>
           <hr />
@@ -326,7 +318,7 @@ function Dashboard() {
                   id="dollar5"
                 />
                 <label className="custom-control-label" htmlFor="dollar5">
-                  {"<"} $5
+                  {"<"} ₹ 5
                 </label>
               </div>
             </div>
@@ -345,7 +337,7 @@ function Dashboard() {
                   id="dollar10"
                 />
                 <label className="custom-control-label" htmlFor="dollar10">
-                  {"<"} $10
+                  {"<"} ₹ 10
                 </label>
               </div>
             </div>
@@ -364,7 +356,7 @@ function Dashboard() {
                   id="dollar15"
                 />
                 <label className="custom-control-label" htmlFor="dollar15">
-                  {"<"} $15
+                  {"<"} ₹ 15
                 </label>
               </div>
             </div>
@@ -383,7 +375,7 @@ function Dashboard() {
                   id="dollar20"
                 />
                 <label className="custom-control-label" htmlFor="dollar20">
-                  {"<"} $20
+                  {"<"} ₹ 20
                 </label>
               </div>
             </div>

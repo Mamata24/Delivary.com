@@ -15,7 +15,7 @@ function Checkout() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user, orders, payment } = useSelector((state) => state.Auth);
+  const { user, orders, payment, billAmt } = useSelector((state) => state.Auth);
 
   const handlePayment = (e) => {
     if (e.target.checked) setPay(true);
@@ -30,10 +30,10 @@ function Checkout() {
     history.push("/orders");
   }
 
-  const paymentHandler = async (e) => {
+  const paymentHandler = (e) => {
     e.preventDefault();
     let payload = {
-      amount: 200,
+      amount: billAmt,
       name: user.first_name,
     };
     pay && dispatch(razorPayment(payload));

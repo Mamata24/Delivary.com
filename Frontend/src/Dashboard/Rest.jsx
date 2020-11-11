@@ -67,11 +67,11 @@ function Rest(props) {
                   <p>Est. Time</p>
                 </div>
                 <div className="col-lg-2">
-                  <span>${singleData.min}</span>
+                  <span>₹ {singleData.min}</span>
                   <p>Minimum</p>
                 </div>
                 <div className="col-lg-3">
-                  <span>${singleData.delivery_fee}</span>
+                  <span>₹ {singleData.delivery_fee}</span>
                   <p>Delivery Fee</p>
                 </div>
               </div>
