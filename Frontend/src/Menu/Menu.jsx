@@ -6,11 +6,16 @@ import SubMenu from "./SubMenu";
 import OrderBag from "./OrderBag";
 import {useSelector} from 'react-redux'
 import Footer from '../LandingPage/Footer'
+import Res from '../Dashboard/restaurants.json'
 
-function Menu() {
+function Menu(props) {
   const orders = useSelector(state=>state.Auth.orders)
-  console.log(orders)
-  
+  // console.log(props.match.params.id)
+  let rest_id = props.match.params.id
+  let rest_detail = Res.filter(singleData=>singleData.id===Number(rest_id))
+  let rest_name = rest_detail[0].restaurant_name
+  // console.log(rest_name)
+
   return (
     <>
       <div className="container-fluid">
@@ -22,7 +27,7 @@ function Menu() {
               <MenuDisplay />
             </div>
             <div className="col-lg-4">
-              <OrderBag />
+              <OrderBag id={rest_id} rest_name = {rest_name}/>
             </div>
         </div>
         <div className="row">

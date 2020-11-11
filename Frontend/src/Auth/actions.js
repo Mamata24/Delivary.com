@@ -22,6 +22,7 @@ import {
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
   ORDERS_FAILURE,
+  RESTAURENT_DETAIL,
   BILL_AMOUNT,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
@@ -321,6 +322,13 @@ export const postOrders = (payload) => (dispatch) => {
     )
     .catch((err) => dispatch(ordersFailure(err)));
 };
+
+// Restaurent detail
+
+export const restaurantDetail = (payload) => ({
+  type:RESTAURENT_DETAIL,
+  payload,
+});
 
 // total Order Amount
 
