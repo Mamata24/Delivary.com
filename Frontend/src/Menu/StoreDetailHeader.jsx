@@ -36,6 +36,10 @@ function StoreDetailHeader() {
                   <button
                     type="button"
                     className="btn btn-sm btn-outline-primary bg-white"
+                    data-toggle="collapse"
+                    href="#mapp"
+                    aria-expanded="false"
+                    aria-controls="mapp"
                   >
                     View map and hours
                   </button>

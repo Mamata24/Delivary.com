@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 
 const orderSchema = new mongoose.Schema({
     user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        type: String,
+        required: true,
+        trim: true
     },
     restaurant_id: {
         type: Number,
@@ -38,5 +39,5 @@ const orderSchema = new mongoose.Schema({
     }
 )
 
-const Orders = mongoose.model('Restaurant', orderSchema)
+const Orders = mongoose.model('Order', orderSchema)
 module.exports = Orders
