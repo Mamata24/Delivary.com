@@ -17,11 +17,7 @@ function ItemModal(props) {
       subTotal: (Number(price) * Number(qty)).toFixed(2)
     }
     dispatch(pushOrder(dish))
-<<<<<<< Updated upstream
     setQty(1)
-=======
-    console.log(pushOrder(dish), "hello")
->>>>>>> Stashed changes
     props.onHide(false)
   }
   return (
