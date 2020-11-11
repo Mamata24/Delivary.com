@@ -3,29 +3,22 @@ import DollerRating from "./DollerRating";
 import StarRating from "./StarRating";
 import styles from "./restaurant.module.css";
 import classnames from "classnames";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Pagination from "@material-ui/lab/Pagination";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchNextPageRestaurants, changePage } from "../Auth/actions";
+import { changePage } from "../Auth/actions";
 
 function Rest(props) {
   let data = props.restData;
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const { totalRestaurants, lat, lon } = useSelector((state) => state.Auth);
+  const { totalRestaurants } = useSelector((state) => state.Auth);
 
-  let totalPages = Math.ceil(totalRestaurants.length / 5);
+  let totalPages = Math.ceil(totalRestaurants / 5);
+  console.log(totalPages);
 
   const handlePageChange = (e, value) => {
     dispatch(changePage(value));
-    let payload = {
-      latitude: lat,
-      longitude: lon,
-      page: value,
-    };
-    dispatch(fetchNextPageRestaurants(payload));
-    history.push(`?page=${value}&limit=5`);
   };
 
   return (

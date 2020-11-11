@@ -118,9 +118,10 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
     latitude: payload.latitude,
     longitude: payload.longitude,
   };
+  console.log(payload);
   axios
     .post(
-      `http://localhost:5000/Restaurants?page=${payload.page}&limit=5`,
+      `http://localhost:5000/Restaurants?star=${payload.star}&deliveryFee=${payload.deliveryFee}&deliveryTime=${payload.deliveryTime}&page=${payload.page}&limit=5`,
       payloadLatLon
     )
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))

@@ -1,6 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Profile from "../LandingPage/Profile";
+import LogReg from "../LandingPage/LogReg";
 
 const Div = styled.div`
   background: #01579b;
@@ -19,7 +21,7 @@ const Span = styled.span`
 `;
 
 function DashboardNav() {
-  const { user, place } = useSelector((state) => state.Auth);
+  const { login, place } = useSelector((state) => state.Auth);
 
   return (
     <Div className="container-fluid">
@@ -31,10 +33,7 @@ function DashboardNav() {
           <Input className="bg-white mt-3" type="text" value={place} />
         </div>
 
-        <div className="offset-1 col-1 text-white">
-          <i className="fas fa-user-circle fa-2x mt-3"></i>
-          <Span className="text-white">{user.first_name}</Span>
-        </div>
+        <div className="offset-1 col-1">{login ? <Profile /> : <LogReg />}</div>
         <div className=" offset-2 col-0.8 text-white mt-3">
           <i className="fas fa-tag fa-2x"></i>
         </div>
