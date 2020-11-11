@@ -20,6 +20,8 @@ import {
   GET_PLACE_NAME,
   PAYMENT_SUCCESS,
   PAYMENT_FAILURE,
+  GET_USER_ORDERS,
+  ORDERS_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -289,3 +291,26 @@ export const pushOrder = (payload) => ({
   type: PUSH_ORDER,
   payload,
 });
+
+// post individual orders
+
+export const getOrdersSuccess = (payload) => ({
+  type: GET_USER_ORDERS,
+  payload,
+});
+
+export const ordersFailure = (payload) => ({
+  type: ORDERS_FAILURE,
+  payload,
+});
+
+export const postOrders = (payload) => (dispatch) => {
+  axios
+    .post(`http://localhost:5000/order`, payload)
+    .then((res) =>
+      axios
+        .get(`http://localhost:5000/getOrders/${res.userId}`)
+        .then((res) => dispatch(getOrdersSuccess(res)))
+    )
+    .catch((err) => dispatch(ordersFailure(err)));
+};

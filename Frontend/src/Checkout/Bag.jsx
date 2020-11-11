@@ -5,6 +5,10 @@ import { useSelector } from "react-redux";
 
 function Bag() {
   const orders = useSelector((state) => state.Auth.orders);
+  let orderSubTotal = orders
+    .map((item) => Number(item.subTotal))
+    .reduce((a = 0, c) => a + c)
+    .toFixed(2);
   return (
     <>
       <div className="col-sm-12 col-lg-4 mb-4">
@@ -41,21 +45,21 @@ function Bag() {
                         <div className="row">
                           <div className="col-2 ">
                             <input
-                              class="btn px-1 btn-secondary text-white"
+                              className="btn px-1 text-white"
                               type="button"
                               value="10 %"
                             />
                           </div>
                           <div className="col-2 ">
                             <input
-                              class="btn px-1 btn-secondary text-white"
+                              class="btn px-1 text-white"
                               type="button"
                               value="15 %"
                             />
                           </div>
                           <div className="col-2 ">
                             <input
-                              className="btn px-1 btn-secondary text-white"
+                              className="btn px-1 text-white"
                               type="button"
                               value="20 %"
                             />
@@ -86,12 +90,7 @@ function Bag() {
                             <h5>Subtotal</h5>
                             <h5>
                               {orders.length !== 0 ? (
-                                <>
-                                  ₹
-                                  {orders
-                                    .map((item) => item.subTotal)
-                                    .reduce((a = 0, c) => a + Number(c))}
-                                </>
+                                <>₹{orderSubTotal}</>
                               ) : (
                                 "No item in your bag"
                               )}
@@ -100,14 +99,7 @@ function Bag() {
 
                           <div className="col-12 d-flex justify-content-between">
                             <h5>Total</h5>
-                            <h5>
-                              ₹
-                              {orders.length !== 0
-                                ? orders
-                                    .map((item) => item.subTotal)
-                                    .reduce((a = 0, c) => a + Number(c))
-                                : 0}
-                            </h5>
+                            <h5>₹{orders.length !== 0 ? orderSubTotal : 0}</h5>
                           </div>
                         </div>
                       </div>
