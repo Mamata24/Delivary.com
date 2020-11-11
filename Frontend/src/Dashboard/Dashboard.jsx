@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
 import Rest from "./Rest";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchNextPageRestaurants } from "../Auth/actions";
 
 function Dashboard() {
+  const dispatch = useDispatch();
+
   // Star Filter -- done
   const [star, setStar] = useState(0);
 
@@ -29,7 +32,7 @@ function Dashboard() {
       }
     }
   };
-  console.log(category);
+  // console.log(category);
 
   // Delivery Fee Filter -- done
   const [delivery, setDelivery] = useState([]);
@@ -71,9 +74,11 @@ function Dashboard() {
 
   console.log(sortCriterion);
 
-  let restaurants = useSelector((state) => state.Auth.restaurants);
+  let { restaurants, activePage, lat, lon } = useSelector(
+    (state) => state.Auth
+  );
 
-  console.log(category);
+  console.log(activePage);
   // restaurants = restaurants.some((item) => {
   //   if (category.length === 0) return item;
   //   else {
@@ -81,29 +86,32 @@ function Dashboard() {
   //   }
   // });
 
-  restaurants = restaurants
-    .filter((item) => {
-      if (time === "All") return item;
-      if (time !== "All") return Number(item.estimated_time) <= time;
-    })
-    .filter((item) => item.rating >= star)
-    .filter((item) => {
-      if (delivery.includes("all") || delivery.length === 0) return item;
-      else {
-        let maxDelivery = Math.max.apply(null, delivery);
-        return item.min <= maxDelivery;
-      }
-    })
-    .sort((a, b) => {
-      if (sortCriterion === "all") return 0;
-      if (sortCriterion === "rating")
-        return Number(b.rating) - Number(a.rating);
-      if (sortCriterion === "distance")
-        return Number(a.distance) - Number(b.distance);
-      if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
-      if (sortCriterion === "estTime")
-        return Number(a.estimated_time) - Number(b.estimated_time);
-    });
+  // filter from backend
+  useEffect(() => {
+    let deliveryCategory;
+    if (delivery.includes("all") || delivery.length === 0)
+      deliveryCategory = "All";
+    else deliveryCategory = Math.max.apply(null, delivery);
+    let payload = {
+      deliveryTime: time,
+      star: star,
+      deliveryFee: deliveryCategory,
+      page: activePage,
+      latitude: lat,
+      longitude: lon,
+    };
+    dispatch(fetchNextPageRestaurants(payload));
+  }, [time, delivery, star, activePage]);
+
+  restaurants = restaurants.sort((a, b) => {
+    if (sortCriterion === "all") return 0;
+    if (sortCriterion === "rating") return Number(b.rating) - Number(a.rating);
+    if (sortCriterion === "distance")
+      return Number(a.distance) - Number(b.distance);
+    if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
+    if (sortCriterion === "estTime")
+      return Number(a.estimated_time) - Number(b.estimated_time);
+  });
 
   console.log(restaurants);
 
