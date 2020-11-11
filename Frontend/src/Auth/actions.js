@@ -312,6 +312,7 @@ export const ordersFailure = (payload) => ({
 });
 
 export const postOrders = (payload) => (dispatch) => {
+  console.log(payload);
   axios
     .post(`http://localhost:5000/order`, payload)
     .then((res) =>
@@ -326,7 +327,7 @@ export const postOrders = (payload) => (dispatch) => {
 // Restaurent detail
 
 export const restaurantDetail = (payload) => ({
-  type:RESTAURENT_DETAIL,
+  type: RESTAURENT_DETAIL,
   payload,
 });
 

@@ -15,7 +15,10 @@ function Checkout() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user, orders, payment, billAmt } = useSelector((state) => state.Auth);
+  const { user, orders, payment, billAmt, restaurantDetail } = useSelector(
+    (state) => state.Auth
+  );
+  console.log(restaurantDetail);
 
   const handlePayment = (e) => {
     if (e.target.checked) setPay(true);
@@ -23,14 +26,14 @@ function Checkout() {
   };
 
   if (payment) {
-    // let payload = {
-    //   orders: orders,
-    //   restId,
-    //   restName,
-    //   userId,
-    //   totalAmt,
-    // };
-    // dispatch(postOrders(payload));
+    let payload = {
+      dish: orders,
+      restaurant_id: restaurantDetail.restaurantId,
+      restaurant_name: restaurantDetail.restaurant_Name,
+      user_id: user._id,
+      total_amount: billAmt,
+    };
+    dispatch(postOrders(payload));
     history.push("/orders");
   }
 
@@ -50,10 +53,9 @@ function Checkout() {
           className="col-12 pt-3 text-white  d-flex justify-content-between"
           style={{ ...topnav }}
         >
-          {/* {`/dashboard/${orders.restaurantId}`} ===>>>  */}
           <Link
             style={{ color: "white", textDecoration: "none" }}
-            to="/dashboard"
+            to={`/dashboard/${restaurantDetail.restaurantId}`}
           >
             <h5> back to menu</h5>
           </Link>
@@ -126,7 +128,9 @@ function Checkout() {
                     <div className="row mt-2">
                       <div className="col-12">
                         <small className="text-muted">from: </small>{" "}
-                        <h5 className="text-secondary">Best of Newyork Food</h5>
+                        <h5 className="text-secondary">
+                          {restaurantDetail.restaurant_Name}
+                        </h5>
                       </div>
                     </div>
                     <div className="row mt-3">
