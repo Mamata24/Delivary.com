@@ -7,6 +7,7 @@ import { Route } from "react-router-dom";
 import Office from "./LandingPage/Office";
 import Checkout from "./Checkout/Checkout";
 import Menu from "./Menu/Menu";
+import Orders from "./Orders/Orders";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/dashboard" exact component={Dashboard} />
       <Route path="/dashboard/:id" component={Menu} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/orders" component={Orders} />
     </div>
   );
 }

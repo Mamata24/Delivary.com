@@ -18,8 +18,11 @@ function OrderBag(props) {
   // }
 
   const movingToCheckout = () => {
-    let payload = {};
-    // dispatch(restaurentDetail(payload))
+    // let payload = {
+    //   restaurantId:,
+    //   restaurant_Name:
+    // };
+    // dispatch(restaurantDetail(payload))
     history.push("/checkout");
   };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { logoutUser } from "../Auth/actions";
+import { Link } from "react-router-dom";
 
 const Div = styled.div`
   color: #01579b;
@@ -56,8 +57,13 @@ function Profile() {
         </div>
         <div className="dropdown-item" href="#">
           <Div>
-            <i class="fas fa-clipboard-list mr-2 ml-3"></i>
-            <span>Your Orders</span>
+            <Link
+              to="/orders"
+              style={{ textDecoration: "none", color: "#01579b" }}
+            >
+              <i class="fas fa-clipboard-list mr-2 ml-3"></i>
+              <span>Your Orders</span>
+            </Link>
           </Div>
         </div>
         <div className="dropdown-item" href="#">

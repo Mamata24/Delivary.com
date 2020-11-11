@@ -3,7 +3,7 @@ import Bag from "./Bag";
 import { Link, useHistory } from "react-router-dom";
 import classnames from "classnames";
 import styled from "./checkout.module.css";
-import { razorPayment } from "../Auth/actions";
+import { razorPayment, postOrders } from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const topnav = {
