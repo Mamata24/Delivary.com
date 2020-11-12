@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Checkout from "../Checkout/Checkout";
-import {restaurantDetail} from '../Auth/actions'
+import {restaurantDetail,deleteDish} from '../Auth/actions'
 
 function OrderBag(props) {
   const history = useHistory();
@@ -15,9 +15,9 @@ function OrderBag(props) {
     return tot + Number(arr.subTotal);
   }, 0);
 
-  // const deleteItem = (dishId) =>{
-  //   orders.filter((item)=>)
-  // }
+  const deleteItem = (dishId) =>{
+    dispatch(deleteDish(dishId))
+  }
 
   const movingToCheckout = () => {
     let payload = {
@@ -62,8 +62,8 @@ function OrderBag(props) {
                       <p>{order.dish_name}</p>
                     </div>
                     <div className="col-lg-4">
-                      <p>${order.subTotal}</p>
-                      <i class="fas fa-trash-alt" role="button"></i>
+                      <p>₹{order.subTotal}</p>
+                      <i style={{color:"crimson"}} class="fas fa-trash-alt" role="button" onClick={()=>deleteItem(order.dish_id)}></i>
                     </div>
                   </div>
                 ))
@@ -89,7 +89,7 @@ function OrderBag(props) {
                   >
                     Go to Checkout
                     <span style={{ backgroundColor: "blue", padding: 5 }}>
-                      ${sum}
+                    ₹{Number(sum).toFixed(2)}
                     </span>
                   </button>
                 </div>

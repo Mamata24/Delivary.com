@@ -24,6 +24,7 @@ import {
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
+  DELETE_DISH
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -337,3 +338,10 @@ export const billAmount = (payload) => ({
   type: BILL_AMOUNT,
   payload,
 });
+
+// Deleting dish from order bag
+
+export const deleteDish = (payload) => ({
+  type:DELETE_DISH,
+  payload,
+})

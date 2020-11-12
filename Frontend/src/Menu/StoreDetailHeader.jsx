@@ -13,8 +13,8 @@ function StoreDetailHeader() {
               <div className="row m-4">
                 <div className="col-lg-2">
                   <img
-                    style={{ borderRadius: 5 }}
-                    src="http://via.placeholder.com/140"
+                    style={{ borderRadius: 5,backgroundColor: "white",padding:5,width:140,height:140 }}
+                    src="https://images.pexels.com/photos/2755/restaurant.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                     alt="tiger"
                   />
                 </div>

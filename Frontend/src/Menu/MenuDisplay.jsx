@@ -109,7 +109,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredAppetizer.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredAppetizer.dish_price}</p>
+                          <p>₹{filteredAppetizer.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -131,7 +131,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredAppetizer.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredAppetizer.dish_price}</p>
+                          <p>₹{filteredAppetizer.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -174,7 +174,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredBreakfast.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredBreakfast.dish_price}</p>
+                          <p>₹{filteredBreakfast.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -196,7 +196,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredBreakfast.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredBreakfast.dish_price}</p>
+                          <p>₹{filteredBreakfast.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -239,7 +239,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredMainCourse.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredMainCourse.dish_price}</p>
+                          <p>₹{filteredMainCourse.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -261,7 +261,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredMainCourse.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredMainCourse.dish_price}</p>
+                          <p>₹{filteredMainCourse.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -304,7 +304,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredPudding.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredPudding.dish_price}</p>
+                          <p>₹{filteredPudding.dish_price}</p>
                         </div>
                       </div>
                     )}
@@ -326,7 +326,7 @@ function MenuDisplay() {
                           <div style={{ color: "grey" }}>{filteredPudding.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
-                          <p>{filteredPudding.dish_price}</p>
+                          <p>₹{filteredPudding.dish_price}</p>
                         </div>
                       </div>
                     )}
