@@ -3,6 +3,7 @@ import styles from "../Checkout/checkout.module.css";
 import classnames from "classnames";
 import { useSelector } from "react-redux";
 import DashboardNav from "../Dashboard/DashboardNav";
+import Footer from "../LandingPage/Footer";
 
 function Orders() {
   const userOrders = useSelector((state) => state.Auth.userOrders);
@@ -25,6 +26,7 @@ function Orders() {
             ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 }
