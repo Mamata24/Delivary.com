@@ -51,8 +51,13 @@ function Profile() {
         </div>
         <div className="dropdown-item" href="#">
           <Div>
-            <i class="fas fa-user mr-2 ml-3"></i>
-            <span>Profile</span>
+            <Link
+              to="/profile"
+              style={{ textDecoration: "none", color: "#01579b" }}
+            >
+              <i class="fas fa-user mr-2 ml-3"></i>
+              <span>Profile</span>
+            </Link>
           </Div>
         </div>
         <div className="dropdown-item" href="#">

@@ -21,7 +21,9 @@ function UserProfile() {
           className="col-11 mx-5"
           style={{ border: 0, borderBottom: "1px solid lightGray" }}
         />
-        <h5 className="ml-5 mt-5">{user.first_name}</h5>
+        <h5 className="ml-5 mt-5 font-weight-bold" style={{ color: "#01579b" }}>
+          {user.first_name}
+        </h5>
         <input
           type="text"
           className="col-11 mx-5"
@@ -33,7 +35,9 @@ function UserProfile() {
           className="col-11 mx-5"
           style={{ border: 0, borderBottom: "1px solid lightGray" }}
         />
-        <h5 className="ml-5 mt-5">{user.email}</h5>
+        <h5 className="ml-5 mt-5 font-weight-bold" style={{ color: "#01579b" }}>
+          {user.email}
+        </h5>
         <input
           type="text"
           className="col-11 mx-5"
@@ -53,8 +57,10 @@ function UserProfile() {
           type="text"
           placeholder="New Phone number"
           className="mt-4 ml-5 p-2"
-        />{" "}
-        <span className={{ fontWeight: "bold" }}> Email: {user.email}</span>
+        />
+        <span style={{ fontWeight: "bold", color: "#01579b" }}>
+          Email: {user.email}
+        </span>
         <hr />
         <h5 className="ml-5 mt-2">SMS Notifications</h5>
         <hr />

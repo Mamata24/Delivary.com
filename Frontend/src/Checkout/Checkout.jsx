@@ -3,7 +3,7 @@ import Bag from "./Bag";
 import { Link, useHistory } from "react-router-dom";
 import classnames from "classnames";
 import styled from "./checkout.module.css";
-import { razorPayment, postOrders } from "../Auth/actions";
+import { razorPayment, postOrders, deliverTo } from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const topnav = {
@@ -12,13 +12,22 @@ const topnav = {
 };
 function Checkout() {
   const [pay, setPay] = useState(false);
+  const [address, setAddress] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { user, orders, payment, billAmt, restaurantDetail } = useSelector(
-    (state) => state.Auth
-  );
-  console.log(restaurantDetail);
+  const {
+    user,
+    orders,
+    payment,
+    billAmt,
+    restaurantDetail,
+    deliveryAddress,
+  } = useSelector((state) => state.Auth);
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
 
   const handlePayment = (e) => {
     if (e.target.checked) setPay(true);
@@ -32,7 +41,9 @@ function Checkout() {
       restaurant_name: restaurantDetail.restaurant_Name,
       user_id: user._id,
       total_amount: billAmt,
+      address: deliveryAddress,
     };
+    console.log(payload);
     dispatch(postOrders(payload));
     history.push("/orders");
   }
@@ -44,6 +55,10 @@ function Checkout() {
       name: user.first_name,
     };
     pay && dispatch(razorPayment(payload));
+  };
+
+  const postDeliveryAddress = () => {
+    dispatch(deliverTo(address));
   };
 
   return (
@@ -72,7 +87,7 @@ function Checkout() {
                 styled.textColor
               )}
             >
-              order summary
+              Order Summary
             </button>
           </div>
         </div>
@@ -143,12 +158,20 @@ function Checkout() {
                     </div>
                     <div className="row">
                       <div className="col-7">
-                        <input type="text" className="form-control" />
+                        <input
+                          type="text"
+                          className="form-control"
+                          onChange={handleAddress}
+                          value={address}
+                        />
                       </div>
                     </div>
                     <div className="row mt-3">
                       <div className="col-sm-12 col-md-5">
-                        <button className={classnames("btn", styled.theme)}>
+                        <button
+                          onClick={postDeliveryAddress}
+                          className={classnames("btn", styled.theme)}
+                        >
                           Update Order Information
                         </button>
                       </div>

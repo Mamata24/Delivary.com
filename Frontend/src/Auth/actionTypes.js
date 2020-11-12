@@ -24,3 +24,4 @@ export const ORDERS_FAILURE = "ORDERS_FAILURE";
 export const RESTAURENT_DETAIL = "RESTAURENT_DETAIL";
 export const BILL_AMOUNT = "BILL_AMOUNT";
 export const DELETE_DISH = "DELETE_DISH";
+export const DELIVER_TO = "DELIVER_TO";

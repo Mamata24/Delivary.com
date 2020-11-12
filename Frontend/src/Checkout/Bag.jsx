@@ -6,7 +6,9 @@ import { billAmount } from "../Auth/actions";
 
 function Bag() {
   const dispatch = useDispatch();
-  const { orders, billAmt } = useSelector((state) => state.Auth);
+  const { orders, billAmt, restaurantDetail } = useSelector(
+    (state) => state.Auth
+  );
   const [tip, setTip] = useState(0);
   let orderSubTotal =
     orders.length !== 0
@@ -34,11 +36,12 @@ function Bag() {
                   <div className="col-12 d-flex justify-content-between">
                     <h5>Your Bag</h5>
                   </div>
-                  <div className="col-12">
-                    <p style={{ color: "#01579b" }}>Ali Baba Organic Market</p>
+                  <div className="col-12 font-weight-bold">
+                    <p style={{ color: "#01579b", fontSize: "22px" }}>
+                      {restaurantDetail.restaurant_Name} Order
+                    </p>
                   </div>
                   <div className="col-12">
-                    <h5>Order</h5>
                     {orders &&
                       orders.map((item) => (
                         <div key={item.dish_id} className="row">

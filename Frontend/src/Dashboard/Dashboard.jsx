@@ -16,7 +16,7 @@ function Dashboard() {
     setStar(starRate);
   };
 
-  // Category Filter
+  // Category Filter -- done
   const [category, setCategory] = useState([]);
 
   const filterCategory = (e, currCategory) => {
@@ -32,7 +32,8 @@ function Dashboard() {
       }
     }
   };
-  // console.log(category);
+
+  console.log(category);
 
   // Delivery Fee Filter -- done
   const [delivery, setDelivery] = useState([]);
@@ -80,6 +81,12 @@ function Dashboard() {
 
   // filter from backend
   useEffect(() => {
+    // let q = "";
+    // for (let i = 0; i < category.length - 1; i++) {
+    //   q += category[i] + " || ";
+    // }
+    // q += category[category.length - 1];
+    // console.log(q);
     let deliveryCategory;
     if (delivery.includes("all") || delivery.length === 0)
       deliveryCategory = "All";
@@ -87,13 +94,15 @@ function Dashboard() {
     let payload = {
       deliveryTime: time,
       star: star,
+      cuisine: category,
       deliveryFee: deliveryCategory,
       page: activePage,
       latitude: lat,
       longitude: lon,
     };
+
     dispatch(fetchNextPageRestaurants(payload));
-  }, [time, delivery, star, activePage]);
+  }, [time, delivery, star, category, activePage]);
 
   restaurants = restaurants.sort((a, b) => {
     if (sortCriterion === "all") return 0;
