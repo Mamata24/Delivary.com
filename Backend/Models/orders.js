@@ -1,36 +1,31 @@
 const mongoose = require('mongoose')
 
 const orderSchema = new mongoose.Schema({
+
     user_id: {
         type: String,
         required: true,
         trim: true
     },
     restaurant_id: {
-        type: Number,
+        type: String,
         unique: true,
         required: true,
         trim: true
     },
-    orders: {
-        type: Array,
+    restaurant_name: {
+        type: String,
         required: true,
         trim: true
     },
-    latitude: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
-    longitude: {
-        type: Number,
-        required: true,
-        trim: true,
-    },
     total_amount: {
-        type: Number,
+        type: String,
         required: true,
         trim: true,
+    },
+    dishs: {
+        type: Array,
+        required: true
     },
 },
     {
