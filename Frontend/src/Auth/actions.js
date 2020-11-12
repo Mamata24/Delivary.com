@@ -24,7 +24,8 @@ import {
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
-  DELETE_DISH
+  DELETE_DISH,
+  DELIVER_TO,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -124,7 +125,7 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
   console.log(payload);
   axios
     .post(
-      `http://localhost:5000/Restaurants?star=${payload.star}&deliveryFee=${payload.deliveryFee}&deliveryTime=${payload.deliveryTime}&page=${payload.page}&limit=5`,
+      `http://localhost:5000/Restaurants?star=${payload.star}&deliveryFee=${payload.deliveryFee}&deliveryTime=${payload.deliveryTime}&cuisine=${payload.cuisine}&page=${payload.page}&limit=5`,
       payloadLatLon
     )
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
@@ -313,13 +314,16 @@ export const ordersFailure = (payload) => ({
 });
 
 export const postOrders = (payload) => (dispatch) => {
-  console.log(payload);
+  let orderPayload = {
+    orders: payload,
+  };
+  console.log(orderPayload);
   axios
-    .post(`http://localhost:5000/order`, payload)
+    .post("http://localhost:5000/order", orderPayload)
     .then((res) =>
       //res = userId
       axios
-        .get(`http://localhost:5000/getOrders?id=${res.userId}`)
+        .get(`http://localhost:5000/getOrder/id=${res.userId}`)
         .then((res) => dispatch(getOrdersSuccess(res)))
     )
     .catch((err) => dispatch(ordersFailure(err)));
@@ -342,6 +346,13 @@ export const billAmount = (payload) => ({
 // Deleting dish from order bag
 
 export const deleteDish = (payload) => ({
-  type:DELETE_DISH,
+  type: DELETE_DISH,
   payload,
-})
+});
+
+//delivery address
+
+export const deliverTo = (payload) => ({
+  type: DELIVER_TO,
+  payload,
+});

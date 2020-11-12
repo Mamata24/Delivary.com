@@ -23,7 +23,8 @@ import {
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
-  DELETE_DISH
+  DELETE_DISH,
+  DELIVER_TO,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -47,6 +48,7 @@ export const initialState = {
   userOrders: [],
   restaurantDetail: "",
   billAmt: 0,
+  deliveryAddress: "",
 };
 
 export default (state = initialState, action) => {
@@ -180,6 +182,8 @@ export default (state = initialState, action) => {
         place: "",
         payment: false,
         userOrders: [],
+        deliveryAddress: "",
+        restaurantDetail: "",
       };
 
     case CHANGE_PAGE:
@@ -229,11 +233,11 @@ export default (state = initialState, action) => {
       };
 
     case RESTAURENT_DETAIL:
-      return{
+      return {
         ...state,
-        restaurantDetail:action.payload
+        restaurantDetail: action.payload,
       };
-    
+
     case BILL_AMOUNT:
       return {
         ...state,
@@ -241,11 +245,19 @@ export default (state = initialState, action) => {
       };
 
     case DELETE_DISH:
-      let newOrders = state.orders.filter(item=>Number(item.dish_id)!==Number(action.payload))
-      return{
+      let newOrders = state.orders.filter(
+        (item) => Number(item.dish_id) !== Number(action.payload)
+      );
+      return {
         ...state,
-        orders:newOrders,
-      }
+        orders: newOrders,
+      };
+
+    case DELIVER_TO:
+      return {
+        ...state,
+        deliveryAddress: action.payload,
+      };
 
     default:
       return state;

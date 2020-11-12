@@ -1,11 +1,11 @@
-const express = require('express')
-const router = new express.Router()
-const getOrders = require('../Controllers/getOrder')
-const addOrders = require('../Controllers/addOrder')
+const express = require("express");
+const router = new express.Router();
+const getOrders = require("../Controllers/getOrder");
+const addOrders = require("../Controllers/addOrder");
 
-router.get('/order/:id', getOrders.getOrder)
-router.post('/getOrders', addOrders.addOrder) //getOrders
-module.exports = router
+router.get("/getOrders/:id", getOrders.getOrder); //getOrders
+router.post("/order", addOrders.addOrder);
+module.exports = router;
 
 // orders: {
 //     dish: {

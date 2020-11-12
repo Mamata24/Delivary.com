@@ -44,6 +44,9 @@ exports.getRestaurant = async (req, res) => {
     const time = req.query.deliveryTime;
     const star = req.query.star;
     const delivery = req.query.deliveryFee;
+    const cuisine = req.query.cuisine.split(",");
+    // console.log(cuisine);
+    let categoryRests = [];
 
     let restaurant = await Restaurant.find();
     let requiredRestaurant = restaurant
@@ -62,9 +65,22 @@ exports.getRestaurant = async (req, res) => {
       .filter((item) => {
         if (delivery === "All") return item;
         else return item.min <= Number(delivery);
+      })
+      .filter((item) => {
+        if (cuisine.length === 0) return item;
+        cuisine.forEach((foodie) => {
+          if (item.category.includes(foodie)) {
+            if (categoryRests.findIndex((index) => index.id == item.id) == -1) {
+              categoryRests.push(item);
+            }
+          }
+        });
+        return categoryRests;
       });
 
-    const resp = Paginator(requiredRestaurant, req.query.page, req.query.limit);
+    // console.log(categoryRests.length);
+
+    const resp = Paginator(categoryRests, req.query.page, req.query.limit);
     // console.log(resp.length)
     res.send(resp);
   } catch (e) {
