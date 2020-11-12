@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 function SubMenu() {
   return (
@@ -24,15 +25,15 @@ function SubMenu() {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="foroffice">
+                <Link style={{textDecoration:"none",color:"#1f5ea9"}} className="nav-link" to="/office">
                   For Office
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="foroffice">
+                <Link style={{textDecoration:"none",color:"#1f5ea9"}} className="nav-link" to="/office">
                   <i className="fa fa-comment-dots"></i>
                   <span style={{ margin: 10 }}>Chat</span>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

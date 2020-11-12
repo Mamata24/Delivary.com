@@ -37,7 +37,7 @@ function ItemModal(props) {
           <Container>
             <Row>
               <Col lg={6}>{dish_name}</Col>
-              <Col lg={6}>${price}</Col>
+              <Col lg={6}>₹{price}</Col>
             </Row>
           </Container>
         </Modal.Body>
@@ -78,7 +78,7 @@ function ItemModal(props) {
                     <Button className="btn btn-block" onClick={addToCart}>
                       Add to bag{" "}
                       <span style={{ backgroundColor: "blue" }}>
-                        ${qty * price}
+                      ₹{qty * price}
                       </span>
                     </Button>
                     {/* oooooooooooooooooooooorders:[] -> reducer

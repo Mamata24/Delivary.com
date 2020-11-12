@@ -23,6 +23,7 @@ import {
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
+  DELETE_DISH
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -237,6 +238,13 @@ export default (state = initialState, action) => {
         ...state,
         billAmt: action.payload,
       };
+
+    case DELETE_DISH:
+      let newOrders = state.orders.filter(item=>Number(item.dish_id)!==Number(action.payload))
+      return{
+        ...state,
+        orders:newOrders,
+      }
 
     default:
       return state;
