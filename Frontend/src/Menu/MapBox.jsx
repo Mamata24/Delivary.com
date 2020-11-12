@@ -19,7 +19,7 @@ function MapBox(props){
             <Map
                 style={style}
                 containerStyle={{
-                height: '400px',
+                height: '300px',
                 width: '550px'
             }}
             center={{lat,lon}}

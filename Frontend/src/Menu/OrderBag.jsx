@@ -52,7 +52,7 @@ function OrderBag(props) {
                 className="fa fa-shopping-basket fa-lg"
                 style={{ color: "#1f5ea9" }}
               ></i>
-              <span style={{ color: "#1f5ea9" }}> Store Name </span>
+              <span style={{ color: "#1f5ea9" }}> {props.rest_name} </span>
             </li>
 
             <li class="list-group-item" style={{ textAlign: "center" }}>
