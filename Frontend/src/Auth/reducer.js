@@ -196,10 +196,11 @@ export default (state = initialState, action) => {
         payment: false,
       };
     case GET_PLACE_NAME:
-      saveData("delivaryPlace", action.payload);
+      let data = "Steel Plant, Visakhapatnam, Andhra Pradesh, India";
+      saveData("delivaryPlace", data);
       return {
         ...state,
-        place: action.payload,
+        place: data,
       };
 
     case PAYMENT_SUCCESS:

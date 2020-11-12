@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
-import {useDispatch} from 'react-redux'
-import {pushOrder} from '../Auth/actions'
+import { useDispatch } from 'react-redux'
+import { pushOrder } from '../Auth/actions'
 
 function ItemModal(props) {
   const dispatch = useDispatch()
-    // console.log(props);
-    const {dish_name,price,dish_id} = props.dishdetail
+  // console.log(props);
+  const { dish_name, price, dish_id } = props.dishdetail
   const [qty, setQty] = useState(1);
-  const addToCart = ()=>{
+  const addToCart = () => {
     let dish = {
-      dish_id:dish_id,
-      dish_name:dish_name,
-      price:price,
-      qty:qty,
-      subTotal:(Number(price)*Number(qty)).toFixed(2)
+      dish_id: dish_id,
+      dish_name: dish_name,
+      price: price,
+      qty: qty,
+      subTotal: (Number(price) * Number(qty)).toFixed(2)
     }
     dispatch(pushOrder(dish))
     setQty(1)

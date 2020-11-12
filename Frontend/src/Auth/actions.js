@@ -71,7 +71,7 @@ export const currLocationReqSuccess = (payload) => ({
 
 export const currLocationSuccess = (payload) => (dispatch) => {
   dispatch(currLocationReqSuccess(payload));
-  console.log(payload);
+  // console.log(payload);
   axios
     .get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${payload.longitude},${payload.latitude}.json?access_token=${accessToken}`
@@ -131,11 +131,11 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
 
-// This is the idea to post the lat and long to backend//
+// post the lat and lon to backend//
 export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   let payloadLatLon = {
-    latitude: 17.269054,
-    longitude: 83.817841,
+    latitude: 12.839223,
+    longitude: 77.659293,
   };
   // let payloadLatLon = {
   //   latitude: Number(payload.latitude).toFixed(6),
@@ -186,9 +186,8 @@ export const registerUser = (payload) => (dispatch) => {
   dispatch(registerUserRequest());
   axios
     .post("http://localhost:5000/signup", payload)
-    .then((res) => console.log(res))
+    .then((res) => dispatch(registerUserSuccess(res.data)))
     .catch((err) => dispatch(registerUserFailure(err)));
-  //dispatch(registerUserSuccess(res.data))
 };
 
 // login a user
@@ -314,11 +313,13 @@ export const ordersFailure = (payload) => ({
 });
 
 export const postOrders = (payload) => (dispatch) => {
+  console.log(payload);
   axios
     .post(`http://localhost:5000/order`, payload)
     .then((res) =>
+      //res = userId
       axios
-        .get(`http://localhost:5000/getOrders/${res.userId}`)
+        .get(`http://localhost:5000/getOrders?id=${res.userId}`)
         .then((res) => dispatch(getOrdersSuccess(res)))
     )
     .catch((err) => dispatch(ordersFailure(err)));
@@ -327,7 +328,7 @@ export const postOrders = (payload) => (dispatch) => {
 // Restaurent detail
 
 export const restaurantDetail = (payload) => ({
-  type:RESTAURENT_DETAIL,
+  type: RESTAURENT_DETAIL,
   payload,
 });
 
