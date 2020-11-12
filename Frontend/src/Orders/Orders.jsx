@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../Checkout/checkout.module.css";
 import classnames from "classnames";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import DashboardNav from "../Dashboard/DashboardNav";
 import Footer from "../LandingPage/Footer";
+import { getAllOrders } from "../Auth/actions";
 
 function Orders() {
-  const userOrders = useSelector((state) => state.Auth.userOrders);
+  let { userOrders, user } = useSelector((state) => state.Auth);
   console.log(userOrders);
+  let displayOrders = userOrders.reverse();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllOrders(user._id));
+  }, []);
+
   return (
     <>
       <DashboardNav />
@@ -21,7 +28,7 @@ function Orders() {
           <div className="row">
             <div className="col-10 offset-1">
               {userOrders &&
-                userOrders.map((item) => (
+                displayOrders.map((item) => (
                   <div className="row" key={item._id}>
                     <div className="col">
                       <div className="card border-0 shadow mb-5 ">

@@ -13,9 +13,9 @@ function Menu(props) {
   // console.log(restt)
   let rest_id = props.match.params.id;
   let rest_detail = restaurants.filter(
-    (singleData) =>Number(singleData.id) === Number(rest_id)
+    (singleData) => Number(singleData.restaurant_id) === Number(rest_id)
   );
-  // console.log(rest_detail)
+  console.log("rest", rest_detail);
   let rest_name = rest_detail[0].restaurant_name;
   let delivery_fee = rest_detail[0].delivery_fee;
 
@@ -25,12 +25,16 @@ function Menu(props) {
         <div className="row" style={{ backgroundColor: "#eeeeee" }}>
           <DashboardNav />
           <SubMenu />
-          <StoreDetailHeader rest_detail = {rest_detail}/>
+          <StoreDetailHeader rest_detail={rest_detail} />
           <div className="col-lg-8">
-            <MenuDisplay rest_detail = {rest_detail}/>
+            <MenuDisplay rest_detail={rest_detail} />
           </div>
           <div className="col-lg-4">
-            <OrderBag id={rest_id} rest_name = {rest_name} delivery_fee={delivery_fee}/>
+            <OrderBag
+              id={rest_id}
+              rest_name={rest_name}
+              delivery_fee={delivery_fee}
+            />
           </div>
         </div>
         <div className="row">

@@ -28,6 +28,8 @@ import {
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -223,6 +225,13 @@ export default (state = initialState, action) => {
       };
 
     case GET_USER_ORDERS:
+      return {
+        ...state,
+        isErr: false,
+        errMsg: "",
+      };
+
+    case GET_ORDERS_SUCCESS:
       return {
         ...state,
         userOrders: action.payload,

@@ -21,6 +21,8 @@ import {
   PAYMENT_SUCCESS,
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
@@ -306,7 +308,7 @@ export const pushOrder = (payload) => ({
 
 // post individual orders
 
-export const getOrdersSuccess = (payload) => ({
+export const postOrdersSuccess = (payload) => ({
   type: GET_USER_ORDERS,
   payload,
 });
@@ -323,12 +325,27 @@ export const postOrders = (payload) => (dispatch) => {
   console.log(orderPayload);
   axios
     .post("http://localhost:5000/order", orderPayload)
-    .then((res) =>
-      axios
-        .get(`http://localhost:5000/getOrders/${payload.user_id}`)
-        .then((res) => dispatch(getOrdersSuccess(res.data)))
-    )
+    .then((res) => dispatch(postOrdersSuccess(res)))
     .catch((err) => dispatch(ordersFailure(err)));
+};
+
+// get all orders of that user
+
+export const getOrdersSuccess = (payload) => ({
+  type: GET_ORDERS_SUCCESS,
+  payload,
+});
+
+export const getOrdersFailure = (payload) => ({
+  type: GET_ORDERS_FAILURE,
+  payload,
+});
+
+export const getAllOrders = (payload) => (dispatch) => {
+  axios
+    .get(`http://localhost:5000/getOrders/${payload}`)
+    .then((res) => dispatch(getOrdersSuccess(res.data)))
+    .catch((err) => dispatch(getOrdersFailure(err)));
 };
 
 // Restaurent detail
