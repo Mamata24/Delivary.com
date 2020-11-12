@@ -25,6 +25,9 @@ import {
   BILL_AMOUNT,
   DELETE_DISH,
   DELIVER_TO,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -257,6 +260,29 @@ export default (state = initialState, action) => {
       return {
         ...state,
         deliveryAddress: action.payload,
+      };
+
+    case EDIT_USER_REQUEST:
+      return {
+        isLoading: true,
+        isErr: false,
+        errMsg: "",
+      };
+
+    case EDIT_USER_SUCCESS:
+      saveData("delivaryUser", action.payload);
+      return {
+        isLoading: false,
+        isErr: false,
+        errMsg: "",
+        user: action.payload,
+      };
+
+    case EDIT_USER_FAILURE:
+      return {
+        isLoading: false,
+        isErr: true,
+        errMsg: action.payload,
       };
 
     default:

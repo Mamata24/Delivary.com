@@ -26,6 +26,9 @@ import {
   BILL_AMOUNT,
   DELETE_DISH,
   DELIVER_TO,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -321,10 +324,9 @@ export const postOrders = (payload) => (dispatch) => {
   axios
     .post("http://localhost:5000/order", orderPayload)
     .then((res) =>
-      //res = userId
       axios
-        .get(`http://localhost:5000/getOrder/id=${res.userId}`)
-        .then((res) => dispatch(getOrdersSuccess(res)))
+        .get(`http://localhost:5000/getOrders/${payload.user_id}`)
+        .then((res) => dispatch(getOrdersSuccess(res.data)))
     )
     .catch((err) => dispatch(ordersFailure(err)));
 };
@@ -356,3 +358,27 @@ export const deliverTo = (payload) => ({
   type: DELIVER_TO,
   payload,
 });
+
+// edit user
+
+export const editUserRequest = () => ({
+  type: EDIT_USER_REQUEST,
+});
+
+export const editUserSuccess = (payload) => ({
+  type: EDIT_USER_SUCCESS,
+  payload,
+});
+
+export const editUserFailure = (payload) => ({
+  type: EDIT_USER_FAILURE,
+  payload,
+});
+
+export const editUser = (payload) => (dispatch) => {
+  dispatch(editUserRequest());
+  axios
+    .post(`http://localhost:5000/editUser/${payload._id}`, payload)
+    .then((res) => dispatch(editUserSuccess(res.data)))
+    .catch((err) => dispatch(editUserFailure(err)));
+};

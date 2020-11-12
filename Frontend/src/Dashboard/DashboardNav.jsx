@@ -16,10 +16,6 @@ const Input = styled.input`
   width: 400px;
 `;
 
-const Span = styled.span`
-  margin-top: 0px;
-`;
-
 function DashboardNav() {
   const { login, place } = useSelector((state) => state.Auth);
 

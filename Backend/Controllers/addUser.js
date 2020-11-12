@@ -4,7 +4,7 @@ exports.addUser = async (req, res) => {
   // console.log(user)
   if (!(await User.findOne({ email: req.body.email }))) {
     const user = new User(req.body);
-    console.log(user);
+    // console.log(user);
     try {
       await user.save();
       res.status(201).send({ user });

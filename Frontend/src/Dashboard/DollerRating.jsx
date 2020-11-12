@@ -9,11 +9,12 @@ function DollerRating(props) {
     <>
       {dollars.map((dollar) => (
         <>
-          <i
+          {/* <i
             style={{ color: "black" }}
             className="fa fa-usd"
             aria-hidden="true"
-          ></i>
+          ></i> */}
+          <span style={{ color: "dimgrey" }}>₹</span>
         </>
       ))}
     </>

@@ -9,6 +9,7 @@ function Bag() {
   const { orders, billAmt, restaurantDetail } = useSelector(
     (state) => state.Auth
   );
+  console.log(orders);
   const [tip, setTip] = useState(0);
   let orderSubTotal =
     orders.length !== 0
@@ -134,7 +135,9 @@ function Bag() {
 
                           <div className="col-12 d-flex justify-content-between">
                             <h5>Total</h5>
-                            <h5>₹{orders.length !== 0 ? billAmt : 0}</h5>
+                            <h5>
+                              ₹{orders.length !== 0 ? billAmt : orderSubTotal}
+                            </h5>
                           </div>
                         </div>
                       </div>
