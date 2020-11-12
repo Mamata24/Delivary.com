@@ -4,11 +4,14 @@ import MapBox from "./MapBox";
 import MenuData from './MenuData.json'
 import Gmap from '../Menu/Gmap'
 
-function MenuDisplay() {
+function MenuDisplay(props) {
   // const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
   const [dishDetail,setdishDetail] = useState({});
-
+  const { latitude ,longitude} = props.rest_detail[0]
+  const lat = Number(latitude)
+  const lon = Number(longitude)
+  // console.log(lat,lon)
   return (
     <>
       <div className="container mt-5">
@@ -431,7 +434,7 @@ function MenuDisplay() {
                     </div>
                   </div>
                   <div className="col-lg-12">
-                    <MapBox lat={20.268998} lon={85.818373}/>
+                    <MapBox lat={lat} lon={lon}/>
                     {/* <Gmap /> */}
                   </div>
                 </div>

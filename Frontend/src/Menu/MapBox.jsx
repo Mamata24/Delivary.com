@@ -5,7 +5,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 function MapBox(props){
     
     const {lat,lon} = props
-
+    // const latt = Number(lat)
+    // const lonn = Number(lon)
     console.log(lat,lon)
 
     const Map = ReactMapboxGl({
@@ -18,14 +19,14 @@ function MapBox(props){
             <Map
                 style={style}
                 containerStyle={{
-                height: '500px',
+                height: '300px',
                 width: '550px'
             }}
             center={{lat,lon}}
             >
-            <Layer type="circle" id="marker" layout={{ 'icon-image': 'marker-15' }}>
+            {/* <Layer type="circle" id="marker" layout={{ 'icon-image': 'marker-15' }}>
                 <Feature coordinates={[]} />
-            </Layer>
+            </Layer> */}
             </Map>;
         </>
     )

@@ -10,10 +10,11 @@ function OrderBag(props) {
   const orders = useSelector((state) => state.Auth.orders);
   // const getRest = useSelector((state) => state.Auth.restaurants);
   console.log(props)
-
-  let sum = orders.reduce(function (tot, arr) {
-    return tot + Number(arr.subTotal);
-  }, 0);
+  
+  let  sum = orders.reduce(function (tot, arr) {
+      return tot + Number(arr.subTotal);
+    }, Number(props.delivery_fee));
+  
 
   const deleteItem = (dishId) =>{
     dispatch(deleteDish(dishId))
@@ -22,7 +23,8 @@ function OrderBag(props) {
   const movingToCheckout = () => {
     let payload = {
       restaurantId:props.id,
-      restaurant_Name:props.rest_name
+      restaurant_Name:props.rest_name,
+      delivery_fee:Number(props.delivery_fee)
     };
     dispatch(restaurantDetail(payload))
     history.push("/checkout");
@@ -50,11 +52,11 @@ function OrderBag(props) {
                 className="fa fa-shopping-basket fa-lg"
                 style={{ color: "#1f5ea9" }}
               ></i>
-              <span style={{ color: "#1f5ea9" }}> Store Name </span>
+              <span style={{ color: "#1f5ea9" }}> {props.rest_name} </span>
             </li>
 
             <li class="list-group-item" style={{ textAlign: "center" }}>
-              {orders ? (
+              {orders.length > 0 ? (
                 orders.map((order) => (
                   <div key={order.dish_id} className="row">
                     <div className="col-lg-2">{order.qty}</div>
@@ -76,7 +78,9 @@ function OrderBag(props) {
                   <p>Delivery Fee</p>
                 </div>
                 <div className="col-lg-6 mr-auto">
+                {props.delivery_fee ? <p>{props.delivery_fee}</p>:
                   <p>Free</p>
+                }
                 </div>
               </div>
               <div className="row mt-5">

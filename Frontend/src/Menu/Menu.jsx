@@ -6,15 +6,18 @@ import SubMenu from "./SubMenu";
 import OrderBag from "./OrderBag";
 import { useSelector } from "react-redux";
 import Footer from "../LandingPage/Footer";
+// import restt from "../Dashboard/restaurants.json"
 
 function Menu(props) {
   const { orders, restaurants } = useSelector((state) => state.Auth);
-  // console.log(props.match.params.id)
+  // console.log(restt)
   let rest_id = props.match.params.id;
   let rest_detail = restaurants.filter(
-    (singleData) => Number(singleData.restaurant_id) === Number(rest_id)
+    (singleData) =>Number(singleData.id) === Number(rest_id)
   );
+  // console.log(rest_detail)
   let rest_name = rest_detail[0].restaurant_name;
+  let delivery_fee = rest_detail[0].delivery_fee;
 
   return (
     <>
@@ -22,12 +25,12 @@ function Menu(props) {
         <div className="row" style={{ backgroundColor: "#eeeeee" }}>
           <DashboardNav />
           <SubMenu />
-          <StoreDetailHeader />
+          <StoreDetailHeader rest_detail = {rest_detail}/>
           <div className="col-lg-8">
-            <MenuDisplay />
+            <MenuDisplay rest_detail = {rest_detail}/>
           </div>
           <div className="col-lg-4">
-            <OrderBag id={rest_id} rest_name={rest_name} />
+            <OrderBag id={rest_id} rest_name = {rest_name} delivery_fee={delivery_fee}/>
           </div>
         </div>
         <div className="row">
