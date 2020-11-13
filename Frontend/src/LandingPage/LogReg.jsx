@@ -37,6 +37,8 @@ function LogReg() {
       };
   }, [clickedLogin]);
 
+  console.log(clickedLogin);
+
   const responseFaceBook = (response) => {
     console.log(response);
     dispatch(fbLoginSuccess(response));

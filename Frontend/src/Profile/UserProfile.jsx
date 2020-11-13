@@ -1,15 +1,86 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardNav from "../Dashboard/DashboardNav";
 import { useSelector } from "react-redux";
 import Footer from "../LandingPage/Footer";
+import { editUser } from "../Auth/actions";
 
 function UserProfile() {
   const user = useSelector((state) => state.Auth.user);
+  let initialState = {
+    first_name: user.first_name,
+    email: user.email,
+  };
+  const [profile, setProfile] = useState(initialState);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((state) => ({ ...state, [name]: value }));
+  };
+
+  // console.log(profile);
+
   return (
     <>
       <div>
         <DashboardNav />
-        <h3 className="ml-5 mt-5">Your Profile</h3>
+        <h3 className="ml-5 mt-5" style={{ color: "#01579b" }}>
+          {user.first_name.toUpperCase()}'s Profile
+          <span data-toggle="modal" data-target="#profileModal">
+            <i className="fas fa-edit float-right"></i>
+          </span>
+          <div
+            className="modal fade"
+            id="exampleModal"
+            tabIndex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="profileModal">
+                    Edit Profile
+                  </h5>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <input
+                    type="text"
+                    value={profile.first_name}
+                    onChange={handleChange}
+                    name="first_name"
+                  />
+                  <br />
+                  <input
+                    type="text"
+                    value={profile.email}
+                    onChange={handleChange}
+                    name="email"
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </h3>
         <input
           type="text"
           className="col-11 mx-5"
