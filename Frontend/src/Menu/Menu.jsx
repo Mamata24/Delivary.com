@@ -6,7 +6,7 @@ import SubMenu from "./SubMenu";
 import OrderBag from "./OrderBag";
 import { useSelector } from "react-redux";
 import Footer from "../LandingPage/Footer";
-// import restt from "../Dashboard/restaurants.json"
+import restt from "../Dashboard/restaurants.json"
 
 function Menu(props) {
   const { orders, restaurants } = useSelector((state) => state.Auth);
