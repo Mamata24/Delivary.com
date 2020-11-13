@@ -4,36 +4,41 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
+  /* position: relative; */
 }
 
-.nav {
+/* .nav {
   position: relative;
   left: 800px;
   top: 10px;
   color: #1f5ea9;
-}
+} */
 
 .logoimg {
-  width: 180px;
+  width: 230px;
 }
 
 .searcboxicon {
   color: #1f5ea9;
-  /* height: 50px;
-  width: 50px; */
-  /* border-radius: 50%; */
-  /* background-color: white; */
-  /* position: relative; */
-  /* left: 185px; */
   margin: 10px;
+  margin-top: 20px;
+}
+
+.roundBox{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+  display:inline-block;
+  margin-right: 20px;
 }
 
 .info {
   font-size: 25px;
   color: #666666;
-  font-family: Open Arial, sans-serif;
-  /* margin-left: 60px; */
+  margin-top: 20px;
+  font-weight: 100;
+  font-family: "Open Sans",Arial,sans-serif,100;
 }
 
 .btn {
@@ -44,8 +49,8 @@
   width: 120px;
   height: 45px;
   position: relative;
-  bottom: 45px;
-  left: 150px;
+  bottom: 0px;
+  left: 0x;
 }
 .searchInput {
   border: none;
@@ -62,9 +67,11 @@
   padding: 6px 8px 6px 30px;
   background: white;
   outline: black;
+  margin-bottom: 20px;
 }
 .searchDiv {
-  margin-left: 45px;
+  position: absolute;
+  left: 70px;
 }
 
 .locationArrow {
@@ -72,4 +79,8 @@
   right: 170px;
   top: 5px;
   color: #1f5ea9;
+}
+
+::placeholder{
+  color:lightgray;
 }

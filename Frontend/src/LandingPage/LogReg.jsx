@@ -109,7 +109,7 @@ function LogReg() {
         style={{ zIndex: "99999" }}
         className="modal fade"
         id="modalLRForm"
-        // tabindex="999999"
+        // tabindex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"

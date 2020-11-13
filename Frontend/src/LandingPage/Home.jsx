@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classnames from 'classnames'
 import {
   Container,
   Row,
@@ -8,6 +9,7 @@ import {
   FormControl,
   InputGroup,
   Image,
+  Form
 } from "react-bootstrap";
 import styled from "./Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,9 +23,15 @@ import {
   fetchRestaurants,
 } from "../Auth/actions";
 import styles, { createGlobalStyle } from "styled-components";
+// import NavBarTest from './NavBarTest'
 
 const Input = styles.input`
   border:0;
+  width:300px;
+  height:30px;
+  position:absolute;
+  down:20px;
+  left:35px;
 `;
 
 function Home() {
@@ -69,6 +77,7 @@ function Home() {
   return (
     <>
       <NavBar />
+      {/* <NavBarTest /> */}
       <Container fluid>
         <Row className={styled.bgimage}>
           <Row style={{ textAlign: "center" }} lg={3} md={3} sm={1} xs={1}>
@@ -77,63 +86,83 @@ function Home() {
               <Card
                 style={{
                   width: "36rem",
-                  marginTop: "7rem",
+                  height: "20rem",
+                  marginTop: "8rem",
                   marginLeft: "6rem",
                   backgroundColor: "#f2f3f4",
                   border: "none",
+                  position:"relative",
+                  boxShadow:"none"
                 }}
               >
                 <Card.Body>
-                  <Image
-                    className={styled.logoimg}
-                    src="./logo2.png"
-                    alt="delivery"
-                  />
-                  <div>
-                    <i className="fa fa-utensils fa-2x"></i>
-                    <FontAwesomeIcon
-                      icon="utensils"
-                      size="2x"
-                      className={styled.searcboxicon}
-                    />
-                    <FontAwesomeIcon
-                      icon="glass-martini"
-                      size="2x"
-                      className={styled.searcboxicon}
-                    />
-                    <FontAwesomeIcon
-                      icon="shopping-basket"
-                      size="2x"
-                      className={styled.searcboxicon}
-                    />
-                  </div>
-                  <div className={styled.info}>
-                    <p>See who delivers in your neighborhood</p>
-                  </div>
-                  <div className={styled.searchDiv}>
+                  <Row>
+                    <Col>
+                      <Image
+                        className={styled.logoimg}
+                        src="./logo2.png"
+                        alt="delivery"
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                    <div className={styled.roundBox}>
+                      <i className={classnames("fa fa-utensils fa-lg",styled.searcboxicon)}></i>
+                    </div>
+                    <div className={styled.roundBox}>
+                      <i className={classnames("fas fa-glass-martini fa-lg",styled.searcboxicon)}></i>
+                    </div>
+                    <div className={styled.roundBox}>
+                      <i className={classnames("fas fa-shopping-basket fa-lg",styled.searcboxicon)}></i>
+                    </div>
+                    <div className={styled.roundBox}>
+                      <i className={classnames("fas fa-shopping-cart fa-lg",styled.searcboxicon)}></i>
+                    </div>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <div className={styled.info}>
+                        <p>See who delivers in your neighborhood</p>
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row className={styled.searchDiv}>
+                    {/* <Col lg={8} className={styled.inpDiv}> */}
                     <div className={styled.inpDiv}>
-                      <FontAwesomeIcon
+                    <i className={classnames("fas fa-location-arrow",styled.locationArrow)}></i>
+                      {/* <FontAwesomeIcon
                         icon="location-arrow"
                         className={styled.locationArrow}
-                      />
+                      /> */}
                       <Input
                         type="text"
                         onChange={handleAddress}
                         value={address}
                         placeholder="Street Address, City, State"
                       />
-                      {suggestions &&
+                      {/* <Form>
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                          <Form.Label>{""}</Form.Label>
+                          <Form.Control as="textarea" rows={3}/> */}
+                        
+                     {suggestions &&
                         suggestions.map((item) => (
                           <div onClick={() => getAddress(item.place_name)}>
                             {item.place_name}
                           </div>
                         ))}
+                        
+                        {/* </Form.Group>
+                      </Form> */}
                     </div>
-
+                    
                     <button className={styled.btn} onClick={getRestaurants}>
                       Search
                     </button>
-                  </div>
+                    
+                  </Row>
                 </Card.Body>
               </Card>
             </Col>
