@@ -185,6 +185,7 @@ export default (state = initialState, action) => {
         register: false,
         user: [],
         place: "",
+        orders: [],
         payment: false,
         userOrders: [],
         deliveryAddress: "",
