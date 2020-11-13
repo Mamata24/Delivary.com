@@ -49,7 +49,7 @@ export const initialState = {
   totalRestaurants: "",
   orders: [],
   place: loadData("delivaryPlace") || "",
-  payment: true,
+  payment: false,
   userOrders: [],
   restaurantDetail: "",
   billAmt: 0,

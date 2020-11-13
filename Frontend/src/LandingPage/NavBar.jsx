@@ -6,21 +6,41 @@ import styled from "../LandingPage/Nav.module.css";
 import { Link } from "react-router-dom";
 import LogReg from "./LogReg";
 import { useSelector } from "react-redux";
-// import Profile from "./Profile";
+import Profile from "./Profile";
 // import LoginModal from './LoginModal'
 
 function NavBar() {
   const { login } = useSelector((state) => state.Auth);
   return (
     <>
-      <Navbar collapseOnSelect fixed="top" expand="lg" className={styled.nav} style={{boxShadow:"none"}}>
+      <Navbar
+        collapseOnSelect
+        fixed="top"
+        expand="lg"
+        className={styled.nav}
+        style={{ boxShadow: "none" }}
+      >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link>
+            <Nav.Link
+              style={{
+                marginRight: 40,
+                color: "#01579b",
+                fontWeight: "400",
+                fontSize: 14,
+              }}
+            >
               <HowItWorksPopOver />
             </Nav.Link>
-            <Nav.Link style={{ color: "#1f5ea9" }}>
+            <Nav.Link
+              style={{
+                color: "#1f5ea9",
+                marginRight: 40,
+                fontWeight: "400",
+                fontSize: 14,
+              }}
+            >
               <Link
                 to="/office"
                 style={{ color: "#01579b", textDecoration: "none" }}
@@ -28,13 +48,14 @@ function NavBar() {
                 For Office
               </Link>
             </Nav.Link>
-            {/* <Nav.Link>{!login ? <LogReg /> : <Profile />}</Nav.Link> */}
-            <Nav.Link><LogReg /></Nav.Link>
-            <Nav.Link style={{ color: "#1f5ea9" }}>
-              <FontAwesomeIcon icon="tag" size="lg" rotation={90} />
+            <Nav.Link style={{ marginRight: 40, marginTop: -18 }}>
+              {!login ? <LogReg /> : <Profile />}
             </Nav.Link>
-            <Nav.Link style={{ color: "#1f5ea9" }}>
-              <FontAwesomeIcon icon="shopping-bag" size="lg" />
+            <Nav.Link style={{ color: "#1f5ea9", marginRight: 40 }}>
+              <i class="fas fa-tag fa-rotate-90 fa-lg"></i>
+            </Nav.Link>
+            <Nav.Link style={{ color: "#1f5ea9", marginRight: 40 }}>
+              <i className="fas fa-shopping-bag fa-lg"></i>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -42,5 +63,4 @@ function NavBar() {
     </>
   );
 }
-
 export default NavBar;

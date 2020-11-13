@@ -2,10 +2,14 @@ import React from "react";
 
 function Footer() {
   return (
-    <>
+    <div className="pt-2 pb-5" style={{ background: "#dfe6e9" }}>
       <div
         className="container-fluid"
-        style={{ fontFamily: "sans-serif", color: "gray" }}
+        style={{
+          fontFamily: "sans-serif",
+          color: "gray",
+          background: "#dfe6e9",
+        }}
       >
         <div className="row pt-4">
           <div className="col">Merchants</div>
@@ -49,7 +53,7 @@ function Footer() {
           <div className="col"></div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

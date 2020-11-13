@@ -280,6 +280,7 @@ export const paymentFailure = () => ({
 });
 
 export const razorPayment = (payload) => async (dispatch) => {
+  console.log("razoraction");
   const response = await axios.get(
     `http://localhost:5000/order?amount=${payload.amount}`
   );

@@ -82,7 +82,7 @@ function LogReg() {
     dispatch(registerUser(registerDetails));
   };
 
-  const login = useSelector((state) => state.Auth.login);
+  const { login, user } = useSelector((state) => state.Auth);
 
   const [component, setComponent] = useState("#panel7");
 
@@ -92,7 +92,7 @@ function LogReg() {
 
   if (login) {
     // history.push("/dashboard");
-    document.getElementById("close").click();
+    if (user == "") document.getElementById("close").click();
   }
 
   React.useEffect(() => {
