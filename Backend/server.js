@@ -20,10 +20,10 @@ require("./mongoose");
 
 app.use(express.static(path.join(__dirname, "Frontend/build")));
 
-app.use(express.static("Frontend/build"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
-});
+// app.use(express.static("Frontend/build"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
+// });
 
 const PORT = process.env.PORT || 5000;
 
