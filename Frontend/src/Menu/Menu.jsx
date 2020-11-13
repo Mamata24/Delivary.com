@@ -6,13 +6,13 @@ import SubMenu from "./SubMenu";
 import OrderBag from "./OrderBag";
 import { useSelector } from "react-redux";
 import Footer from "../LandingPage/Footer";
-// import restt from "../Dashboard/restaurants.json"
+import restt from "../Dashboard/restaurants.json"
 
 function Menu(props) {
   const { orders, restaurants } = useSelector((state) => state.Auth);
   // console.log(restt)
   let rest_id = props.match.params.id;
-  let rest_detail = restaurants.filter(
+  let rest_detail = restt.filter(
     (singleData) =>Number(singleData.id) === Number(rest_id)
   );
   // console.log(rest_detail)
