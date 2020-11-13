@@ -236,6 +236,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userOrders: action.payload,
+        orders: [],
       };
 
     case ORDERS_FAILURE:

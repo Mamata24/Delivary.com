@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const Razorpay = require("razorpay");
 const dotenv = require("dotenv");
 const request = require("request");
-const build = require("build");
+// const build = require("build");
 
 const cors = require("cors");
 
@@ -18,7 +18,7 @@ dotenv.config();
 const app = express();
 require("./mongoose");
 
-app.use(express.static(path.join(__dirname, "Frontend/build")));
+// app.use(express.static(path.join(__dirname, "Frontend/build")));
 
 // app.use(express.static("Frontend/build"));
 // app.get("*", (req, res) => {

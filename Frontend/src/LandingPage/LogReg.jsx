@@ -91,7 +91,6 @@ function LogReg() {
   };
 
   if (login) {
-    // history.push("/dashboard");
     if (user == "") document.getElementById("close").click();
   }
 

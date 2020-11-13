@@ -331,7 +331,10 @@ export const postOrders = (payload) => (dispatch) => {
   console.log(orderPayload);
   axios
     .post("http://localhost:5000/order", orderPayload)
-    .then((res) => dispatch(postOrdersSuccess(res)))
+    .then((res) => {
+      dispatch(postOrdersSuccess(res));
+      dispatch(getAllOrders(payload.user_id));
+    })
     .catch((err) => dispatch(ordersFailure(err)));
 };
 

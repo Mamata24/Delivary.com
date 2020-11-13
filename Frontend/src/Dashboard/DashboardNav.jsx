@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Profile from "../LandingPage/Profile";
 import LogReg from "../LandingPage/LogReg";
+import { Link } from "react-router-dom";
 
 const Div = styled.div`
   background: #01579b;
@@ -23,7 +24,9 @@ function DashboardNav() {
     <Div className="container-fluid">
       <div className="row">
         <div className="col-3">
-          <img src="logo.png" width="150px" alt="delivary.com" />
+          <Link to="/office" style={{ textDecoration: "none" }}>
+            <img src="logo.png" width="150px" alt="delivary.com" />
+          </Link>
         </div>
         <div className="col-3">
           <Input className="bg-white mt-3" type="text" value={place} />
@@ -35,7 +38,7 @@ function DashboardNav() {
         </div>
         <div className="ml-5 col text-white mt-3">
           <i className="fas fa-shopping-basket fa-lg"></i>
-          {orders.length > 0 ? <i>{orders.length}</i>:""}
+          {orders.length > 0 ? <i>{orders.length}</i> : ""}
         </div>
       </div>
     </Div>
