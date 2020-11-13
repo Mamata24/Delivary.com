@@ -13,10 +13,11 @@ function Bag() {
   const [tip, setTip] = useState(0);
   let orderSubTotal =
     orders.length !== 0
-      ? orders
-          .map((item) => Number(item.subTotal))
-          .reduce((a = 0, c) => a + c)
-          .toFixed(2)
+      ? (
+          orders
+            .map((item) => Number(item.subTotal))
+            .reduce((a = 0, c) => a + c) + Number(restaurantDetail.delivery_fee)
+        ).toFixed(2)
       : 0;
 
   const handleTip = (e, tip) => {
@@ -135,9 +136,7 @@ function Bag() {
 
                           <div className="col-12 d-flex justify-content-between">
                             <h5>Total</h5>
-                            <h5>
-                              ₹{orders.length !== 0 ? billAmt : orderSubTotal}
-                            </h5>
+                            <h5>₹{tip !== 0 ? billAmt : orderSubTotal}</h5>
                           </div>
                         </div>
                       </div>

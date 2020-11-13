@@ -138,7 +138,7 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
 };
 
 // post the lat and lon to backend//
-export const showCurrentLocationSuccess = (payload) => (dispatch) => {
+export const showCurrentLocationSuccess = (payload) => async (dispatch) => {
   let payloadLatLon = {
     latitude: 12.839223,
     longitude: 77.659293,
@@ -148,15 +148,20 @@ export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   //   longitude: Number(payload.longitude).toFixed(6),
   // };
   // console.log(payloadLatLon);
-  dispatch(currLocationSuccess(payloadLatLon));
+  await dispatch(currLocationSuccess(payloadLatLon));
+  console.log("before rest");
 
-  axios
+  await axios
     .post(
       "http://localhost:5000/Restaurants?star=0&deliveryFee=All&deliveryTime=All&page=1&limit=5",
       payloadLatLon
     )
-    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    .then((res) => {
+      console.log(res.data);
+      dispatch(fetchRestaurantsSuccess(res.data));
+    })
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+  console.log("after rest");
 };
 
 export const showCurrentLocationFailure = (payload) => ({

@@ -1,53 +1,54 @@
 import React from "react";
-import { Col, Row, Container } from "react-bootstrap";
 
 function Footer() {
   return (
     <>
-      <Container style={{ backgroundColor: "lightGray" }} fluid>
-        <Row>
-          <Container style={{ marginRight: 10, marginTop: 20, fontSize: 13 }}>
-            <Row>
-              <Col lg={1}></Col>
-              <Col lg={8}>
-                <Row>
-                  <Col>
-                    <i>Merchants</i>
-                  </Col>
-                  <Col>
-                    <i>Drivers</i>
-                  </Col>
-                  <Col>
-                    <i>About us</i>
-                  </Col>
-                  <Col>
-                    <i>Contact</i>
-                  </Col>
-                  <Col>
-                    <i>FAQ</i>
-                  </Col>
-                  <Col>
-                    <i>Careers</i>
-                  </Col>
-                  <Col>
-                    <i>Office</i>
-                  </Col>
-                  <Col>
-                    <i>Blog</i>
-                  </Col>
-                  <Col>
-                    <i>Terms of Use</i>
-                  </Col>
-                  <Col>
-                    <i>Privacy Policy</i>
-                  </Col>
-                </Row>
-              </Col>
-              <Col lg={1}></Col>
-            </Row>
-          </Container>
-        </Row>
-      </Container>
+      <div
+        className="container-fluid"
+        style={{ fontFamily: "sans-serif", color: "gray" }}
+      >
+        <div className="row pt-4">
+          <div className="col">Merchants</div>
+          <div className="col">Drivers</div>
+          <div className="col">About Us</div>
+          <div className="col">Contact</div>
+          <div className="col">FAQ</div>
+          <div className="col">Careers</div>
+          <div className="col">Office</div>
+          <div className="col">Blog</div>
+          <div className="col">Terms Of Use</div>
+        </div>
+      </div>
+      <div className="container my-5">
+        <div className="row offset-2">
+          <div className="col mt-1">
+            <i class="fab fa-facebook-f" style={{ color: "gray" }}></i>
+          </div>
+          <div className="col mt-1">
+            <i class="fab fa-twitter" style={{ color: "gray" }}></i>
+          </div>
+          <div className="col mt-1">
+            <i class="fab fa-instagram" style={{ color: "gray" }}></i>
+          </div>
+          <div className="col">
+            <img
+              style={{ height: 40, width: 80 }}
+              src="https://zerodha.com/static/images/google-play-badge.svg"
+              alt=""
+            />
+          </div>
+          <div className="col ml-2">
+            <img
+              style={{ height: 40, width: 80 }}
+              src="https://zerodha.com/static/images/appstore-badge.svg"
+              alt=""
+            />
+          </div>
+          <div className="col"></div>
+          <div className="col"></div>
+          <div className="col"></div>
+        </div>
+      </div>
     </>
   );
 }
