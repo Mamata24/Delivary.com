@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 const Razorpay = require("razorpay");
@@ -15,6 +16,14 @@ const orderRouter = require("./Routes/orderRouter")
 dotenv.config();
 const app = express();
 require("./mongoose");
+
+
+// app.use(express.static(path.join(__dirname, "Frontend/build")))
+
+app.use(express.static("Frontend/build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
+});
 
 const PORT = process.env.PORT || 5000;
 

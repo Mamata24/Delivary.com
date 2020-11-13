@@ -21,11 +21,16 @@ import {
   PAYMENT_SUCCESS,
   PAYMENT_FAILURE,
   GET_USER_ORDERS,
+  GET_ORDERS_SUCCESS,
+  GET_ORDERS_FAILURE,
   ORDERS_FAILURE,
   RESTAURENT_DETAIL,
   BILL_AMOUNT,
   DELETE_DISH,
   DELIVER_TO,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAILURE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -133,7 +138,7 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
 };
 
 // post the lat and lon to backend//
-export const showCurrentLocationSuccess = (payload) => (dispatch) => {
+export const showCurrentLocationSuccess = (payload) => async (dispatch) => {
   let payloadLatLon = {
     latitude: 12.839223,
     longitude: 77.659293,
@@ -143,15 +148,20 @@ export const showCurrentLocationSuccess = (payload) => (dispatch) => {
   //   longitude: Number(payload.longitude).toFixed(6),
   // };
   // console.log(payloadLatLon);
-  dispatch(currLocationSuccess(payloadLatLon));
+  await dispatch(currLocationSuccess(payloadLatLon));
+  console.log("before rest");
 
-  axios
+  await axios
     .post(
       "http://localhost:5000/Restaurants?star=0&deliveryFee=All&deliveryTime=All&page=1&limit=5",
       payloadLatLon
     )
-    .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+    .then((res) => {
+      console.log(res.data);
+      dispatch(fetchRestaurantsSuccess(res.data));
+    })
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
+  console.log("after rest");
 };
 
 export const showCurrentLocationFailure = (payload) => ({
@@ -303,7 +313,7 @@ export const pushOrder = (payload) => ({
 
 // post individual orders
 
-export const getOrdersSuccess = (payload) => ({
+export const postOrdersSuccess = (payload) => ({
   type: GET_USER_ORDERS,
   payload,
 });
@@ -320,13 +330,27 @@ export const postOrders = (payload) => (dispatch) => {
   console.log(orderPayload);
   axios
     .post("http://localhost:5000/order", orderPayload)
-    .then((res) =>
-      //res = userId
-      axios
-        .get(`http://localhost:5000/getOrder/id=${res.userId}`)
-        .then((res) => dispatch(getOrdersSuccess(res)))
-    )
+    .then((res) => dispatch(postOrdersSuccess(res)))
     .catch((err) => dispatch(ordersFailure(err)));
+};
+
+// get all orders of that user
+
+export const getOrdersSuccess = (payload) => ({
+  type: GET_ORDERS_SUCCESS,
+  payload,
+});
+
+export const getOrdersFailure = (payload) => ({
+  type: GET_ORDERS_FAILURE,
+  payload,
+});
+
+export const getAllOrders = (payload) => (dispatch) => {
+  axios
+    .get(`http://localhost:5000/getOrders/${payload}`)
+    .then((res) => dispatch(getOrdersSuccess(res.data)))
+    .catch((err) => dispatch(getOrdersFailure(err)));
 };
 
 // Restaurent detail
@@ -356,3 +380,27 @@ export const deliverTo = (payload) => ({
   type: DELIVER_TO,
   payload,
 });
+
+// edit user
+
+export const editUserRequest = () => ({
+  type: EDIT_USER_REQUEST,
+});
+
+export const editUserSuccess = (payload) => ({
+  type: EDIT_USER_SUCCESS,
+  payload,
+});
+
+export const editUserFailure = (payload) => ({
+  type: EDIT_USER_FAILURE,
+  payload,
+});
+
+export const editUser = (payload) => (dispatch) => {
+  dispatch(editUserRequest());
+  axios
+    .post(`http://localhost:5000/editUser/${payload._id}`, payload)
+    .then((res) => dispatch(editUserSuccess(res.data)))
+    .catch((err) => dispatch(editUserFailure(err)));
+};

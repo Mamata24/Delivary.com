@@ -43,7 +43,7 @@ function Checkout() {
       total_amount: billAmt,
       address: deliveryAddress,
     };
-    console.log(payload);
+    console.log("orders", payload);
     dispatch(postOrders(payload));
     history.push("/orders");
   }

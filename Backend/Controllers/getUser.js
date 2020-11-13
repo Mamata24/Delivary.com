@@ -6,9 +6,9 @@ exports.getUser = async (req, res) => {
       req.body.email,
       req.body.password
     );
-    // console.log(user)
+    // console.log(user);
     res.send({ user });
   } catch (e) {
-    res.status(400).send();
+    res.status(400).send(e);
   }
 };

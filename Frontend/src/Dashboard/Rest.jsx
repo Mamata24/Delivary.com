@@ -87,6 +87,7 @@ function Rest(props) {
           clear: "both",
           outline: "none",
           marginBottom: "3%",
+          marginLeft: "35%",
         }}
         color="secondary"
       />

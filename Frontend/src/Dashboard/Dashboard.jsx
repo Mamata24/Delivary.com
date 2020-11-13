@@ -5,6 +5,7 @@ import styles from "./dashboard.module.css";
 import Rest from "./Rest";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchNextPageRestaurants } from "../Auth/actions";
+import Footer from "../LandingPage/Footer";
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -81,12 +82,6 @@ function Dashboard() {
 
   // filter from backend
   useEffect(() => {
-    // let q = "";
-    // for (let i = 0; i < category.length - 1; i++) {
-    //   q += category[i] + " || ";
-    // }
-    // q += category[category.length - 1];
-    // console.log(q);
     let deliveryCategory;
     if (delivery.includes("all") || delivery.length === 0)
       deliveryCategory = "All";
@@ -718,6 +713,7 @@ function Dashboard() {
           <hr />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Button, Row, Col, Container } from "react-bootstrap";
-import { useDispatch } from 'react-redux'
-import { pushOrder } from '../Auth/actions'
+import { useDispatch, useSelector } from "react-redux";
+import { pushOrder } from "../Auth/actions";
 
 function ItemModal(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const login = useSelector((state) => state.Auth.login);
   // console.log(props);
-  const { dish_name, price, dish_id } = props.dishdetail
+  const { dish_name, price, dish_id } = props.dishdetail;
   const [qty, setQty] = useState(1);
   const addToCart = () => {
     let dish = {
@@ -14,12 +15,16 @@ function ItemModal(props) {
       dish_name: dish_name,
       price: price,
       qty: qty,
-      subTotal: (Number(price) * Number(qty)).toFixed(2)
+      subTotal: (Number(price) * Number(qty)).toFixed(2),
+    };
+    if (!login) alert("Log in to order");
+    if (login) {
+      dispatch(pushOrder(dish));
+      setQty(1);
     }
-    dispatch(pushOrder(dish))
-    setQty(1)
-    props.onHide(false)
-  }
+
+    props.onHide(false);
+  };
   return (
     <>
       <Modal
@@ -78,7 +83,7 @@ function ItemModal(props) {
                     <Button className="btn btn-block" onClick={addToCart}>
                       Add to bag{" "}
                       <span style={{ backgroundColor: "blue" }}>
-                      ₹{qty * price}
+                        ₹{qty * price}
                       </span>
                     </Button>
                     {/* oooooooooooooooooooooorders:[] -> reducer
