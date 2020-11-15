@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.eefe5f0e.chunk.css",
+    "main.js": "/static/js/main.c63106dd.chunk.js",
+    "main.js.map": "/static/js/main.c63106dd.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cea5d14a.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cea5d14a.js.map",
+    "static/css/2.25a5cd90.chunk.css": "/static/css/2.25a5cd90.chunk.css",
+    "static/js/2.21989d85.chunk.js": "/static/js/2.21989d85.chunk.js",
+    "static/js/2.21989d85.chunk.js.map": "/static/js/2.21989d85.chunk.js.map",
+    "static/js/3.845c4a8f.chunk.js": "/static/js/3.845c4a8f.chunk.js",
+    "static/js/3.845c4a8f.chunk.js.map": "/static/js/3.845c4a8f.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.25a5cd90.chunk.css.map": "/static/css/2.25a5cd90.chunk.css.map",
+    "static/css/main.eefe5f0e.chunk.css.map": "/static/css/main.eefe5f0e.chunk.css.map",
+    "static/js/2.21989d85.chunk.js.LICENSE.txt": "/static/js/2.21989d85.chunk.js.LICENSE.txt",
+    "static/media/Home.module.css": "/static/media/https___s3.amazonaws.com_s3.delivery.com_Homepage_default-small.911bbaed.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cea5d14a.js",
+    "static/css/2.25a5cd90.chunk.css",
+    "static/js/2.21989d85.chunk.js",
+    "static/css/main.eefe5f0e.chunk.css",
+    "static/js/main.c63106dd.chunk.js"
+  ]
+}
