@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { googleCLientId, fbAppId } from "../googleAuth";
-import classnames from "classnames";
 import {
   loginUser,
   registerUser,
@@ -10,7 +9,6 @@ import {
   fbLoginSuccess,
 } from "../Auth/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
 import styled from "../LandingPage/Nav.module.css";
 import styles from "styled-components";
 
@@ -19,6 +17,7 @@ const Button = styles.button`
   color:white;
   border: 1px solid #01579b;
 `;
+
 function LogReg() {
   const dispatch = useDispatch();
   const [clickedLogin, setClickedLogin] = useState(false);
@@ -28,14 +27,17 @@ function LogReg() {
   };
 
   React.useEffect(() => {
-    return () => {
-      const elem = document.getElementsByClassName("modal-backdrop");
-      // console.log(elem[0]);
-      if (elem[0]) {
-        elem[0].parentElement.removeChild(elem[0]);
-      }
-    };
+    if (clickedLogin)
+      return () => {
+        const elem = document.getElementsByClassName("modal-backdrop");
+        // console.log(elem[0]);
+        if (elem[0]) {
+          elem[0].parentElement.removeChild(elem[0]);
+        }
+      };
   }, [clickedLogin]);
+
+  console.log(clickedLogin);
 
   const responseFaceBook = (response) => {
     console.log(response);
@@ -80,18 +82,18 @@ function LogReg() {
     dispatch(registerUser(registerDetails));
   };
 
-  const login = useSelector((state) => state.Auth.login);
+  const { login, user } = useSelector((state) => state.Auth);
 
   const [component, setComponent] = useState("#panel7");
 
   const handleComponent = (comp) => {
     setComponent(comp);
   };
-  const history = useHistory();
 
   if (login) {
-    history.push("/dashboard");
+    if (user == "") document.getElementById("close").click();
   }
+
   React.useEffect(() => {
     return () => {
       const elem = document.getElementsByClassName("modal-backdrop");
@@ -100,6 +102,7 @@ function LogReg() {
       }
     };
   }, []);
+
   return (
     <>
       {/* <!--Modal: Login / Register Form--> */}
@@ -107,7 +110,7 @@ function LogReg() {
         style={{ zIndex: "99999" }}
         className="modal fade"
         id="modalLRForm"
-        // tabindex="999999"
+        // tabindex="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
@@ -400,6 +403,7 @@ function LogReg() {
                     </div>
                     <button
                       type="button"
+                      id="close"
                       className="btn btn-outline-info waves-effect ml-auto"
                       data-dismiss="modal"
                     >

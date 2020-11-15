@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardNav from "./DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
-import { useSelector } from "react-redux";
-import restaurantsData from "./restaurants.json";
-// import RestaurantsDetails from "./Restaurants";
 import Rest from "./Rest";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchNextPageRestaurants } from "../Auth/actions";
+import Footer from "../LandingPage/Footer";
 
 function Dashboard() {
-  const login = useSelector((state) => state.Auth.login);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // if (login) window.location.reload(true);
-  }, []);
   // Star Filter -- done
   const [star, setStar] = useState(0);
 
@@ -21,7 +17,7 @@ function Dashboard() {
     setStar(starRate);
   };
 
-  // Category Filter
+  // Category Filter -- done
   const [category, setCategory] = useState([]);
 
   const filterCategory = (e, currCategory) => {
@@ -31,17 +27,17 @@ function Dashboard() {
     else {
       if (category.includes(currCategory.toLowerCase())) {
         let allDelivery = category.filter(
-          (item) => item != currCategory.toLowerCase()
+          (item) => item !== currCategory.toLowerCase()
         );
         setCategory(allDelivery);
       }
     }
   };
+
   console.log(category);
 
   // Delivery Fee Filter -- done
   const [delivery, setDelivery] = useState([]);
-  console.log(delivery);
 
   const handleDeliveryFilter = (e, fee) => {
     if (e.target.checked) {
@@ -50,7 +46,7 @@ function Dashboard() {
       setDelivery(allDelivery);
     } else {
       if (delivery.includes(fee)) {
-        let allDelivery = delivery.filter((item) => item != fee);
+        let allDelivery = delivery.filter((item) => item !== fee);
         setDelivery(allDelivery);
       }
     }
@@ -80,43 +76,38 @@ function Dashboard() {
 
   console.log(sortCriterion);
 
-  // let restaurants = useSelector((state) => state.Auth.restaurants);
+  let { restaurants, activePage, lat, lon } = useSelector(
+    (state) => state.Auth
+  );
 
-  let restaurants = restaurantsData;
-  console.log(category);
-  restaurants = restaurants.filter((item) => {
-    if (category.length === 0) return item;
-    else {
-      for (var i = 0; i < category.length; i++) {
-        return item.category.toLowerCase().includes(category[i]);
-        // return item.category.toLowerCase().includes("indian");
-      }
-    }
+  // filter from backend
+  useEffect(() => {
+    let deliveryCategory;
+    if (delivery.includes("all") || delivery.length === 0)
+      deliveryCategory = "All";
+    else deliveryCategory = Math.max.apply(null, delivery);
+    let payload = {
+      deliveryTime: time,
+      star: star,
+      cuisine: category,
+      deliveryFee: deliveryCategory,
+      page: activePage,
+      latitude: lat,
+      longitude: lon,
+    };
+
+    dispatch(fetchNextPageRestaurants(payload));
+  }, [time, delivery, star, category, activePage]);
+
+  restaurants = restaurants.sort((a, b) => {
+    if (sortCriterion === "all") return 0;
+    if (sortCriterion === "rating") return Number(b.rating) - Number(a.rating);
+    if (sortCriterion === "distance")
+      return Number(a.distance) - Number(b.distance);
+    if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
+    if (sortCriterion === "estTime")
+      return Number(a.estimated_time) - Number(b.estimated_time);
   });
-
-  // restaurants = restaurants
-  //   .filter((item) => {
-  //     if (time === "All") return item;
-  //     if (time !== "All") return Number(item.estimated_time) <= time;
-  //   })
-  //   .filter((item) => item.rating >= star)
-  //   .filter((item) => {
-  //     if (delivery.includes("all") || delivery.length === 0) return item;
-  //     else {
-  //       let maxDelivery = Math.max.apply(null, delivery);
-  //       return item.min <= maxDelivery;
-  //     }
-  //   })
-  //   .sort((a, b) => {
-  //     if (sortCriterion === "all") return 0;
-  //     if (sortCriterion === "rating")
-  //       return Number(b.rating) - Number(a.rating);
-  //     if (sortCriterion === "distance")
-  //       return Number(a.distance) - Number(b.distance);
-  //     if (sortCriterion === "minimum") return Number(a.min) - Number(b.min);
-  //     if (sortCriterion === "estTime")
-  //       return Number(a.estimated_time) - Number(b.estimated_time);
-  //   });
 
   console.log(restaurants);
 
@@ -306,10 +297,10 @@ function Dashboard() {
 
           <div className="row mb-4">
             <div className="col">
-              <button onClick={(e) => priceFilter1(e, 1)}>$</button>
-              {/* <button onClick={(e) => priceFilter2(e, 2)}>$$</button>
-              <button onClick={(e) => priceFilter3(e, 3)}>$$$</button>
-              <button onClick={(e) => priceFilter4(e, 4)}>$$$</button> */}
+              <button onClick={(e) => priceFilter1(e, 1)}>₹</button>
+              {/* <button onClick={(e) => priceFilter2(e, 2)}>₹₹</button>
+              <button onClick={(e) => priceFilter3(e, 3)}>₹₹₹</button>
+              <button onClick={(e) => priceFilter4(e, 4)}>₹₹₹₹</button> */}
             </div>
           </div>
           <hr />
@@ -331,7 +322,7 @@ function Dashboard() {
                   id="dollar5"
                 />
                 <label className="custom-control-label" htmlFor="dollar5">
-                  {"<"} $5
+                  {"<"} ₹ 5
                 </label>
               </div>
             </div>
@@ -350,7 +341,7 @@ function Dashboard() {
                   id="dollar10"
                 />
                 <label className="custom-control-label" htmlFor="dollar10">
-                  {"<"} $10
+                  {"<"} ₹ 10
                 </label>
               </div>
             </div>
@@ -369,7 +360,7 @@ function Dashboard() {
                   id="dollar15"
                 />
                 <label className="custom-control-label" htmlFor="dollar15">
-                  {"<"} $15
+                  {"<"} ₹ 15
                 </label>
               </div>
             </div>
@@ -388,7 +379,7 @@ function Dashboard() {
                   id="dollar20"
                 />
                 <label className="custom-control-label" htmlFor="dollar20">
-                  {"<"} $20
+                  {"<"} ₹ 20
                 </label>
               </div>
             </div>
@@ -419,110 +410,301 @@ function Dashboard() {
             <div className="col">Delivery Estimate</div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 10)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onClick={(e) => deliveryTimeFilter(e, 10)}
+              />
               10 min(no.)
             </div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 20)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, 20)}
+              />
               20 min(no.)
             </div>
           </div>
           <div className="row">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, 30)}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, 30)}
+              />
               30 min(no.)
             </div>
           </div>
           <div className="row mb-4">
-            <div
-              className="col"
-              value={time}
-              onClick={(e) => deliveryTimeFilter(e, "All")}
-            >
+            <div className="col">
+              <input
+                type="radio"
+                name="deliveryTime"
+                className="mr-2"
+                value={time}
+                onChange={(e) => deliveryTimeFilter(e, "All")}
+              />
               All
             </div>
           </div>
         </div>
         {/* Restaurants display */}
-        <div className="col-10" style={{ marginTop: 30, textAlign: "center" }}>
+        <div
+          className={classnames("col-10")}
+          style={{ marginTop: 30, textAlign: "center" }}
+        >
           {/* Icons */}
-          <div className="row">
+          <div className={classnames("row", styles.scrollContent)}>
             {/* Italian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Italian.jpg"
                 alt="Italian"
               />
-              <p>Italian</p>
+              <p className={classnames("ml-2", styles.textColor)}>Italian</p>
+            </div>
+            {/* Turkish */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Turkish.jpg"
+                alt="Turkish"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Turkish
+              </p>
             </div>
             {/* Indian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Indian.jpg"
                 alt="Indian"
               />
-              <p>Indian</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Indian
+              </p>
+            </div>
+            {/* Sandwiches */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Sandwiches.jpg"
+                alt="sandwiches"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Sandwiches
+              </p>
             </div>
             {/* Chinese */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Chinese.jpg"
                 alt="Chinese"
               />
-              <p>Chinese</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Chinese
+              </p>
+            </div>
+            {/* Sushi */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Sushi.jpg"
+                alt="Sushi"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Sushi
+              </p>
             </div>
             {/* Pizza */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Pizza.jpg"
                 alt="Pizza"
               />
-              <p>Pizza</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Pizza
+              </p>
+            </div>
+            {/* Salads */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Salads.jpg"
+                alt="Salads"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Salads
+              </p>
             </div>
             {/* Vegetarian */}
-            <div className="col">
+            <div className="col-1 text-center">
               <img
                 width="84px"
                 src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Vegetarian.jpg"
                 alt="Vegetarian"
               />
-              <p>Vegetarian</p>
+              <p className={classnames("text-center", styles.textColor)}>
+                Vegetarian
+              </p>
+            </div>
+            {/* Asian */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Asian_icon.jpg"
+                alt="Asian"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Asian
+              </p>
+            </div>
+            {/* American */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/American.jpg"
+                alt="American"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                American
+              </p>
+            </div>
+            {/* Mediterranean */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Mediterranean.jpg"
+                alt="Mediterranean"
+              />
+              <p className={styles.textColor}>Mediterranean</p>
+            </div>
+            {/* Healthy */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Healthy.jpg"
+                alt="Healthy"
+              />
+              <p className={classnames("ml-4", styles.textColor)}>Healthy</p>
+            </div>
+            {/* Thai */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Thai.jpg"
+                alt="Thai"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Thai
+              </p>
+            </div>
+            {/* Deli */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Deli.jpg"
+                alt="Deli"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Deli
+              </p>
+            </div>
+            {/* Japanese */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Japanese.jpg"
+                alt="Japanese"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Japanese
+              </p>
+            </div>
+            {/* Wings */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Wings.jpg"
+                alt="Wings"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Wings
+              </p>
+            </div>
+            {/* Desserts */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Dessert.jpg"
+                alt="Desserts"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Desserts
+              </p>
+            </div>
+            {/* Seafood */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Seafood.jpg"
+                alt="Seafood"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Seafood
+              </p>
+            </div>
+            {/* Latin */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/Generic.jpg"
+                alt="Latin"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Latin
+              </p>
+            </div>
+            {/* IceCream */}
+            <div className="col-1 text-center">
+              <img
+                width="84px"
+                src="https://s3.amazonaws.com/cuisine-images/Cuisine+icons/IceCream.jpg"
+                alt="IceCream"
+              />
+              <p className={classnames("text-center", styles.textColor)}>
+                Ice Cream
+              </p>
             </div>
           </div>
           {/* Address and Sort */}
           <div className="row">
-              <div className="col-lg-6" style={{float:"left"}}></div>
-              <div className="col-lg-6" style={{float:"right"}}>
-              <select
-                  name="sortFunction"
-                  name="sortCriterion"
-                  onChange={handleSort}
-                >
-                  <option value="all">Sort By</option>
-                  <option value="distance">Distance</option>
-                  <option value="rating">Rating</option>
-                  <option value="minimum">Minimum</option>
-                  <option value="estTime">Est. Time</option>
-                </select>
-              </div>
+            <div className="col-lg-6" style={{ float: "left" }}></div>
+            <div className="col-lg-6" style={{ float: "right" }}>
+              <select name="sortFunction" onChange={handleSort}>
+                <option value="all">Sort By</option>
+                <option value="distance">Distance</option>
+                <option value="rating">Rating</option>
+                <option value="minimum">Minimum</option>
+                <option value="estTime">Est. Time</option>
+              </select>
+            </div>
           </div>
-          <br/>
+          <br />
           <div className="row">
             <div className="col">
               <Rest restData={restaurants} />
@@ -531,6 +713,7 @@ function Dashboard() {
           <hr />
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

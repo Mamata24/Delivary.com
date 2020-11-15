@@ -23,6 +23,9 @@ import {
   fetchRestaurants,
 } from "../Auth/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import LogReg from "./LogReg";
+import Profile from "./Profile";
 
 const CssTextField = withStyles({
   root: {
@@ -116,9 +119,10 @@ function Office() {
   };
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [address, setAddress] = useState("");
-  const suggestions = useSelector((state) => state.Auth.suggestions);
+  const { login, suggestions } = useSelector((state) => state.Auth);
 
   const handleAddress = (e) => {
     setAddress(e.target.value);
@@ -128,6 +132,7 @@ function Office() {
   const success = (pos) => {
     console.log(pos);
     dispatch(showCurrentLocationSuccess(pos.coords));
+    history.push("/dashboard");
   };
 
   const error = (err) => {
@@ -185,10 +190,8 @@ function Office() {
               </Typography>
             </Grid>
           </Grid>
+          {login ? <Profile /> : <LogReg />}
 
-          <Button color="inherit" className={classes.loginBtn}>
-            Log in
-          </Button>
           <Typography style={{ margin: "0 2%" }}>
             <LocalOfferIcon />
           </Typography>

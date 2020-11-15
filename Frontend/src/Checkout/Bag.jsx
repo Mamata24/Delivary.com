@@ -1,45 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "./checkout.module.css";
 import classnames from "classnames";
+import { useSelector, useDispatch } from "react-redux";
+import { billAmount } from "../Auth/actions";
 
 function Bag() {
+  const dispatch = useDispatch();
+  const { orders, billAmt, restaurantDetail } = useSelector(
+    (state) => state.Auth
+  );
+  console.log(orders);
+  const [tip, setTip] = useState(0);
+  let orderSubTotal =
+    orders.length !== 0
+      ? (
+          orders
+            .map((item) => Number(item.subTotal))
+            .reduce((a = 0, c) => a + c) + Number(restaurantDetail.delivery_fee)
+        ).toFixed(2)
+      : 0;
+
+  const handleTip = (e, tip) => {
+    setTip(tip);
+    let tipAmt = ((orderSubTotal * tip) / 100).toFixed(2);
+    let totalAmt = (Number(orderSubTotal) + Number(tipAmt)).toFixed(2);
+    dispatch(billAmount(totalAmt));
+  };
+
   return (
     <>
       <div className="col-sm-12 col-lg-4 mb-4">
         <div className="row">
           <div className="col-12">
-            <button className={classnames("btn btn-block", styled.theme)}>
-              Proceed to Checkout
-            </button>
-            <p className="text-muted text-center mt-2">
-              You won't be charged yet.
-            </p>
             <div class="card">
               <div class="card-body">
                 <div className="row">
                   <div className="col-12 d-flex justify-content-between">
                     <h5>Your Bag</h5>
-                    <p style={{ color: "#01579b" }}>+ Add items</p>
+                  </div>
+                  <div className="col-12 font-weight-bold">
+                    <p style={{ color: "#01579b", fontSize: "22px" }}>
+                      {restaurantDetail.restaurant_Name} Order
+                    </p>
                   </div>
                   <div className="col-12">
-                    <p style={{ color: "#01579b" }}>Ali Baba Organic Market</p>
-                  </div>
-                  <div className="col-12">
-                    <h5>Order</h5>
-                    <div className="row">
-                      <div className="col-2">4</div>
-                      <div className="col-7">
-                        <p>Chef's Salad</p>
-                      </div>
-                      <div className="col-3">$31.96</div>
-                    </div>
-                    <div className="row">
-                      <div className="col-2"></div>
-                      <div className="col-7">
-                        <p>Lorem, ipsum dolor.</p>
-                      </div>
-                      <div className="col-3">$31</div>
-                    </div>
+                    {orders &&
+                      orders.map((item) => (
+                        <div key={item.dish_id} className="row">
+                          <div className="col-2">4</div>
+                          <div className="col-7">
+                            <p>{item.dish_name}</p>
+                          </div>
+                          <div className="col-3">₹ {item.subTotal}</div>
+                        </div>
+                      ))}
+
                     <hr />
                     <div className="row">
                       <div className="col-12">
@@ -49,23 +64,41 @@ function Bag() {
                         <div className="row">
                           <div className="col-2 ">
                             <input
-                              class="btn px-1 btn-secondary text-white"
+                              style={
+                                tip === 10
+                                  ? { background: "#01579b", color: "white" }
+                                  : null
+                              }
+                              className="btn px-1"
                               type="button"
-                              value="10 %"
+                              value="10%"
+                              onClick={(e) => handleTip(e, 10)}
                             />
                           </div>
                           <div className="col-2 ">
                             <input
-                              class="btn px-1 btn-secondary text-white"
+                              style={
+                                tip === 15
+                                  ? { background: "#01579b", color: "white" }
+                                  : null
+                              }
+                              className="btn px-1"
                               type="button"
-                              value="15 %"
+                              value="15%"
+                              onClick={(e) => handleTip(e, 15)}
                             />
                           </div>
-                          <div className="col-2 ">
+                          <div NameName="col-2 ">
                             <input
-                              className="btn px-1 btn-secondary text-white"
+                              className="btn px-1"
+                              style={
+                                tip === 20
+                                  ? { background: "#01579b", color: "white" }
+                                  : null
+                              }
                               type="button"
-                              value="20 %"
+                              value="20%"
+                              onClick={(e) => handleTip(e, 20)}
                             />
                           </div>
                           <div className="col-2 ">
@@ -92,15 +125,18 @@ function Bag() {
                         <div className="row">
                           <div className="col-12 d-flex justify-content-between">
                             <h5>Subtotal</h5>
-                            <h5>$ 0.00</h5>
+                            <h5>
+                              {orders.length !== 0 ? (
+                                <>₹{orderSubTotal}</>
+                              ) : (
+                                "No item in your bag"
+                              )}
+                            </h5>
                           </div>
+
                           <div className="col-12 d-flex justify-content-between">
-                            <p>Subtotal</p>
-                            <p>$ 0.00</p>
-                          </div>
-                          <div className="col-12 d-flex justify-content-between">
-                            <h5>total</h5>
-                            <h5>$ 0.00</h5>
+                            <h5>Total</h5>
+                            <h5>₹{tip !== 0 ? billAmt : orderSubTotal}</h5>
                           </div>
                         </div>
                       </div>
