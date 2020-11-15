@@ -40,7 +40,7 @@
 - Node JS
 - Express
 - MongoDB
-Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com/blob/main/Backend/Readme.md)
+- Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com/blob/main/Backend/Readme.md)
 
 ## Getting Started
 
