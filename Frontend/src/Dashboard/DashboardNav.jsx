@@ -26,7 +26,7 @@ function DashboardNav() {
     <Div className="container-fluid">
       <div className="row">
         <div className="col-3">
-          <img src="./logo.png" width="150px" alt="delivary.com" />
+          <img src="logo2.png" width="150px" alt="delivary.com" />
         </div>
         <div className="col-3">
           <Input

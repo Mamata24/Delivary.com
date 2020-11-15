@@ -11,7 +11,7 @@ function StarRating(props) {
       {stars.map((star) => (
         <>
           <i
-            style={{ color: "yellow" }}
+            style={{ color: "#f5b002" }}
             className="fa fa-star"
             aria-hidden="true"
           ></i>
@@ -19,7 +19,7 @@ function StarRating(props) {
       ))}
       {decimalPart && decimalPart ? (
         <i
-          style={{ color: "yellow" }}
+          style={{ color: "#f5b002" }}
           className="fa fa-star-half-o"
           aria-hidden="true"
         ></i>
