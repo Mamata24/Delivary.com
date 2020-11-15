@@ -116,7 +116,7 @@ export const fetchRestaurants = (payload) => (dispatch) => {
           longitude: Number(res.data.features[0].center[0]).toFixed(6),
         }),
       axios
-        .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
+        .post("/api/Restaurants?page=1&limit=5", payloadLatLon)
         .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
     )
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
@@ -130,7 +130,7 @@ export const fetchNextPageRestaurants = (payload) => (dispatch) => {
   console.log(payload);
   axios
     .post(
-      `http://localhost:5000/Restaurants?star=${payload.star}&deliveryFee=${payload.deliveryFee}&deliveryTime=${payload.deliveryTime}&cuisine=${payload.cuisine}&page=${payload.page}&limit=5`,
+      `/api/Restaurants?star=${payload.star}&deliveryFee=${payload.deliveryFee}&deliveryTime=${payload.deliveryTime}&cuisine=${payload.cuisine}&page=${payload.page}&limit=5`,
       payloadLatLon
     )
     .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
@@ -153,7 +153,7 @@ export const showCurrentLocationSuccess = (payload) => async (dispatch) => {
 
   await axios
     .post(
-      "http://localhost:5000/Restaurants?star=0&deliveryFee=All&deliveryTime=All&page=1&limit=5",
+      "/api/Restaurants?star=0&deliveryFee=All&deliveryTime=All&page=1&limit=5",
       payloadLatLon
     )
     .then((res) => {
@@ -196,7 +196,7 @@ export const registerUser = (payload) => (dispatch) => {
   console.log(payload);
   dispatch(registerUserRequest());
   axios
-    .post("http://localhost:5000/signup", payload)
+    .post("/api/signup", payload)
     .then((res) => dispatch(registerUserSuccess(res.data)))
     .catch((err) => dispatch(registerUserFailure(err)));
 };
@@ -220,7 +220,7 @@ export const loginUserFailure = (payload) => ({
 export const loginUser = (payload) => (dispatch) => {
   dispatch(loginUserRequest());
   axios
-    .post("http://localhost:5000/login", payload)
+    .post("/api/login", payload)
     .then((res) => dispatch(loginUserSuccess(res.data)))
     .catch((err) => dispatch(loginUserFailure(err)));
 };
@@ -236,7 +236,7 @@ export const googleLoginSuccess = (payload) => (dispatch) => {
   };
   console.log(payloadData);
   axios
-    .post("http://localhost:5000/signup", payloadData)
+    .post("/api/signup", payloadData)
     .then((res) => dispatch(loginUserSuccess(res.data)))
     .catch((err) => dispatch(loginUserFailure(err)));
 };
@@ -251,7 +251,7 @@ export const fbLoginSuccess = (payload) => (dispatch) => {
     password: `${payload.name}1234`,
   };
   axios
-    .post("http://localhost:5000/signup", payloadData)
+    .post("/api/signup", payloadData)
     .then((res) => dispatch(loginUserSuccess(res.data)))
     .catch((err) => dispatch(loginUserFailure(err)));
 };
@@ -281,9 +281,7 @@ export const paymentFailure = () => ({
 
 export const razorPayment = (payload) => async (dispatch) => {
   console.log("razoraction");
-  const response = await axios.get(
-    `http://localhost:5000/order?amount=${payload.amount}`
-  );
+  const response = await axios.get(`/api/order?amount=${payload.amount}`);
   const { data } = response;
   const options = {
     name: payload.name,
@@ -292,7 +290,7 @@ export const razorPayment = (payload) => async (dispatch) => {
     handler: async (response) => {
       try {
         const paymentId = response.razorpay_payment_id;
-        const url = `http://localhost:5000/capture/${paymentId}?amount=${payload.amount}`;
+        const url = `/api/capture/${paymentId}?amount=${payload.amount}`;
         const capturedResponse = await axios.post(url);
         const successObj = JSON.parse(capturedResponse.data);
         const captured = successObj.captured;
@@ -330,7 +328,7 @@ export const postOrders = (payload) => (dispatch) => {
   };
   console.log(orderPayload);
   axios
-    .post("http://localhost:5000/order", orderPayload)
+    .post("/api/order", orderPayload)
     .then((res) => {
       dispatch(postOrdersSuccess(res));
       dispatch(getAllOrders(payload.user_id));
@@ -352,7 +350,7 @@ export const getOrdersFailure = (payload) => ({
 
 export const getAllOrders = (payload) => (dispatch) => {
   axios
-    .get(`http://localhost:5000/getOrders/${payload}`)
+    .get(`/api/getOrders/${payload}`)
     .then((res) => dispatch(getOrdersSuccess(res.data)))
     .catch((err) => dispatch(getOrdersFailure(err)));
 };
@@ -404,7 +402,7 @@ export const editUserFailure = (payload) => ({
 export const editUser = (payload) => (dispatch) => {
   dispatch(editUserRequest());
   axios
-    .post(`http://localhost:5000/editUser/${payload._id}`, payload)
+    .post(`/api/editUser/${payload._id}`, payload)
     .then((res) => dispatch(editUserSuccess(res.data)))
     .catch((err) => dispatch(editUserFailure(err)));
 };
