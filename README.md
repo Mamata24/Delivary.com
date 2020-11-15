@@ -60,8 +60,10 @@ Just fork it and you are good to go.
 ## Authors
 
 👤 **Akhila Gajulapalli**
-
-
+  -Github
+  -Twitter
+  -LinkedIn
+  -Email
 👤 **Mamata Nayak**
 
 
