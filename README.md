@@ -61,13 +61,14 @@ Just fork it and you are good to go.
 
 👤 **Akhila Gajulapalli**
 
-  -Github
-  -Twitter
-  -LinkedIn
-  -Email
+
   
 👤 **Mamata Nayak**
 
+- Github: [@Mamata24](https://github.com/Mamata24)
+- Twitter: [@MamataN24](https://twitter.com/MamataN24)
+- Linkedin: [Mamata Nayak](https://www.linkedin.com/in/mamata-nayak)
+- Email: (nmamta240@gmail.com)
 
 👤 **Siddharth Kumar**
 
