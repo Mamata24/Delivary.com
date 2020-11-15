@@ -46,3 +46,38 @@
 **Just fork it and feel free to use it.**
 
 To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+Having a web browser, code editor and git.
+
+### Install
+
+Just fork it and you are good to go.
+
+## Authors
+
+👤 **Akhila Gajulapalli**
+
+
+👤 **Mamata Nayak**
+
+
+👤 **Siddharth Kumar**
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://Mamata24.github.io/Delivary.com/issues).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Acknowledgments
+
+- We take all the responsiblity for every signle line of code. The desgin inspire from Delivery.com.
+
+82de
