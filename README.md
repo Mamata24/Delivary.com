@@ -76,6 +76,10 @@ Just fork it and you are good to go.
 
 👤 **Siddharth Kumar**
 
+- Github: [@siddharthkumaaar](https://github.com/siddharthkumaaar)
+- Twitter: [@](https://twitter.com/)
+- Linkedin: [Siddharth Kumar](https://www.linkedin.com/in/siddharth-kumaaar)
+- Email: (siddharthkumaaar@gmail.com)
 
 ## 🤝 Contributing
 
