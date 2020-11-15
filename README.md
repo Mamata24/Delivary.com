@@ -61,6 +61,10 @@ Just fork it and you are good to go.
 
 👤 **Akhila Gajulapalli**
 
+- Github: [@AkhilaG28](https://github.com/AkhilaG28)
+- Twitter: [@akhila_g28](https://twitter.com/akhila_g28)
+- Linkedin: [Akhila G](https://www.linkedin.com/in/akhila-g-a82bb385)
+- Email: (akhilagajjulapalli@gmail.com)
 
   
 👤 **Mamata Nayak**
