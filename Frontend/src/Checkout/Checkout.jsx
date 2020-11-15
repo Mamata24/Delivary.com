@@ -45,7 +45,7 @@ function Checkout() {
     };
     console.log("orders", payload);
     dispatch(postOrders(payload));
-    history.push("/orders");
+    history.push("/orderSuccess");
   }
 
   const paymentHandler = (e) => {
