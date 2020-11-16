@@ -1,6 +1,6 @@
 # Delivary.com
 
-> Delivary.com is a clone of delivery.com, a food delivery application. 
+> Delivary.com is a clone of delivery.com, an international based food delivery application, that enables users to order from local restaurants and stores for on-demand delivery. 
 
 ## Built With
 
@@ -8,7 +8,7 @@
 - React JS
 - Redux
 - React Hooks
-- Font awesome.
+- Font awesome
 - Bootstrap
 - Material UI
 
@@ -24,29 +24,30 @@ Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com
 
 <table>
   <tr>
-     <td>Landing Page <img src="./images/landing.png" width=900 ></td>
+     <td> Landing Page <img src="./Images/Landing_Page.PNG" width=900 ></td>
   </tr>
   <tr>
-    <td>Office Page <img src="./images/office.png" width=900 ></td>
+    <td>Office Page <img src="./Images/Office_Page.PNG" width=900 ></td>
   </tr>
   <tr>
-  <td>Restaurant Page<img src="./images/restaurant.png" width=900></td>
+  <td>Restaurant Page<img src="./Images/Restaurants_Page.PNG" width=900></td>
   </tr>
   <tr>
-  <td>Menu Page<img src="./images/menu.png" width=900></td>
+  <td>Menu Page<img src="./Images/Menu_Page.PNG" width=900></td>
   </tr>
   <tr>
-  <td>Checkout Page<img src="./images/checkout.png" width=900></td>
+  <td>Checkout Page<img src="./Images/Checkout_Page.PNG" width=900></td>
   </tr>
   <tr>
-  <td>Order Success Page<img src="./images/payment.png" width=900></td>
+  <td>Payment Page<img src="./Images/Payment.PNG" width=900></td>
   </tr>
   <tr>
-  <td>Orders Page<img src="./images/orders.png" width=900></td>
+  <td>Order Success Page<img src="./Images/Order_Success_Page.PNG" width=900></td>
   </tr>
-   <tr>
-  <td>Payment Page<img src="./images/payment.png" width=900></td>
+  <tr>
+  <td>Orders Page<img src="./Images/Orders_Page.PNG" width=900></td>
   </tr>
+   
  </table>
 
 
@@ -85,7 +86,7 @@ Just fork it and you are good to go.
 👤 **Siddharth Kumar**
 
 - Github: [@siddharthkumaaar](https://github.com/siddharthkumaaar)
-- Twitter: [@](https://twitter.com/)
+- Twitter: [@@Siddhar41906212](https://twitter.com/@Siddhar41906212)
 - Linkedin: [Siddharth Kumar](https://www.linkedin.com/in/siddharth-kumaaar)
 - Email: (siddharthkumaaar@gmail.com)
 
@@ -101,6 +102,6 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- We take all the responsiblity for every signle line of code. The desgin inspire from Delivery.com.
+- We take all the responsiblity for every signle line of code. The design is inspired from Delivery.com.
 
-82de
+
