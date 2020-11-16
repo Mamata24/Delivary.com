@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardNav from "../Dashboard/DashboardNav";
 import Footer from "../LandingPage/Footer";
 import { Link } from "react-router-dom";
+import { makePaymentFalse } from "../Auth/actions";
 
 function OrderSuccess() {
+  useEffect(() => {
+    makePaymentFalse();
+  }, []);
   return (
     <>
       <DashboardNav />

@@ -29,10 +29,14 @@ const Button = styled.button`
 function Orders() {
   const history = useHistory();
   let { userOrders, user, payment } = useSelector((state) => state.Auth);
-  console.log(userOrders);
+  // console.log(userOrders);
+  const [click, setClick] = useState(false);
   let displayOrders = userOrders.reverse();
+
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(makePaymentFalse());
+    setClick(false);
     dispatch(getAllOrders(user._id));
   }, []);
 
@@ -51,9 +55,10 @@ function Orders() {
     console.log(payload);
     setId(id);
     dispatch(razorPayment(payload));
+    setClick(true);
   };
 
-  if (payment) {
+  if (payment && click) {
     let ordersAgain = userOrders.find((order) => order._id === id);
     console.log(ordersAgain);
 
