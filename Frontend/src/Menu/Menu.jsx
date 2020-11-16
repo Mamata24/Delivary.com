@@ -12,8 +12,8 @@ function Menu(props) {
   const { orders, restaurants } = useSelector((state) => state.Auth);
   // console.log(restt)
   let rest_id = props.match.params.id;
-  let rest_detail = restt.filter(
-    (singleData) => Number(singleData.id) === Number(rest_id)
+  let rest_detail = restaurants.filter(
+    (singleData) => Number(singleData.restaurant_id) === Number(rest_id)
   );
   // console.log("rest", rest_detail);
   let rest_name = rest_detail[0].restaurant_name;

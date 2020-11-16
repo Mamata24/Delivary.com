@@ -21,25 +21,29 @@ function DashboardNav() {
   const { login, place, orders } = useSelector((state) => state.Auth);
 
   return (
-    <div className="container-fluid" style={{backgroundColor: "#01579b"}}>
-      <div className="row" style={{marginTop:-15,marginBottom:-15}}>
-        <div className="col-lg-2" style={{marginTop:10}}>
-          <img src="https://drive.google.com/uc?export=view&id=1pBHxhESUPqpeY-_FfViEVHC41-lPxk4A" width="150px" alt="company logo" />
-        </div>
+    <div className="container-fluid" style={{ backgroundColor: "#01579b" }}>
+      <div className="row" style={{ marginTop: -15, marginBottom: -15 }}>
+        <Link to="/office">
+          <div className="col-lg-2" style={{ marginTop: 10 }}>
+            <img
+              src="https://drive.google.com/uc?export=view&id=18CGudyHkTO0gBm2twXkrWxBJm4wfHKw1"
+              width="150px"
+              alt="company logo"
+            />
+          </div>
+        </Link>
         <div className="col-lg-7 mt-4">
           <Input className="bg-white" type="text" value={place} />
         </div>
         <div className="col-lg-3">
           <div className="row">
-            <div className="col-lg-6" >
-              {login ? <Profile /> : <LogReg />}
-            </div>
+            <div className="col-lg-6">{login ? <Profile /> : <LogReg />}</div>
             <div className="col-lg-3 text-white mt-4">
               <i className="fas fa-tag fa-lg fa-rotate-90"></i>
             </div>
             <div className="col-lg-3 text-white mt-4">
               <i className="fas fa-shopping-basket fa-lg"></i>
-              {orders.length > 0 ? <i>{orders.length}</i>:""}
+              {orders.length > 0 ? <i>{orders.length}</i> : ""}
             </div>
           </div>
         </div>

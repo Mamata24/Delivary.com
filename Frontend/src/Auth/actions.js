@@ -298,7 +298,7 @@ export const razorPayment = (payload) => async (dispatch) => {
   const { data } = response;
   const options = {
     name: payload.name,
-    description: "Integration of RazorPay",
+    description: "Dude, let’s give some food.",
     order_id: data.id,
     handler: async (response) => {
       try {

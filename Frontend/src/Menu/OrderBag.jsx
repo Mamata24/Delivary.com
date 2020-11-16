@@ -2,31 +2,30 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Checkout from "../Checkout/Checkout";
-import {restaurantDetail,deleteDish} from '../Auth/actions'
+import { restaurantDetail, deleteDish } from "../Auth/actions";
 
 function OrderBag(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.Auth.orders);
   // const getRest = useSelector((state) => state.Auth.restaurants);
-  console.log(props)
-  
-  let  sum = orders.reduce(function (tot, arr) {
-      return tot + Number(arr.subTotal);
-    }, Number(props.delivery_fee));
-  
+  console.log(props);
 
-  const deleteItem = (dishId) =>{
-    dispatch(deleteDish(dishId))
-  }
+  let sum = orders.reduce(function (tot, arr) {
+    return tot + Number(arr.subTotal);
+  }, Number(props.delivery_fee));
+
+  const deleteItem = (dishId) => {
+    dispatch(deleteDish(dishId));
+  };
 
   const movingToCheckout = () => {
     let payload = {
-      restaurantId:props.id,
-      restaurant_Name:props.rest_name,
-      delivery_fee:Number(props.delivery_fee)
+      restaurantId: props.id,
+      restaurant_Name: props.rest_name,
+      delivery_fee: Number(props.delivery_fee),
     };
-    dispatch(restaurantDetail(payload))
+    dispatch(restaurantDetail(payload));
     history.push("/checkout");
   };
 
@@ -59,13 +58,20 @@ function OrderBag(props) {
               {orders.length > 0 ? (
                 orders.map((order) => (
                   <div key={order.dish_id} className="row">
-                    <div className="col-lg-2">{order.qty}</div>
+                    <div className="col-lg-1">{order.qty}</div>
                     <div className="col-lg-6">
                       <p>{order.dish_name}</p>
                     </div>
                     <div className="col-lg-4">
                       <p>₹{order.subTotal}</p>
-                      <i style={{color:"crimson"}} class="fas fa-trash-alt" role="button" onClick={()=>deleteItem(order.dish_id)}></i>
+                      <span>
+                        <i
+                          style={{ color: "crimson" }}
+                          class="fas fa-trash-alt"
+                          role="button"
+                          onClick={() => deleteItem(order.dish_id)}
+                        ></i>
+                      </span>
                     </div>
                   </div>
                 ))
@@ -78,9 +84,11 @@ function OrderBag(props) {
                   <p>Delivery Fee</p>
                 </div>
                 <div className="col-lg-6 mr-auto">
-                {props.delivery_fee ? <p>{props.delivery_fee}</p>:
-                  <p>Free</p>
-                }
+                  {props.delivery_fee ? (
+                    <p>{props.delivery_fee}</p>
+                  ) : (
+                    <p>Free</p>
+                  )}
                 </div>
               </div>
               <div className="row mt-5">
@@ -93,7 +101,7 @@ function OrderBag(props) {
                   >
                     Go to Checkout
                     <span style={{ backgroundColor: "blue", padding: 5 }}>
-                    ₹{Number(sum).toFixed(2)}
+                      ₹{Number(sum).toFixed(2)}
                     </span>
                   </button>
                 </div>

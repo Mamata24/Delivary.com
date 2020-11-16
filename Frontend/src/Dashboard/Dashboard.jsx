@@ -134,7 +134,7 @@ function Dashboard() {
                   id="Free Delivery"
                 />
                 <label className="custom-control-label" htmlFor="Free Delivery">
-                  Free Delivery(5)
+                  Free Delivery
                 </label>
               </div>
             </div>
@@ -152,7 +152,7 @@ function Dashboard() {
                   id="Indian"
                 />
                 <label className="custom-control-label" htmlFor="Indian">
-                  Indian(3)
+                  Indian
                 </label>
               </div>
             </div>
@@ -170,7 +170,7 @@ function Dashboard() {
                   id="Vegetarian"
                 />
                 <label className="custom-control-label" htmlFor="Vegetarian">
-                  Vegetarian(2)
+                  Vegetarian
                 </label>
               </div>
             </div>
@@ -188,7 +188,7 @@ function Dashboard() {
                   id="Chinese"
                 />
                 <label className="custom-control-label" htmlFor="Chinese">
-                  Chinese(12)
+                  Chinese
                 </label>
               </div>
             </div>
@@ -206,7 +206,7 @@ function Dashboard() {
                   id="Italian"
                 />
                 <label className="custom-control-label" htmlFor="Italian">
-                  Italian(12)
+                  Italian
                 </label>
               </div>
             </div>
@@ -224,7 +224,7 @@ function Dashboard() {
                   id="Pizza"
                 />
                 <label className="custom-control-label" htmlFor="Pizza">
-                  Pizza(12)
+                  Pizza
                 </label>
               </div>
             </div>
