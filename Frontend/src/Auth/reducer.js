@@ -29,7 +29,7 @@ import {
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
   GET_ORDERS_SUCCESS,
-  GET_ORDERS_FAILURE,
+  MAKE_PAYMENT_FALSE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -275,6 +275,7 @@ export default (state = initialState, action) => {
 
     case EDIT_USER_REQUEST:
       return {
+        ...state,
         isLoading: true,
         isErr: false,
         errMsg: "",
@@ -283,6 +284,7 @@ export default (state = initialState, action) => {
     case EDIT_USER_SUCCESS:
       saveData("delivaryUser", action.payload);
       return {
+        ...state,
         isLoading: false,
         isErr: false,
         errMsg: "",
@@ -291,9 +293,16 @@ export default (state = initialState, action) => {
 
     case EDIT_USER_FAILURE:
       return {
+        ...state,
         isLoading: false,
         isErr: true,
         errMsg: action.payload,
+      };
+
+    case MAKE_PAYMENT_FALSE:
+      return {
+        ...state,
+        payment: false,
       };
 
     default:
