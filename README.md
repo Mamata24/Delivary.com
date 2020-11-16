@@ -19,9 +19,12 @@
   <td>Checkout Page<img src="./images/checkout.png" width=900></td>
   </tr>
   <tr>
-  <td>Orders Page<img src="./images/orders.png" width=900></td>
+  <td>Order Success Page<img src="./images/payment.png" width=900></td>
   </tr>
   <tr>
+  <td>Orders Page<img src="./images/orders.png" width=900></td>
+  </tr>
+   <tr>
   <td>Payment Page<img src="./images/payment.png" width=900></td>
   </tr>
  </table>
@@ -40,6 +43,7 @@
 - Node JS
 - Express
 - MongoDB
+- RazorPay
 
 Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com/blob/main/Backend/Readme.md)
 
