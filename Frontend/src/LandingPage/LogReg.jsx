@@ -175,7 +175,7 @@ function LogReg() {
                   {/* <!--Body--> */}
                   <div className="modal-body mb-1">
                     <div className="md-form form-sm mb-5 text-center">
-                      <img src="./logo2.png" alt="delivary.com" />
+                      <img src="https://drive.google.com/uc?export=view&id=1Hppu0AWUcaUUKAdaev5qXXvTA9J1zRHf" alt="delivary.com" />
                     </div>
                     <div className="md-form form-sm mb-5">
                       <i className="fas fa-envelope prefix"></i>
@@ -428,7 +428,7 @@ function LogReg() {
           data-target="#modalLRForm"
           onClick={clickLogin}
         >
-          <Button>Log in</Button>
+          <button className="btn btn-outline-light btn-sm" style={{whiteSpace:"nowrap", textAlign:"center"}}>Log in</button>
         </div>
       </div>
     </>

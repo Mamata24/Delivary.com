@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DashboardNav from "./DashboardNav";
+import DashboardNav from "../Dashboard/DashboardNav";
 import classnames from "classnames";
 import styles from "./dashboard.module.css";
 import Rest from "./Rest";
@@ -116,7 +116,7 @@ function Dashboard() {
       <DashboardNav />
       <div className="row">
         {/* Side Bar */}
-        <div className={classnames("col-2 pl-4", styles.bgCol)}>
+        <div className={classnames("col-2 pl-4 mt-3", styles.bgCol)}>
           {/* feature filters */}
           <div className="row">
             <div className="col font-weight-bold">Feature</div>

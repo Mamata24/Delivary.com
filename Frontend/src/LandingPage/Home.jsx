@@ -181,7 +181,7 @@ function Home() {
           sm={2}
           xs={1}
           style={{ textAlign: "center" }}
-          className={styled.animation}
+          // className="wow animated fadeInDownBig slow"
         >
           <Col>
             <img

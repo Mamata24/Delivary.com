@@ -12,15 +12,59 @@ function SubMenu() {
           >
             <ul className="navbar-nav">
               <li className="nav-item ml-5">
-                <a className="nav-link" href="foodmenu">
+                <Link className="nav-link" to="/dashboard">
                   <i
                     className="fa fa-utensils"
                     style={{ color: "#1f5ea9" }}
                   ></i>
-                  <span style={{ marginLeft: 10, fontWeight: "bold" }}>
+                  <span style={{ marginLeft: 10, fontWeight: "bold", color: "#1f5ea9" }}>
                     FOOD
                   </span>
-                </a>
+                </Link>
+              </li>
+              <li className="nav-item ml-5">
+                <Link className="nav-link" to="/dashboard">
+                  <i
+                    className="fa fa-cocktail"
+                    style={{ color: "#1f5ea9" }}
+                  ></i>
+                  <span style={{ marginLeft: 10, fontWeight: "400", color: "#1f5ea9" }}>
+                  ALCOHOL
+                  </span>
+                </Link>
+              </li>
+              <li className="nav-item ml-5">
+                <Link className="nav-link" to="/dashboard">
+                  <i
+                    className="fa fa-shopping-basket"
+                    style={{ color: "#1f5ea9" }}
+                  ></i>
+                  <span style={{ marginLeft: 10, fontWeight: "400", color: "#1f5ea9" }}>
+                    GROCERIES
+                  </span>
+                </Link>
+              </li>
+              <li className="nav-item ml-5">
+                <Link className="nav-link" to="/dashboard">
+                  <i
+                    className="fa fa-utensils"
+                    style={{ color: "#1f5ea9" }}
+                  ></i>
+                  <span style={{ marginLeft: 10, fontWeight: "400", color: "#1f5ea9" }}>
+                    CATERING
+                  </span>
+                </Link>
+              </li>
+              <li className="nav-item ml-5">
+                <Link className="nav-link" to="/dashboard">
+                  <i
+                    className="fa fa-gift"
+                    style={{ color: "#1f5ea9" }}
+                  ></i>
+                  <span style={{ marginLeft: 10, fontWeight: "400", color: "#1f5ea9" }}>
+                    GIFTS
+                  </span>
+                </Link>
               </li>
             </ul>
             <ul className="navbar-nav ml-auto">

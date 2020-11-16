@@ -28,7 +28,10 @@ function NavBar() {
                 For Office
               </Link>
             </Nav.Link>
-            <Nav.Link style={{marginRight:40, marginTop:-18}}>{!login ? <LogReg /> : <Profile />}</Nav.Link>
+            {/* <Nav.Link style={{marginRight:40, marginTop:-18}}>{!login ? <LogReg /> : <Profile />}</Nav.Link> */}
+            <Nav.Link style={{marginRight:40, marginTop:-5}}>
+              <div style={{color:"#01579b", padding:5, border:"1px solid #01579b", borderRadius:3, height:30, width:80,fontSize:14,fontWeight:"400", textAlign:"center"}}>Log in</div>
+            </Nav.Link>
             <Nav.Link style={{ color: "#1f5ea9",marginRight:40 }}>
               <i class="fas fa-tag fa-rotate-90 fa-lg"></i>
             </Nav.Link>

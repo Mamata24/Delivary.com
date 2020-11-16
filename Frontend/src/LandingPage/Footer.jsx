@@ -2,12 +2,9 @@ import React from "react";
 
 function Footer() {
   return (
-    <>
-      <div
-        className="container-fluid"
-        style={{ fontFamily: "sans-serif", color: "gray" }}
-      >
-        <div className="row pt-4">
+    <div className="container-fluid" style={{backgroundColor:"#f2f3f5"}}>
+      <div style={{ fontFamily: "sans-serif", color: "gray" }}>
+        <div className="row p-4">
           <div className="col">Merchants</div>
           <div className="col">Drivers</div>
           <div className="col">About Us</div>
@@ -19,37 +16,22 @@ function Footer() {
           <div className="col">Terms Of Use</div>
         </div>
       </div>
-      <div className="container my-5">
-        <div className="row offset-2">
-          <div className="col mt-1">
-            <i class="fab fa-facebook-f" style={{ color: "gray" }}></i>
-          </div>
-          <div className="col mt-1">
-            <i class="fab fa-twitter" style={{ color: "gray" }}></i>
-          </div>
-          <div className="col mt-1">
-            <i class="fab fa-instagram" style={{ color: "gray" }}></i>
-          </div>
-          <div className="col">
+        <div className="row offset-4">
+            <i class="fab fa-facebook-f" style={{ color: "gray", margin:20}}></i>
+            <i class="fab fa-twitter" style={{ color: "gray", margin:20 }}></i>
+            <i class="fab fa-instagram" style={{ color: "gray", margin:20 }}></i>
             <img
-              style={{ height: 40, width: 80 }}
+              style={{ height: 40, width: 80, margin:20, marginTop:10 }}
               src="https://zerodha.com/static/images/google-play-badge.svg"
               alt=""
             />
-          </div>
-          <div className="col ml-2">
             <img
-              style={{ height: 40, width: 80 }}
+              style={{ height: 40, width: 80, margin:20, marginTop:10}}
               src="https://zerodha.com/static/images/appstore-badge.svg"
               alt=""
             />
-          </div>
-          <div className="col"></div>
-          <div className="col"></div>
-          <div className="col"></div>
         </div>
-      </div>
-    </>
+    </div>
   );
 }
 

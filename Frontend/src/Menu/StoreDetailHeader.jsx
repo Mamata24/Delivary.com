@@ -50,6 +50,7 @@ function StoreDetailHeader(props) {
                     href="#mapp"
                     aria-expanded="false"
                     aria-controls="mapp"
+                    style={{color:"#01579b"}}
                   >
                     View map and hours
                   </button>

@@ -1,14 +1,13 @@
 import React,{useState} from "react";
 import ItemModal from "./ItemModal";
 import MapBox from "./MapBox";
-import MenuData from './MenuData.json'
-import Gmap from '../Menu/Gmap'
+import MenuData from './MenuData.json';
 
 function MenuDisplay(props) {
   // const categorySet = ["Appetizer", "Breakfast"]
   const [modalShow, setModalShow] = useState(false);
   const [dishDetail,setdishDetail] = useState({});
-  const { latitude ,longitude} = props.rest_detail[0]
+  const { latitude ,longitude,restaurant_name} = props.rest_detail[0]
   const lat = Number(latitude)
   const lon = Number(longitude)
   // console.log(lat,lon)
@@ -25,6 +24,7 @@ function MenuDisplay(props) {
                   href="#appetiser"
                   aria-expanded="false"
                   aria-controls="appetiser"
+                  style={{color:"#01579b"}}
                 >
                   Appetizer
                   </a>
@@ -36,6 +36,7 @@ function MenuDisplay(props) {
                   href="#breakFast"
                   aria-expanded="false"
                   aria-controls="breakFast"
+                  style={{color:"#01579b"}}
                 >
                   Break Fast
                    </a>
@@ -47,6 +48,7 @@ function MenuDisplay(props) {
                   href="#lunch"
                   aria-expanded="false"
                   aria-controls="lunch"
+                  style={{color:"#01579b"}}
                 >
                   Main Course
                    </a>
@@ -58,6 +60,7 @@ function MenuDisplay(props) {
                   href="#dinner"
                   aria-expanded="false"
                   aria-controls="dinner"
+                  style={{color:"#01579b"}}
                 >
                   Pudding
                    </a>
@@ -69,6 +72,7 @@ function MenuDisplay(props) {
                   href="#mapp"
                   aria-expanded="false"
                   aria-controls="mapp"
+                  style={{color:"#01579b"}}
                 >
                   View Map and Hours
                    </a>
@@ -84,6 +88,7 @@ function MenuDisplay(props) {
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
+                style={{color:"#01579b"}}
               >
                 Appetizer
                 <span style={{ float: "right" }}>
@@ -99,7 +104,8 @@ function MenuDisplay(props) {
                     {MenuData.filter(data => data.category === 'Appetizer' && data.restaurant_id === 1 && data.dish_id < 6).map(filteredAppetizer =>
                       <div className="row">
                         <div className="col-lg-8">
-                          <a href="#chicken" onClick={()=>(setModalShow(true),
+                          <div href="#chicken" onClick={()=>(
+                            setModalShow(true),
                             setdishDetail(
                               {
                                 dish_name:filteredAppetizer.dish_name,
@@ -108,7 +114,7 @@ function MenuDisplay(props) {
                               }
                             ))}>
                             {filteredAppetizer.dish_name}
-                          </a>
+                          </div>
                           <div style={{ color: "grey" }}>{filteredAppetizer.dish_description}</div>
                         </div>
                         <div className="col-lg-4">
@@ -149,6 +155,7 @@ function MenuDisplay(props) {
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
+                style={{color:"#01579b"}}
               >
                 Break Fast
                 <span style={{ float: "right" }}>
@@ -214,6 +221,7 @@ function MenuDisplay(props) {
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
+                style={{color:"#01579b"}}
               >
                 Main Course
                 <span style={{ float: "right" }}>
@@ -279,6 +287,7 @@ function MenuDisplay(props) {
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
+                style={{color:"#01579b"}}
               >
                 Pudding
                 <span style={{ float: "right" }}>
@@ -344,6 +353,7 @@ function MenuDisplay(props) {
                 role="button"
                 aria-expanded="false"
                 aria-controls="collapseExample"
+                style={{color:"#01579b"}}
               >
                 View Map and Hours
                 <span style={{ float: "right" }}>
@@ -434,8 +444,7 @@ function MenuDisplay(props) {
                     </div>
                   </div>
                   <div className="col-lg-12">
-                    <MapBox lat={lat} lon={lon}/>
-                    {/* <Gmap /> */}
+                    <MapBox lat={lat} lon={lon} restaurant_name={restaurant_name}/>
                   </div>
                 </div>
               </div>

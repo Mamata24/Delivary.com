@@ -12,10 +12,10 @@ function Menu(props) {
   const { orders, restaurants } = useSelector((state) => state.Auth);
   // console.log(restt)
   let rest_id = props.match.params.id;
-  let rest_detail = restaurants.filter(
-    (singleData) => Number(singleData.restaurant_id) === Number(rest_id)
+  let rest_detail = restt.filter(
+    (singleData) => Number(singleData.id) === Number(rest_id)
   );
-  console.log("rest", rest_detail);
+  // console.log("rest", rest_detail);
   let rest_name = rest_detail[0].restaurant_name;
   let delivery_fee = rest_detail[0].delivery_fee;
 
@@ -36,8 +36,6 @@ function Menu(props) {
               delivery_fee={delivery_fee}
             />
           </div>
-        </div>
-        <div className="row">
           <Footer />
         </div>
       </div>
