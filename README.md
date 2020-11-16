@@ -24,7 +24,7 @@ Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com
 
 <table>
   <tr>
-     <td>Landing Page <img src="./Images/Landing_Page" width=900 ></td>
+     <td>Landing Page <img src="./Images/Landing_Page.PNG" width=900 ></td>
   </tr>
   <tr>
     <td>Office Page <img src="./Images/Office_Page.PNG" width=900 ></td>
