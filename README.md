@@ -1,6 +1,6 @@
 # Delivary.com
 
-> Delivary.com is a clone of delivery.com, a food delivery application. 
+> Delivary.com is a clone of delivery.com, an international based food delivery application, that enables users to order from local restaurants and stores for on-demand delivery. 
 
 ## Built With
 
@@ -24,7 +24,7 @@ Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com
 
 <table>
   <tr>
-     <td>Landing Page <img src="./Images/Landing_Page.PNG" width=900 ></td>
+     <td> **Landing Page** <img src="./Images/Landing_Page.PNG" width=900 ></td>
   </tr>
   <tr>
     <td>Office Page <img src="./Images/Office_Page.PNG" width=900 ></td>
