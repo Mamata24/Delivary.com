@@ -1,5 +1,25 @@
 # Delivary.com
 
+> Delivary.com is a clone of delivery.com, a food delivery application. 
+
+## Built With
+
+### Client
+- React JS
+- Redux
+- React Hooks
+- Font awesome.
+- Bootstrap
+- Material UI
+
+### Server
+- Node JS
+- Express
+- MongoDB
+- RazorPay
+
+Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com/blob/main/Backend/Readme.md)
+
 #### Project Screenshots
 
 <table>
@@ -29,23 +49,7 @@
   </tr>
  </table>
 
-## Built With
 
-### Client
-- React JS
-- Redux
-- React Hooks
-- Font awesome.
-- Bootstrap
-- Material UI
-
-### Server
-- Node JS
-- Express
-- MongoDB
-- RazorPay
-
-Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com/blob/main/Backend/Readme.md)
 
 ## Getting Started
 
