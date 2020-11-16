@@ -9,7 +9,6 @@ const orderSchema = new mongoose.Schema(
     },
     restaurant_id: {
       type: String,
-      unique: true,
       required: true,
       trim: true,
     },
