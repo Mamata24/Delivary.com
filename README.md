@@ -8,7 +8,7 @@
 - React JS
 - Redux
 - React Hooks
-- Font awesome.
+- Font awesome
 - Bootstrap
 - Material UI
 
@@ -24,7 +24,7 @@ Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com
 
 <table>
   <tr>
-     <td>Landing Page <img src="./images/landing.png" width=900 ></td>
+     <td>Landing Page <img src="./Images/Landing_Page" width=900 ></td>
   </tr>
   <tr>
     <td>Office Page <img src="./images/office.png" width=900 ></td>
@@ -85,7 +85,7 @@ Just fork it and you are good to go.
 👤 **Siddharth Kumar**
 
 - Github: [@siddharthkumaaar](https://github.com/siddharthkumaaar)
-- Twitter: [@](https://twitter.com/)
+- Twitter: [@@Siddhar41906212](https://twitter.com/@Siddhar41906212)
 - Linkedin: [Siddharth Kumar](https://www.linkedin.com/in/siddharth-kumaaar)
 - Email: (siddharthkumaaar@gmail.com)
 
@@ -101,6 +101,6 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- We take all the responsiblity for every signle line of code. The desgin inspire from Delivery.com.
+- We take all the responsiblity for every signle line of code. The design is inspired from Delivery.com.
 
-82de
+
