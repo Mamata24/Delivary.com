@@ -30,7 +30,7 @@ Feel free to check the API [API Readme](https://github.com/Mamata24/Delivary.com
     <td>Office Page <img src="./Images/Office_Page.PNG" width=900 ></td>
   </tr>
   <tr>
-  <td>Restaurant Page<img src="./Images/Restaurant_Page.PNG" width=900></td>
+  <td>Restaurant Page<img src="./Images/Restaurants_Page.PNG" width=900></td>
   </tr>
   <tr>
   <td>Menu Page<img src="./Images/Menu_Page.PNG" width=900></td>
