@@ -9,6 +9,7 @@ import Checkout from "./Checkout/Checkout";
 import Menu from "./Menu/Menu";
 import Orders from "./Orders/Orders";
 import UserProfile from "./Profile/UserProfile";
+import OrderSuccess from "./Orders/OrderSuccess";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/checkout" component={Checkout} />
       <Route path="/orders" component={Orders} />
       <Route path="/profile" component={UserProfile} />
+      <Route path="/orderSuccess" component={OrderSuccess} />
     </div>
   );
 }

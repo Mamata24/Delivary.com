@@ -29,7 +29,7 @@ import {
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
   GET_ORDERS_SUCCESS,
-  GET_ORDERS_FAILURE,
+  MAKE_PAYMENT_FALSE,
 } from "./actionTypes";
 import { loadData, saveData } from "../localStorage";
 
@@ -49,7 +49,7 @@ export const initialState = {
   totalRestaurants: "",
   orders: [],
   place: loadData("delivaryPlace") || "",
-  payment: true,
+  payment: false,
   userOrders: [],
   restaurantDetail: "",
   billAmt: 0,
@@ -236,6 +236,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userOrders: action.payload,
+        orders: [],
       };
 
     case ORDERS_FAILURE:
@@ -274,6 +275,7 @@ export default (state = initialState, action) => {
 
     case EDIT_USER_REQUEST:
       return {
+        ...state,
         isLoading: true,
         isErr: false,
         errMsg: "",
@@ -282,6 +284,7 @@ export default (state = initialState, action) => {
     case EDIT_USER_SUCCESS:
       saveData("delivaryUser", action.payload);
       return {
+        ...state,
         isLoading: false,
         isErr: false,
         errMsg: "",
@@ -290,9 +293,16 @@ export default (state = initialState, action) => {
 
     case EDIT_USER_FAILURE:
       return {
+        ...state,
         isLoading: false,
         isErr: true,
         errMsg: action.payload,
+      };
+
+    case MAKE_PAYMENT_FALSE:
+      return {
+        ...state,
+        payment: false,
       };
 
     default:

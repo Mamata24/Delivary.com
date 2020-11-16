@@ -31,6 +31,7 @@ import {
   EDIT_USER_REQUEST,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAILURE,
+  MAKE_PAYMENT_FALSE,
 } from "./actionTypes";
 import { accessToken } from "../accessToken";
 import axios from "axios";
@@ -111,13 +112,23 @@ export const fetchRestaurants = (payload) => (dispatch) => {
     )
     .then(
       (res) =>
+        // (payloadLatLon = {
+        //   latitude: Number(res.data.features[0].center[1]).toFixed(6),
+        //   longitude: Number(res.data.features[0].center[0]).toFixed(6),
+        // }),
         (payloadLatLon = {
-          latitude: Number(res.data.features[0].center[1]).toFixed(6),
-          longitude: Number(res.data.features[0].center[0]).toFixed(6),
+          latitude: 17,
+          longitude: 81,
         }),
       axios
-        .post("http://localhost:5000/Restaurants?page=1&limit=5", payloadLatLon)
-        .then((res) => dispatch(fetchRestaurantsSuccess(res.data)))
+        .post(
+          "http://localhost:5000/Restaurants?star=2&deliveryFee=20&deliveryTime=20&cuisine=&page=1&limit=5",
+          payloadLatLon
+        )
+        .then((res) => {
+          console.log(res.data);
+          dispatch(fetchRestaurantsSuccess(res.data));
+        })
     )
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
 };
@@ -149,7 +160,7 @@ export const showCurrentLocationSuccess = (payload) => async (dispatch) => {
   // };
   // console.log(payloadLatLon);
   await dispatch(currLocationSuccess(payloadLatLon));
-  console.log("before rest");
+  // console.log("before rest");
 
   await axios
     .post(
@@ -157,11 +168,11 @@ export const showCurrentLocationSuccess = (payload) => async (dispatch) => {
       payloadLatLon
     )
     .then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       dispatch(fetchRestaurantsSuccess(res.data));
     })
     .catch((err) => dispatch(fetchRestaurantsFailure(err)));
-  console.log("after rest");
+  // console.log("after rest");
 };
 
 export const showCurrentLocationFailure = (payload) => ({
@@ -280,6 +291,7 @@ export const paymentFailure = () => ({
 });
 
 export const razorPayment = (payload) => async (dispatch) => {
+  console.log("razoraction");
   const response = await axios.get(
     `http://localhost:5000/order?amount=${payload.amount}`
   );
@@ -330,7 +342,10 @@ export const postOrders = (payload) => (dispatch) => {
   console.log(orderPayload);
   axios
     .post("http://localhost:5000/order", orderPayload)
-    .then((res) => dispatch(postOrdersSuccess(res)))
+    .then((res) => {
+      dispatch(postOrdersSuccess(res));
+      dispatch(getAllOrders(payload.user_id));
+    })
     .catch((err) => dispatch(ordersFailure(err)));
 };
 
@@ -404,3 +419,9 @@ export const editUser = (payload) => (dispatch) => {
     .then((res) => dispatch(editUserSuccess(res.data)))
     .catch((err) => dispatch(editUserFailure(err)));
 };
+
+// make payment false
+
+export const makePaymentFalse = () => ({
+  type: MAKE_PAYMENT_FALSE,
+});

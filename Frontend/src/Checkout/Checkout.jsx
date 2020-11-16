@@ -34,19 +34,19 @@ function Checkout() {
     else setPay(false);
   };
 
-  // if (payment) {
-  //   let payload = {
-  //     dish: orders,
-  //     restaurant_id: restaurantDetail.restaurantId,
-  //     restaurant_name: restaurantDetail.restaurant_Name,
-  //     user_id: user._id,
-  //     total_amount: billAmt,
-  //     address: deliveryAddress,
-  //   };
-  //   console.log("orders", payload);
-  //   dispatch(postOrders(payload));
-  //   history.push("/orders");
-  // }
+  if (payment) {
+    let payload = {
+      dish: orders,
+      restaurant_id: restaurantDetail.restaurantId,
+      restaurant_name: restaurantDetail.restaurant_Name,
+      user_id: user._id,
+      total_amount: billAmt,
+      address: deliveryAddress,
+    };
+    console.log("orders", payload);
+    dispatch(postOrders(payload));
+    history.push("/orderSuccess");
+  }
 
   const paymentHandler = (e) => {
     e.preventDefault();
@@ -54,6 +54,7 @@ function Checkout() {
       amount: billAmt,
       name: user.first_name,
     };
+    console.log("pay", pay);
     pay && dispatch(razorPayment(payload));
   };
 
@@ -63,33 +64,6 @@ function Checkout() {
 
   return (
     <>
-      {/* {payment ? (
-        <>
-          <div id="success_tic" className="modal fade" role="dialog">
-            <div className="modal-dialog">
-              {/* <!-- Modal content--> */}
-      {/* <div className="modal-content">
-                <div className="close" href="#" data-dismiss="modal">
-                  &times;
-                </div>
-                <div className="page-body">
-                  <div className="head">
-                    <h3 style="margin-top:5px;">Lorem ipsum dolor sit amet</h3>
-                    <h4>Lorem ipsum dolor sit amet</h4>
-                  </div>
-
-                  <h1 style="text-align:center;">
-                    <div className="checkmark-circle">
-                      <div className="background"></div>
-                      <div className="checkmark draw"></div>
-                    </div>
-                  </h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
-      ) : null} */}
       <div className="container-fluid">
         <div className="row">
           <div

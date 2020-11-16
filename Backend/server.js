@@ -4,26 +4,26 @@ const { v4: uuidv4 } = require("uuid");
 const Razorpay = require("razorpay");
 const dotenv = require("dotenv");
 const request = require("request");
+// const build = require("build");
 
 const cors = require("cors");
 
 const userRouter = require("./Routes/userRouter");
 const restaurantRouter = require("./Routes/restaurantRouter");
 const paymentRouter = require("./Routes/paymentRouter");
-const orderRouter = require("./Routes/orderRouter")
+const orderRouter = require("./Routes/orderRouter");
 // const menuRouter = require('./Routes/menuRouter')
 
 dotenv.config();
 const app = express();
 require("./mongoose");
 
+// app.use(express.static(path.join(__dirname, "Frontend/build")));
 
-// app.use(express.static(path.join(__dirname, "Frontend/build")))
-
-app.use(express.static("Frontend/build"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
-});
+// app.use(express.static("Frontend/build"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "Frontend", "build", "index.html"));
+// });
 
 const PORT = process.env.PORT || 5000;
 
@@ -33,7 +33,7 @@ app.use(cors());
 
 app.use(userRouter);
 app.use(restaurantRouter);
-app.use(orderRouter)
+app.use(orderRouter);
 
 const instance = new Razorpay({
   key_id: process.env.RAZOR_PAY_KEY_ID,

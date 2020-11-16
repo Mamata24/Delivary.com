@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import classnames from 'classnames'
+import classnames from "classnames";
 import {
   Container,
   Row,
@@ -9,7 +9,7 @@ import {
   FormControl,
   InputGroup,
   Image,
-  Form
+  Form,
 } from "react-bootstrap";
 import styled from "./Home.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -91,8 +91,8 @@ function Home() {
                   marginLeft: "6rem",
                   backgroundColor: "#f2f3f4",
                   border: "none",
-                  position:"relative",
-                  boxShadow:"none"
+                  position: "relative",
+                  boxShadow: "none",
                 }}
               >
                 <Card.Body>
@@ -107,18 +107,38 @@ function Home() {
                   </Row>
                   <Row>
                     <Col>
-                    <div className={styled.roundBox}>
-                      <i className={classnames("fa fa-utensils fa-lg",styled.searcboxicon)}></i>
-                    </div>
-                    <div className={styled.roundBox}>
-                      <i className={classnames("fas fa-glass-martini fa-lg",styled.searcboxicon)}></i>
-                    </div>
-                    <div className={styled.roundBox}>
-                      <i className={classnames("fas fa-shopping-basket fa-lg",styled.searcboxicon)}></i>
-                    </div>
-                    <div className={styled.roundBox}>
-                      <i className={classnames("fas fa-shopping-cart fa-lg",styled.searcboxicon)}></i>
-                    </div>
+                      <div className={styled.roundBox}>
+                        <i
+                          className={classnames(
+                            "fa fa-utensils fa-lg",
+                            styled.searcboxicon
+                          )}
+                        ></i>
+                      </div>
+                      <div className={styled.roundBox}>
+                        <i
+                          className={classnames(
+                            "fas fa-glass-martini fa-lg",
+                            styled.searcboxicon
+                          )}
+                        ></i>
+                      </div>
+                      <div className={styled.roundBox}>
+                        <i
+                          className={classnames(
+                            "fas fa-shopping-basket fa-lg",
+                            styled.searcboxicon
+                          )}
+                        ></i>
+                      </div>
+                      <div className={styled.roundBox}>
+                        <i
+                          className={classnames(
+                            "fas fa-shopping-cart fa-lg",
+                            styled.searcboxicon
+                          )}
+                        ></i>
+                      </div>
                     </Col>
                   </Row>
                   <Row>
@@ -131,7 +151,12 @@ function Home() {
                   <Row className={styled.searchDiv}>
                     {/* <Col lg={8} className={styled.inpDiv}> */}
                     <div className={styled.inpDiv}>
-                    <i className={classnames("fas fa-location-arrow",styled.locationArrow)}></i>
+                      <i
+                        className={classnames(
+                          "fas fa-location-arrow",
+                          styled.locationArrow
+                        )}
+                      ></i>
                       {/* <FontAwesomeIcon
                         icon="location-arrow"
                         className={styled.locationArrow}
@@ -142,26 +167,25 @@ function Home() {
                         value={address}
                         placeholder="Street Address, City, State"
                       />
-                      {/* <Form>
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                          <Form.Label>{""}</Form.Label>
-                          <Form.Control as="textarea" rows={3}/> */}
-                        
-                     {suggestions &&
-                        suggestions.map((item) => (
-                          <div onClick={() => getAddress(item.place_name)}>
-                            {item.place_name}
-                          </div>
-                        ))}
-                        
-                        {/* </Form.Group>
+
+                      <div style={{ background: "white", padding: "2%" }}>
+                        {suggestions &&
+                          suggestions.map((item) => (
+                            <div
+                              key={item.place_name}
+                              onClick={() => getAddress(item.place_name)}
+                            >
+                              {item.place_name}
+                            </div>
+                          ))}
+                      </div>
+                      {/* </Form.Group>
                       </Form> */}
                     </div>
-                    
+
                     <button className={styled.btn} onClick={getRestaurants}>
                       Search
                     </button>
-                    
                   </Row>
                 </Card.Body>
               </Card>

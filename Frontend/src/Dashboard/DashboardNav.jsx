@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Profile from "../LandingPage/Profile";
 import LogReg from "../LandingPage/LogReg";
+import { Link } from "react-router-dom";
 
 // const Div = styled.div`
 //   background: #01579b;

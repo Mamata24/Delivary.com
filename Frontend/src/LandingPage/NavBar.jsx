@@ -13,14 +13,34 @@ function NavBar() {
   const { login } = useSelector((state) => state.Auth);
   return (
     <>
-      <Navbar collapseOnSelect fixed="top" expand="lg" className={styled.nav} style={{boxShadow:"none"}}>
+      <Navbar
+        collapseOnSelect
+        fixed="top"
+        expand="lg"
+        className={styled.nav}
+        style={{ boxShadow: "none" }}
+      >
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link style={{marginRight:40, color: "#01579b", fontWeight:"400",fontSize:14}}>
+            <Nav.Link
+              style={{
+                marginRight: 40,
+                color: "#01579b",
+                fontWeight: "400",
+                fontSize: 14,
+              }}
+            >
               <HowItWorksPopOver />
             </Nav.Link>
-            <Nav.Link style={{ color: "#1f5ea9", marginRight:40 ,fontWeight:"400",fontSize:14}}>
+            <Nav.Link
+              style={{
+                color: "#1f5ea9",
+                marginRight: 40,
+                fontWeight: "400",
+                fontSize: 14,
+              }}
+            >
               <Link
                 to="/office"
                 style={{ color: "#01579b", textDecoration: "none" }}
@@ -35,7 +55,7 @@ function NavBar() {
             <Nav.Link style={{ color: "#1f5ea9",marginRight:40 }}>
               <i class="fas fa-tag fa-rotate-90 fa-lg"></i>
             </Nav.Link>
-            <Nav.Link style={{ color: "#1f5ea9",marginRight:40 }}>
+            <Nav.Link style={{ color: "#1f5ea9", marginRight: 40 }}>
               <i className="fas fa-shopping-bag fa-lg"></i>
             </Nav.Link>
           </Nav>
@@ -44,5 +64,4 @@ function NavBar() {
     </>
   );
 }
-
 export default NavBar;
